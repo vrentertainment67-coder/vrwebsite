@@ -1,0 +1,13 @@
+---
+const { variant = 'filled', href, type = 'button', text, small = false } = Astro.props;
+const classes = variant === 'outlined'
+  ? 'border border-accent text-accent hover:bg-accent hover:text-background transition duration-300 ease-in-out inline-flex items-center justify-center rounded-[8px] px-6 py-3 text-sm tracking-[0.05em] font-[500]'
+  : 'bg-accent text-background hover:bg-accent-hover transition duration-300 ease-in-out inline-flex items-center justify-center rounded-[8px] px-6 py-3 text-sm tracking-[0.05em] font-[500]';
+---
+{href ? (
+  <a href={href} class={classes} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined} target={href.startsWith('http') ? '_blank' : undefined}>
+    {text}
+  </a>
+) : (
+  <button type={type} class={classes}>{text}</button>
+)}

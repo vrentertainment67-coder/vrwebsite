@@ -1,0 +1,13 @@
+---
+const { category, descriptor, challenge, actions, outcome, status } = Astro.props;
+---
+<article class="bg-surface border border-border p-10 rounded-[6px]">
+  <span class="inline-block text-[11px] uppercase tracking-[0.15em] text-white bg-terracotta px-3 py-1 rounded-sm">{category}</span>
+  <p class="mt-4 text-[14px] uppercase tracking-[0.15em] text-text-tertiary">{descriptor}</p>
+  <p class="mt-6 text-[16px] font-[500] leading-7 text-text-primary">{challenge}</p>
+  <div class="mt-6 space-y-3 text-[15px] leading-7 text-text-secondary font-[300]">
+    {actions.map((line) => <p>— {line}</p>)}
+  </div>
+  <p class="mt-6 text-[15px] font-[500] text-text-primary"><span class="font-[700]">Outcome:</span> {outcome}</p>
+  <div class="mt-6 inline-flex items-center rounded-full border border-border px-3 py-1 text-[13px] text-text-secondary">{status}</div>
+</article>

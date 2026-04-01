@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+const inquiryOptions = [
+  'Artist Management',
+  'Content & Production',
+  'Digital Marketing',
+  'Store & Licensing',
+  'General Inquiry'
+];
+---
+<Layout title="Contact VR Entertainment" description="Contact VR Entertainment for artist management, content production, digital marketing, store products, and licensing inquiries.">
+  <section class="bg-background px-6 py-[100px] lg:px-8">
+    <div class="mx-auto max-w-[840px]">
+      <h1 class="font-display text-[52px] leading-tight text-text-primary">Let's Talk</h1>
+      <p class="mt-6 text-[18px] leading-[1.8] text-text-secondary font-[300]">Tell us about your project. We respond to all serious inquiries within 48 hours.</p>
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[100px] lg:px-8">
+    <div class="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1.4fr_1fr]">
+      <div>
+        <form id="contact-form" action="#" method="POST" class="space-y-6 rounded-[6px] border border-border bg-background p-10">
+          <div>
+            <label class="mb-2 block text-[14px] font-[500] text-text-primary" for="full-name">Full Name</label>
+            <input id="full-name" name="fullName" type="text" required class="w-full bg-surface border border-border px-4 py-3 text-text-primary focus:border-accent focus:outline-none" />
+          </div>
+          <div>
+            <label class="mb-2 block text-[14px] font-[500] text-text-primary" for="email">Email</label>
+            <input id="email" name="email" type="email" required class="w-full bg-surface border border-border px-4 py-3 text-text-primary focus:border-accent focus:outline-none" />
+          </div>
+          <div>
+            <label class="mb-2 block text-[14px] font-[500] text-text-primary" for="inquiry-type">What are you inquiring about?</label>
+            <select id="inquiry-type" name="inquiryType" class="w-full bg-surface border border-border px-4 py-3 text-text-primary focus:border-accent focus:outline-none">
+              {inquiryOptions.map((option) => (
+                <option value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label class="mb-2 block text-[14px] font-[500] text-text-primary" for="project-details">Tell us about your project</label>
+            <textarea id="project-details" name="projectDetails" rows="5" placeholder="The more context you give us, the better we can respond." class="w-full bg-surface border border-border px-4 py-3 text-text-primary focus:border-accent focus:outline-none"></textarea>
+          </div>
+          <div>
+            <label class="mb-2 block text-[14px] font-[500] text-text-primary" for="referral">How did you hear about us?</label>
+            <input id="referral" name="referral" type="text" class="w-full bg-surface border border-border px-4 py-3 text-text-primary focus:border-accent focus:outline-none" />
+          </div>
+          <button type="submit" class="w-full rounded-[8px] bg-accent px-6 py-4 text-[14px] font-[500] text-background transition duration-300 ease-in-out hover:bg-accent-hover">Send Inquiry</button>
+          <p class="text-[12px] text-text-tertiary">Prefer email? hello@vrentertainment.digital</p>
+          <div id="form-success" class="hidden rounded-[6px] border border-accent bg-background p-4 text-[14px] text-accent"></div>
+        </form>
+      </div>
+      <div class="space-y-6">
+        <div class="rounded-[6px] border border-border bg-background p-6">
+          <p class="text-[14px] font-[500] text-text-primary">Artist Management</p>
+          <p class="mt-3 text-[15px] leading-[1.8] text-text-secondary">We take on 3 artists at a time. Applications are reviewed monthly.</p>
+        </div>
+        <div class="rounded-[6px] border border-border bg-background p-6">
+          <p class="text-[14px] font-[500] text-text-primary">New Projects</p>
+          <p class="mt-3 text-[15px] leading-[1.8] text-text-secondary">Content and marketing projects typically start within 2–3 weeks of agreement.</p>
+        </div>
+        <div class="rounded-[6px] border border-border bg-background p-6">
+          <p class="text-[14px] font-[500] text-text-primary">Store & Products</p>
+          <p class="mt-3 text-[15px] leading-[1.8] text-text-secondary">Digital products are delivered instantly after payment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      success.textContent = "Thank you. We'll be in touch within 48 hours.";
+      success.classList.remove('hidden');
+      form.reset();
+    });
+  </script>
+</Layout>

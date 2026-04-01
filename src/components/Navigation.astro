@@ -1,0 +1,58 @@
+---
+---
+<nav id="site-nav" class="fixed inset-x-0 top-0 z-50">
+  <div class="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-5 bg-background/80 backdrop-blur-sm transition duration-300 ease-in-out border-b border-border md:bg-transparent md:border-b-0 lg:px-8">
+    <a href="/" class="font-display text-[18px] font-[700] text-accent">VR Entertainment</a>
+    <div class="hidden items-center gap-8 md:flex">
+      <a href="/what-we-do" class="text-[14px] font-[400] tracking-tight text-text-primary hover:text-accent transition">What We Do</a>
+      <a href="/artist-management" class="text-[14px] font-[400] tracking-tight text-text-primary hover:text-accent transition">Artists</a>
+      <a href="/content-production" class="text-[14px] font-[400] tracking-tight text-text-primary hover:text-accent transition">Content</a>
+      <a href="/digital-marketing" class="text-[14px] font-[400] tracking-tight text-text-primary hover:text-accent transition">Marketing</a>
+      <a href="/work" class="text-[14px] font-[400] tracking-tight text-text-primary hover:text-accent transition">Work</a>
+      <a href="/store" class="text-[14px] font-[400] tracking-tight text-text-primary hover:text-accent transition">Store</a>
+      <a href="/contact" class="border border-accent px-5 py-2 text-[13px] uppercase tracking-[0.15em] text-accent transition duration-300 ease-in-out hover:bg-accent hover:text-background">Inquire</a>
+    </div>
+    <button id="nav-toggle" aria-label="Open navigation" class="md:hidden text-text-primary">
+      <span class="block h-0.5 w-6 bg-text-primary"></span>
+      <span class="mt-2 block h-0.5 w-6 bg-text-primary"></span>
+      <span class="mt-2 block h-0.5 w-6 bg-text-primary"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="fixed inset-0 hidden bg-background/96 p-8 md:hidden">
+    <div class="flex items-center justify-between">
+      <a href="/" class="font-display text-[18px] font-[700] text-accent">VR Entertainment</a>
+      <button id="nav-close" aria-label="Close navigation" class="text-text-primary text-[24px]">×</button>
+    </div>
+    <div class="mt-16 space-y-8">
+      <a href="/what-we-do" class="block text-[22px] font-[400] text-text-primary">What We Do</a>
+      <a href="/artist-management" class="block text-[22px] font-[400] text-text-primary">Artists</a>
+      <a href="/content-production" class="block text-[22px] font-[400] text-text-primary">Content</a>
+      <a href="/digital-marketing" class="block text-[22px] font-[400] text-text-primary">Marketing</a>
+      <a href="/work" class="block text-[22px] font-[400] text-text-primary">Work</a>
+      <a href="/store" class="block text-[22px] font-[400] text-text-primary">Store</a>
+      <a href="/contact" class="inline-flex rounded-[8px] border border-accent bg-transparent px-6 py-3 text-[14px] uppercase tracking-[0.12em] text-accent">Inquire</a>
+    </div>
+  </div>
+  <script is:inline>
+    const nav = document.getElementById('site-nav');
+    const toggle = document.getElementById('nav-toggle');
+    const close = document.getElementById('nav-close');
+    const menu = document.getElementById('mobile-menu');
+    const wrapper = nav.querySelector('div');
+    const onScroll = () => {
+      if (window.scrollY > 20) {
+        wrapper.classList.add('bg-background/95', 'border-b', 'border-border');
+      } else {
+        wrapper.classList.remove('bg-background/95', 'border-b', 'border-border');
+      }
+    };
+    toggle.addEventListener('click', () => {
+      menu.classList.remove('hidden');
+    });
+    close.addEventListener('click', () => {
+      menu.classList.add('hidden');
+    });
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  </script>
+</nav>

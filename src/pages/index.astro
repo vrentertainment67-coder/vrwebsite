@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+---
+<Layout title="VR Entertainment | Premium creative services for artists and brands" description="VR Entertainment builds careers for independent artists and content presence for brands through artist management, production and digital marketing.">
+  <section class="relative overflow-hidden bg-background text-text-primary">
+    <div class="noise-overlay absolute inset-0"></div>
+    <div class="relative mx-auto flex min-h-[92vh] max-w-[1200px] flex-col items-center justify-center px-6 py-24 text-center lg:px-8">
+      <p class="text-[11px] uppercase tracking-[0.2em] text-text-tertiary font-[300] mb-6">EST. BANGALORE, INDIA</p>
+      <div class="max-w-[700px]">
+        <h1 class="font-display text-[46px] leading-[1.02] tracking-[-0.03em] sm:text-[72px]">We build careers.<br />We build audiences.</h1>
+        <p class="mx-auto mt-8 max-w-[520px] text-[20px] leading-[1.8] text-text-secondary font-[300]">A premium creative company for artists, creators, and brands in India's evolving entertainment economy.</p>
+      </div>
+      <a href="/contact" class="mt-12 inline-flex h-[52px] items-center justify-center rounded-[8px] border border-accent bg-transparent px-10 text-[14px] font-[500] uppercase tracking-[0.05em] text-accent transition duration-300 ease-in-out hover:bg-accent hover:text-background">Inquire About Working Together</a>
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-4 text-[13px] text-text-tertiary font-[300]">
+        <span>Artist Management</span>
+        <span class="h-4 w-px bg-border"></span>
+        <span>Content & Production</span>
+        <span class="h-4 w-px bg-border"></span>
+        <span>Digital Marketing</span>
+      </div>
+      <div class="mt-16 h-px w-[0%] bg-accent animate-[expandLine_1.5s_ease forwards]"></div>
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[120px] lg:px-8">
+    <div class="mx-auto max-w-[780px] relative">
+      <div class="pointer-events-none absolute -top-12 left-0 text-[120px] font-display text-accent opacity-10 leading-none">“</div>
+      <p class="relative text-[26px] leading-[1.6] font-display italic text-text-primary md:text-[26px]">VR Entertainment works with a small number of artists and brands at a time. We don't take on every project — we take on the ones we believe in, and we commit fully to their success.</p>
+      <div class="mx-auto mt-14 h-px w-[80px] bg-accent"></div>
+      <p class="mt-8 text-[14px] text-text-secondary font-[300] uppercase tracking-[0.12em] text-center">Based in Bangalore. Working across India.</p>
+    </div>
+  </section>
+
+  <section class="bg-background px-6 py-[120px] lg:px-8">
+    <SectionLabel label="WHAT WE DO" />
+    <div class="mx-auto grid max-w-[1200px] gap-8 md:grid-cols-3">
+      <ServiceCard number="01" title="Artist Management" description="We develop independent artists from promising to career-defining." href="/artist-management" />
+      <ServiceCard number="02" title="Content & Production" description="We produce content that builds audiences, not just impressions." href="/content-production" />
+      <ServiceCard number="03" title="Digital Marketing" description="We grow entertainment brands through strategy, not just spend." href="/digital-marketing" />
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[120px] lg:px-8">
+    <SectionLabel label="SELECTED WORK" />
+    <div class="mx-auto grid max-w-[1200px] gap-6 md:grid-cols-3">
+      <article class="rounded-[6px] border border-border bg-background p-8">
+        <span class="inline-block text-[11px] uppercase tracking-[0.15em] text-white bg-terracotta px-3 py-1 rounded-sm">ARTIST MANAGEMENT</span>
+        <p class="text-[13px] uppercase tracking-[0.12em] text-text-tertiary mt-4">Independent Electronic Music Artist</p>
+        <p class="mt-4 text-[16px] leading-7 font-[500] text-text-primary">3× streaming growth in 6 months across DSPs</p>
+        <a href="/work" class="mt-6 inline-flex text-[13px] font-[500] tracking-[0.05em] text-accent hover:underline">View case study →</a>
+      </article>
+      <article class="rounded-[6px] border border-border bg-background p-8">
+        <span class="inline-block text-[11px] uppercase tracking-[0.15em] text-white bg-terracotta px-3 py-1 rounded-sm">CONTENT PRODUCTION</span>
+        <p class="text-[13px] uppercase tracking-[0.12em] text-text-tertiary mt-4">Hospitality Brand, South India</p>
+        <p class="mt-4 text-[16px] leading-7 font-[500] text-text-primary">120K organic reach on launch content series</p>
+        <a href="/work" class="mt-6 inline-flex text-[13px] font-[500] tracking-[0.05em] text-accent hover:underline">View case study →</a>
+      </article>
+      <article class="rounded-[6px] border border-border bg-background p-8">
+        <span class="inline-block text-[11px] uppercase tracking-[0.15em] text-white bg-terracotta px-3 py-1 rounded-sm">DIGITAL MARKETING</span>
+        <p class="text-[13px] uppercase tracking-[0.12em] text-text-tertiary mt-4">Independent Hip-Hop Artist</p>
+        <p class="mt-4 text-[16px] leading-7 font-[500] text-text-primary">Signed to independent label within 8 months</p>
+        <a href="/work" class="mt-6 inline-flex text-[13px] font-[500] tracking-[0.05em] text-accent hover:underline">View case study →</a>
+      </article>
+    </div>
+    <div class="mt-10 text-center">
+      <a href="/work" class="text-[14px] font-[500] tracking-[0.05em] text-accent hover:underline">See all work →</a>
+    </div>
+  </section>
+
+  <section class="bg-background px-6 py-[120px] lg:px-8">
+    <SectionLabel label="HOW WE WORK" />
+    <div class="mx-auto grid max-w-[1200px] gap-8 lg:grid-cols-4">
+      {['Discovery','Strategy','Execution','Growth'].map((step, index) => (
+        <div class="space-y-3 rounded-[6px] border border-border bg-surface p-8 text-center md:text-left" key={step}>
+          <div class="text-[36px] font-display text-accent opacity-50">0{index + 1}</div>
+          <p class="text-[16px] font-[500] text-text-primary">{step}</p>
+          <p class="text-[14px] leading-7 text-text-secondary font-[300]">{
+            index === 0 ? 'We learn your world before we touch your brand.' :
+            index === 1 ? 'We build a plan specific to your goals, audience, and market.' :
+            index === 2 ? 'We produce, publish, and manage with full accountability.' :
+            'We measure, optimise, and scale what works.'
+          }</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[120px] lg:px-8">
+    <div class="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-2">
+      <div class="max-w-[520px]">
+        <SectionLabel label="VR STORE" />
+        <h2 class="font-display text-[36px] leading-tight text-text-primary">Professional tools for working artists and creators.</h2>
+        <p class="mt-6 text-[16px] leading-[1.75] text-text-secondary font-[300]">We develop digital products for independent DJs, musicians, and content creators. Built from real production experience.</p>
+        <a href="/store" class="mt-8 inline-flex text-[14px] font-[500] text-accent hover:underline">Browse the store →</a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <article class="rounded-[6px] border border-border bg-background p-6">
+          <p class="text-[13px] uppercase tracking-[0.15em] text-text-tertiary">Audio + Visual · Digital Download</p>
+          <h3 class="mt-4 text-[18px] font-[500] text-text-primary">NYE Countdown Tool</h3>
+          <p class="mt-4 text-[14px] leading-7 text-text-secondary">A ready-to-use countdown experience for live events and performances.</p>
+          <p class="mt-6 text-[16px] font-[700] text-accent">₹999</p>
+          <a href="https://razorpay.me/@vrentertainment" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex text-[13px] font-[500] tracking-[0.05em] text-accent hover:underline">Buy now →</a>
+        </article>
+        <article class="rounded-[6px] border border-border bg-background p-6">
+          <p class="text-[13px] uppercase tracking-[0.15em] text-text-tertiary">SAMPLE PACK · Digital Download</p>
+          <h3 class="mt-4 text-[18px] font-[500] text-text-primary">Indian Elements Sample Pack</h3>
+          <p class="mt-4 text-[14px] leading-7 text-text-secondary">A curated collection of Indian instruments and textures for modern productions.</p>
+          <p class="mt-6 text-[16px] font-[700] text-accent">₹199</p>
+          <a href="https://pages.razorpay.com/indianelements" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex text-[13px] font-[500] tracking-[0.05em] text-accent hover:underline">Buy now →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-background border-t border-border border-b border-border px-6 py-[100px] lg:px-8">
+    <div class="mx-auto max-w-[720px] text-center">
+      <p class="text-[11px] uppercase tracking-[0.2em] text-text-tertiary font-[300]">STAY INFORMED</p>
+      <h2 class="mt-4 font-display text-[40px] leading-tight text-text-primary">The VR Intelligence Brief</h2>
+      <p class="mx-auto mt-6 max-w-[520px] text-[16px] leading-[1.75] text-text-secondary font-[300]">A monthly read on what's shifting in India's creator economy, music industry, and entertainment marketing. No noise. Just signal.</p>
+      <form action="#" method="POST" class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <label class="sr-only" for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="Email address" required class="min-w-[320px] bg-surface border border-border px-5 py-4 text-text-primary placeholder:text-text-tertiary focus:border-accent focus:outline-none" />
+        <button type="submit" class="inline-flex items-center justify-center rounded-[8px] bg-accent px-8 py-4 text-[14px] font-[500] text-background transition duration-300 ease-in-out hover:bg-accent-hover">Subscribe</button>
+      </form>
+      <p class="mt-4 text-[12px] text-text-tertiary">Monthly. No spam. Unsubscribe anytime.</p>
+      <!-- TODO: Connect to ConvertKit or Mailchimp -->
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+@keyframes expandLine { to { width: 100%; } }
+</style>

@@ -1,0 +1,9 @@
+---
+const { number, title, description, href } = Astro.props;
+---
+<article class="group bg-surface border border-border p-10 rounded-[6px] transition duration-300 ease-in-out hover:border-accent">
+  <div class="text-accent text-[48px] font-display opacity-40">{number}</div>
+  <h3 class="mt-6 text-[24px] font-display leading-tight text-text-primary">{title}</h3>
+  <p class="mt-4 text-[15px] leading-7 text-text-secondary font-[300]">{description}</p>
+  <a href={href} class="mt-8 inline-block text-[13px] font-[500] tracking-[0.05em] text-accent hover:underline">Learn more →</a>
+</article>

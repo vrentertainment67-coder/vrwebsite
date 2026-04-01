@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+---
+<Layout title="What We Do | VR Entertainment" description="Explore VR Entertainment's service lines: artist management, content and production, and digital marketing for India's entertainment economy.">
+  <section class="bg-background px-6 py-[100px] lg:px-8">
+    <div class="mx-auto max-w-[840px] text-center">
+      <h1 class="font-display text-[52px] leading-tight text-text-primary">What We Do</h1>
+      <p class="mt-6 text-[18px] leading-[1.8] text-text-secondary font-[300]">We work with independent artists, venue and hospitality brands, and creators to build lasting careers, meaningful audiences, and premium creative content.</p>
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[100px] lg:px-8">
+    <div class="mx-auto flex max-w-[1200px] flex-col gap-16">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.2em] text-text-tertiary font-[300]">ARTIST MANAGEMENT</p>
+          <h2 class="mt-4 text-[32px] font-display text-text-primary">Career development for independent artists.</h2>
+          <p class="mt-6 text-[16px] leading-[1.8] text-text-secondary font-[300]">From your first 1,000 listeners to label conversations, we build the infrastructure around talent so artists can focus on their craft.</p>
+          <div class="mt-6 space-y-3 text-[15px] leading-7 text-text-primary font-[300]">
+            <p>— Career strategy and roadmap</p>
+            <p>— Content and brand direction</p>
+            <p>— Industry introductions and booking coordination</p>
+          </div>
+          <a href="/artist-management" class="mt-8 inline-flex text-[14px] font-[500] text-accent hover:underline">Explore artist management →</a>
+        </div>
+        <div class="rounded-[6px] border border-border bg-background p-10">
+          <p class="text-[16px] leading-7 text-text-secondary">We select a small roster of artists and move with confidence. Our approach is built around long-term audience growth and cultural positioning.</p>
+        </div>
+      </div>
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:flex-row-reverse">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.2em] text-text-tertiary font-[300]">CONTENT & PRODUCTION</p>
+          <h2 class="mt-4 text-[32px] font-display text-text-primary">End-to-end creative production for brands and creators.</h2>
+          <p class="mt-6 text-[16px] leading-[1.8] text-text-secondary font-[300]">We deliver strategic content with strong production values so every release is crafted for attention, relevance and reach.</p>
+          <div class="mt-6 space-y-3 text-[15px] leading-7 text-text-primary font-[300]">
+            <p>— Short-form social content series</p>
+            <p>— Video, audio and brand film production</p>
+            <p>— Post-production, editing and motion design</p>
+          </div>
+          <a href="/content-production" class="mt-8 inline-flex text-[14px] font-[500] text-accent hover:underline">Explore content production →</a>
+        </div>
+        <div class="rounded-[6px] border border-border bg-background p-10">
+          <p class="text-[16px] leading-7 text-text-secondary">We keep production lean and focused on the story. Fewer elements, stronger execution, measured by audience impact.</p>
+        </div>
+      </div>
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.2em] text-text-tertiary font-[300]">DIGITAL MARKETING</p>
+          <h2 class="mt-4 text-[32px] font-display text-text-primary">Strategy-first marketing for entertainment brands.</h2>
+          <p class="mt-6 text-[16px] leading-[1.8] text-text-secondary font-[300]">We combine culture-led digital campaigns with data and audience development, built for music, nightlife and creator economies.</p>
+          <div class="mt-6 space-y-3 text-[15px] leading-7 text-text-primary font-[300]">
+            <p>— Social media strategy and publishing</p>
+            <p>— Paid social, analytics and optimisation</p>
+            <p>— Community growth and identity coordination</p>
+          </div>
+          <a href="/digital-marketing" class="mt-8 inline-flex text-[14px] font-[500] text-accent hover:underline">Explore digital marketing →</a>
+        </div>
+        <div class="rounded-[6px] border border-border bg-background p-10">
+          <p class="text-[16px] leading-7 text-text-secondary">Entertainment audiences need cultural understanding and timing. We plan for rhythms, moments and the creator-led marketplace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-background px-6 py-[100px] lg:px-8">
+    <SectionLabel label="HOW WE WORK" />
+    <div class="mx-auto grid max-w-[1200px] gap-8 lg:grid-cols-4">
+      {['Discovery','Strategy','Execution','Growth'].map((step, index) => (
+        <div class="space-y-3 text-center md:text-left" key={step}>
+          <div class="text-[36px] font-display text-accent opacity-50">0{index + 1}</div>
+          <p class="text-[16px] font-[500] text-text-primary">{step}</p>
+          <p class="text-[14px] leading-7 text-text-secondary font-[300]">{
+            index === 0 ? 'We learn your world before we touch your brand.' :
+            index === 1 ? 'We build a plan specific to your goals, audience, and market.' :
+            index === 2 ? 'We produce, publish, and manage with full accountability.' :
+            'We measure, optimise, and scale what works.'
+          }</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[100px] lg:px-8">
+    <div class="mx-auto max-w-[840px] text-center">
+      <h2 class="font-display text-[40px] leading-tight text-text-primary">Ready to work together?</h2>
+      <a href="/contact" class="mt-8 inline-flex rounded-[8px] border border-accent px-8 py-4 text-[14px] font-[500] text-accent hover:bg-accent hover:text-background transition duration-300 ease-in-out">Inquire</a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+---
+<Layout title="VR Store | Professional tools for artists and creators" description="Explore VR Store products: digital tools, sample packs and licensing for artists, producers and entertainment brands.">
+  <section class="bg-background px-6 py-[100px] lg:px-8">
+    <div class="mx-auto max-w-[840px]">
+      <p class="text-[11px] uppercase tracking-[0.2em] text-terracotta font-[300]">VR STORE</p>
+      <h1 class="mt-6 font-display text-[52px] leading-tight text-text-primary">Professional tools for working artists and creators.</h1>
+      <p class="mt-6 text-[18px] leading-[1.8] text-text-secondary font-[300]">Digital products developed from real production and performance experience.</p>
+    </div>
+  </section>
+
+  <section class="bg-surface px-6 py-[100px] lg:px-8">
+    <div class="mx-auto grid max-w-[1200px] gap-8 lg:grid-cols-2">
+      <ProductCard
+        tag="AUDIO + VISUAL"
+        name="NYE Countdown Tool for DJs"
+        description="A full 5-minute audio and visual track for New Year's Eve midnight moments. High-energy build, 10-second countdown, perfectly timed drop."
+        specs="Format: Audio + Visual file · Delivery: Instant digital download · Compatible: All DJ and VJ setups"
+        price="₹999"
+        href="https://razorpay.me/@vrentertainment"
+      />
+      <ProductCard
+        tag="SAMPLE PACK"
+        name="Indian Elements Sample Pack"
+        description="65+ meticulously recorded Indian music samples. Sitar, Tabla, Dholak, Flute, Violin, Mandolin, and Tamborine."
+        specs="65+ samples · High-quality recordings · Instant digital download"
+        price="₹199"
+        href="https://pages.razorpay.com/indianelements"
+      />
+    </div>
+  </section>
+
+  <section class="bg-background px-6 py-[100px] lg:px-8">
+    <div class="mx-auto max-w-[840px] space-y-8">
+      <div>
+        <h2 class="text-[32px] font-display text-text-primary">Licensing</h2>
+        <p class="mt-6 text-[16px] leading-[1.8] text-text-secondary font-[300]">All VR Store products are available for commercial licensing. If you need to use our productions in commercial, broadcast, or sync contexts, get in touch.</p>
+        <a href="/contact?type=licensing" class="mt-8 inline-flex rounded-[8px] border border-accent px-8 py-4 text-[14px] font-[500] text-accent hover:bg-accent hover:text-background transition duration-300 ease-in-out">Licensing inquiries →</a>
+      </div>
+      <div>
+        <p class="text-[18px] leading-[1.8] text-text-secondary font-[300]">We're developing new tools for DJs, producers, and content creators. Join the Intelligence Brief to be notified first.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,15 @@
+---
+const { tag, name, description, specs, price, href } = Astro.props;
+---
+<article class="bg-surface-2 border border-border p-8 rounded-[6px] flex flex-col justify-between">
+  <div>
+    <span class="inline-block text-[11px] uppercase tracking-[0.15em] text-white bg-terracotta px-3 py-1 rounded-sm">{tag}</span>
+    <h3 class="mt-4 text-[22px] font-[500] leading-tight text-text-primary">{name}</h3>
+    <p class="mt-4 text-[15px] leading-7 text-text-secondary font-[300]">{description}</p>
+    <p class="mt-6 text-[14px] uppercase tracking-[0.1em] text-text-tertiary">{specs}</p>
+  </div>
+  <div class="mt-8">
+    <div class="text-[20px] font-[700] text-accent">{price}</div>
+    <a href={href} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex w-full items-center justify-center border border-accent text-accent px-6 py-3 rounded-[8px] text-sm font-[500] hover:bg-accent hover:text-background transition duration-300 ease-in-out">Buy Now</a>
+  </div>
+</article>
