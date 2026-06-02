@@ -6,26 +6,25 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 
 <header
   id="site-nav"
-  class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300"
-  data-at-top="true"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-colors duration-300"
 >
-  <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+  <nav class="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 lg:px-10">
     <!-- Brand -->
-    <a href="/" class="group flex items-center gap-2" aria-label="VR Entertainment home">
-      <span class="font-display text-2xl tracking-wide text-off-white">VR</span>
-      <span class="font-display text-2xl tracking-wide text-gold">Entertainment</span>
+    <a href="/" class="flex items-baseline gap-2" aria-label="VR Entertainment home">
+      <span class="font-display text-xl font-extrabold tracking-tight text-ink">VR Entertainment</span>
+      <span class="mono-label hidden sm:inline">®</span>
     </a>
 
     <!-- Desktop links -->
-    <ul class="hidden items-center gap-7 lg:flex">
+    <ul class="hidden items-center gap-8 lg:flex">
       {
         NAV.map((item) => (
           <li>
             <a
               href={item.href}
               class:list={[
-                'text-sm font-medium tracking-wide transition-colors hover:text-gold',
-                isActive(item.href) ? 'text-gold' : 'text-off-white/80',
+                'font-mono text-xs uppercase tracking-wider transition-colors hover:text-accent',
+                isActive(item.href) ? 'text-accent' : 'text-ink/70',
               ]}
             >
               {item.label}
@@ -35,33 +34,24 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       }
     </ul>
 
-    <div class="hidden items-center gap-3 lg:flex">
-      <a href="/contact" class="btn-cta !px-5 !py-2 !text-base">Book a Call</a>
+    <div class="hidden lg:block">
+      <a href="/contact" class="btn !py-2.5 !px-5">Book a Call</a>
     </div>
 
     <!-- Mobile toggle -->
-    <button
-      id="nav-toggle"
-      class="lg:hidden"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-off-white">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
+    <button id="nav-toggle" class="lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-ink">
+        <line x1="3" y1="7" x2="21" y2="7"></line>
         <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
+        <line x1="3" y1="17" x2="21" y2="17"></line>
       </svg>
     </button>
   </nav>
 
   <!-- Mobile menu overlay -->
-  <div
-    id="mobile-menu"
-    class="fixed inset-0 z-40 hidden flex-col bg-deep-black/98 px-6 pt-24 backdrop-blur lg:hidden"
-  >
-    <button id="nav-close" class="absolute right-5 top-5 text-off-white" aria-label="Close menu">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <div id="mobile-menu" class="fixed inset-0 z-40 hidden flex-col bg-paper px-6 pt-24 lg:hidden">
+    <button id="nav-close" class="absolute right-5 top-5 text-ink" aria-label="Close menu">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
@@ -70,15 +60,15 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       {
         NAV.map((item) => (
           <li>
-            <a href={item.href} class="font-display text-3xl tracking-wide text-off-white hover:text-gold">
+            <a href={item.href} class="font-display text-3xl font-extrabold tracking-tight text-ink hover:text-accent">
               {item.label}
             </a>
           </li>
         ))
       }
     </ul>
-    <a href="/contact" class="btn-cta mt-8 justify-center">Book a Strategy Call</a>
-    <a href={SITE.whatsapp} class="mt-4 text-center text-warm-grey hover:text-gold">WhatsApp us →</a>
+    <a href="/contact" class="btn mt-8 justify-center">Book a Strategy Call</a>
+    <a href={SITE.whatsapp} class="btn-text mt-5">WhatsApp us →</a>
   </div>
 </header>
 
@@ -104,15 +94,14 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   close?.addEventListener('click', closeMenu);
   menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
 
-  // Opaque background after scrolling past the hero top
   function onScroll() {
     if (!nav) return;
-    if (window.scrollY > 40) {
-      nav.dataset.atTop = 'false';
-      nav.classList.add('bg-near-black/95', 'backdrop-blur', 'shadow-lg', 'shadow-black/40');
+    if (window.scrollY > 30) {
+      nav.classList.add('bg-paper/85', 'backdrop-blur', 'border-hairline');
+      nav.classList.remove('border-transparent');
     } else {
-      nav.dataset.atTop = 'true';
-      nav.classList.remove('bg-near-black/95', 'backdrop-blur', 'shadow-lg', 'shadow-black/40');
+      nav.classList.remove('bg-paper/85', 'backdrop-blur', 'border-hairline');
+      nav.classList.add('border-transparent');
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });

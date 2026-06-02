@@ -23,55 +23,43 @@ const schema = [
 ];
 ---
 
-<Layout
-  title={`${s.title} — VR Entertainment`}
-  description={s.blurb}
-  path={`/services/${s.slug}`}
-  schema={schema}
->
+<Layout title={`${s.title} — VR Entertainment`} description={s.blurb} path={`/services/${s.slug}`} schema={schema}>
   <PageHero eyebrow="Service" title={s.title} subtitle={s.blurb}>
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href="/contact" class="btn-cta">Book a Strategy Call</a>
-      <a href="/work" class="btn-ghost">See the work</a>
+    <div class="mt-8 flex flex-wrap items-center gap-5">
+      <a href="/contact" class="btn">Book a Strategy Call</a>
+      <a href="/work" class="btn-text">See the work →</a>
     </div>
   </PageHero>
 
-  <!-- TODO: full service copy — deliverables, packages, FAQs, proof. Scaffold below. -->
-  <section class="mx-auto max-w-3xl px-5 py-20 lg:px-8">
-    <div data-reveal>
-      <p class="eyebrow mb-5">How it works</p>
-      <h2 class="font-display text-4xl text-off-white">Audit → Strategy → Build → Grow</h2>
-      <div class="mt-8 grid gap-4 sm:grid-cols-4">
-        {
-          PROCESS.map((step, i) => (
-            <div class="rounded-md border border-white/10 bg-white/[0.02] p-4">
-              <span class="font-display text-3xl text-gold/50">0{i + 1}</span>
-              <p class="mt-1 font-display text-2xl text-off-white">{step}</p>
-            </div>
-          ))
-        }
-      </div>
+  <!-- TODO(VIC): full service copy — deliverables, packages, FAQs, proof. -->
+  <section class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
+    <p class="mono-label" data-reveal>// How it works</p>
+    <div class="mt-8 grid gap-px overflow-hidden rounded-lg border border-hairline bg-hairline sm:grid-cols-4">
+      {PROCESS.map((step, i) => (
+        <div data-reveal class="bg-paper p-6">
+          <span class="section-index">0{i + 1}</span>
+          <p class="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink">{step}</p>
+        </div>
+      ))}
     </div>
   </section>
 
-  <section class="bg-deep-black py-20">
-    <div class="mx-auto flex max-w-3xl flex-col items-center px-5 text-center lg:px-8" data-reveal>
-      <h2 class="font-display text-4xl text-off-white">Let’s build it.</h2>
-      <div class="mt-8 flex justify-center"><LeadForm source="service-page" /></div>
+  <section class="border-t border-hairline bg-surface">
+    <div class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10">
+      <h2 class="font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold tracking-tight text-ink" data-reveal>Let’s build it.</h2>
+      <div class="mt-8" data-reveal data-reveal-delay="0.1"><LeadForm source="service-page" /></div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-    <h2 class="mb-6 font-display text-3xl text-off-white">More services</h2>
-    <div class="grid gap-5 sm:grid-cols-3">
-      {
-        others.map((o) => (
-          <a href={`/services/${o.slug}`} class="glow-gold rounded-md border border-white/10 bg-white/[0.02] p-6">
-            <h3 class="font-display text-2xl text-off-white">{o.title}</h3>
-            <p class="mt-2 text-sm text-warm-grey">{o.blurb}</p>
-          </a>
-        ))
-      }
+  <section class="mx-auto max-w-[1400px] px-5 py-16 lg:px-10">
+    <p class="mono-label mb-6" data-reveal>// More services</p>
+    <div>
+      {others.map((o, i) => (
+        <a href={`/services/${o.slug}`} data-reveal class="group flex items-center justify-between border-b border-hairline py-5 transition-colors hover:border-ink">
+          <h3 class="font-display text-xl font-extrabold tracking-tight text-ink transition-colors group-hover:text-accent">{o.title}</h3>
+          <span class="mono-label transition-transform group-hover:translate-x-1">→</span>
+        </a>
+      ))}
     </div>
   </section>
 </Layout>

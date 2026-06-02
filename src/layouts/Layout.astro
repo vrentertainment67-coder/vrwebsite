@@ -28,7 +28,7 @@ const { title, description, path, image, type, noindex, schema = [], bare = fals
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#f4f2ed" />
     <meta name="generator" content={Astro.generator} />
     <SEO title={title} description={description} path={path} image={image} type={type} noindex={noindex} />
     <JsonLd extra={schema} />
@@ -37,10 +37,10 @@ const { title, description, path, image, type, noindex, schema = [], bare = fals
       document.documentElement.classList.remove('no-js');
     </script>
   </head>
-  <body class="min-h-screen bg-near-black text-off-white antialiased">
+  <body class="min-h-screen bg-paper text-ink antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-gold focus:px-4 focus:py-2 focus:text-near-black"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
     >
       Skip to content
     </a>

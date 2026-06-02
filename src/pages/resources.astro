@@ -15,17 +15,22 @@ import AuditForm from '@/components/AuditForm.astro';
     subtitle="Start with a free audit. More playbooks coming soon."
   />
 
-  <section id="free-audit" class="mx-auto max-w-3xl px-5 py-16 text-center lg:px-8">
-    <div data-reveal>
-      <h2 class="font-display text-4xl text-off-white">Get the free audit.</h2>
-      <p class="mx-auto mt-4 max-w-xl text-warm-grey">
-        We’ll show you the three things hurting your bookings or footfall right now. No call required.
-      </p>
+  <section id="free-audit" class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <p class="mono-label">// Free audit</p>
+        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
+          Get the free audit.
+        </h2>
+        <p class="mt-5 max-w-md text-lg text-grey">
+          We’ll show you the three things hurting your bookings or footfall right now. No call required.
+        </p>
+      </div>
+      <div data-reveal data-reveal-delay="0.1"><AuditForm /></div>
     </div>
-    <div class="mt-10" data-reveal data-reveal-delay="0.15"><AuditForm /></div>
   </section>
 
-  <!-- TODO: guides / templates / downloads grid -->
+  <!-- TODO(VIC): guides / templates / downloads grid -->
 </Layout>
 
 <script>

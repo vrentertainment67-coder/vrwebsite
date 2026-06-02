@@ -5,24 +5,24 @@ interface Props {
 }
 const {
   items = [
-    '18 Countries',
     'Universal Music',
-    'The Vic Fix',
-    '19 Years On The Decks',
     'Flingit',
+    '18 Countries',
+    'Featured on The Vic Fix',
+    '19 Years On The Decks',
     '₹1L/mo Retainer',
   ],
 } = Astro.props;
 const doubled = [...items, ...items];
 ---
 
-<div class="relative overflow-hidden border-y border-white/10 bg-deep-black py-5" aria-hidden="true">
+<div class="rule overflow-hidden border-b border-hairline bg-paper py-5" aria-hidden="true">
   <div class="marquee-track">
     {
       doubled.map((item) => (
-        <span class="mx-8 flex items-center gap-8 whitespace-nowrap font-display text-xl tracking-wide text-warm-grey">
+        <span class="mx-7 flex items-center gap-7 whitespace-nowrap font-mono text-sm uppercase tracking-wider text-grey">
           {item}
-          <span class="h-1.5 w-1.5 rounded-full bg-gold/70"></span>
+          <span class="h-1 w-1 rounded-full bg-accent"></span>
         </span>
       ))
     }

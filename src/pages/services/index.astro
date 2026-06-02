@@ -4,6 +4,17 @@ import PageHero from '@/components/PageHero.astro';
 import ServiceCard from '@/components/ServiceCard.astro';
 import { SERVICES, SITE } from '@/lib/site';
 
+const serviceTags: Record<string, string[]> = {
+  'web-design-development': ['Astro', 'Tailwind', 'SEO', 'CMS'],
+  'artist-dj-websites': ['EPK', 'Booking', 'Mixes'],
+  'seo-and-local-seo': ['Local', 'Technical', 'Content'],
+  'social-content-and-reels': ['Reels', 'Shooting', 'Editing'],
+  'video-and-podcast-production': ['Film', 'Audio', 'Studio'],
+  'branding-and-press-kits': ['Identity', 'EPK', 'Logo'],
+  'event-and-nightlife-marketing': ['Campaigns', 'Ads', 'Footfall'],
+  'consulting-and-growth-strategy': ['Roadmap', 'Audit', 'Growth'],
+};
+
 const schema = [
   {
     '@type': 'Service',
@@ -28,17 +39,20 @@ const schema = [
   schema={schema}
 >
   <PageHero
-    eyebrow="The arsenal"
+    index="02"
+    eyebrow="The Arsenal"
     title="Everything you need to grow. Nothing you don’t."
     subtitle="A full stack of services built by people who live in the night economy."
   />
 
-  <section class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {SERVICES.map((s) => <ServiceCard title={s.title} blurb={s.blurb} href={`/services/${s.slug}`} />)}
+  <section class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
+    <div>
+      {SERVICES.map((s, i) => (
+        <ServiceCard title={s.title} blurb={s.blurb} href={`/services/${s.slug}`} index={`0${i + 1}`} tags={serviceTags[s.slug] ?? []} />
+      ))}
     </div>
-    <div class="mt-12 text-center" data-reveal>
-      <a href="/contact" class="btn-cta">Book a Strategy Call</a>
+    <div class="mt-12" data-reveal>
+      <a href="/contact" class="btn">Book a Strategy Call</a>
     </div>
   </section>
 </Layout>

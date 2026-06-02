@@ -1,0 +1,24 @@
+---
+/** Live Bengaluru (IST) clock — Swiss metadata detail. Computed client-side. */
+---
+<span class="mono-label inline-flex items-center gap-2" aria-label="Local time in Bengaluru">
+  <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent"></span>
+  Bengaluru <span data-clock>—:—:—</span> IST
+</span>
+
+<script>
+  function tick() {
+    const el = document.querySelector('[data-clock]');
+    if (!el) return;
+    const t = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    }).format(new Date());
+    el.textContent = t;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>

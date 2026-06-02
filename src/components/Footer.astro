@@ -1,89 +1,81 @@
 ---
 import { SITE, NAV, SERVICES } from '@/lib/site';
+const year = new Date().getFullYear();
 ---
 
-<footer class="relative border-t border-white/10 bg-deep-black">
-  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4 lg:px-8">
-    <!-- Brand + NAP -->
-    <div class="lg:col-span-1">
-      <a href="/" class="flex items-center gap-2">
-        <span class="font-display text-2xl text-off-white">VR</span>
-        <span class="font-display text-2xl text-gold">Entertainment</span>
-      </a>
-      <p class="mt-4 max-w-xs text-sm text-warm-grey">{SITE.tagline}</p>
-      <address class="mt-5 not-italic text-sm leading-relaxed text-warm-grey">
-        {SITE.nap.business}<br />
-        {SITE.nap.street}<br />
-        {SITE.nap.locality} {SITE.nap.postalCode}<br />
-        <a href={`tel:${SITE.nap.phoneE164}`} class="hover:text-gold">{SITE.nap.phoneDisplay}</a><br />
-        <a href={`mailto:${SITE.email}`} class="hover:text-gold">{SITE.email}</a>
-      </address>
-    </div>
-
-    <!-- Explore -->
-    <div>
-      <h3 class="font-display text-lg tracking-wide text-off-white">Explore</h3>
-      <ul class="mt-4 space-y-2 text-sm">
-        {NAV.map((i) => (
-          <li><a href={i.href} class="text-warm-grey hover:text-gold">{i.label}</a></li>
-        ))}
-        <li><a href="/contact" class="text-warm-grey hover:text-gold">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- Services -->
-    <div>
-      <h3 class="font-display text-lg tracking-wide text-off-white">Services</h3>
-      <ul class="mt-4 space-y-2 text-sm">
-        {SERVICES.slice(0, 6).map((s) => (
-          <li><a href={`/services/${s.slug}`} class="text-warm-grey hover:text-gold">{s.title}</a></li>
-        ))}
-        <li><a href="/services" class="text-gold hover:text-gold-light">All services →</a></li>
-      </ul>
-    </div>
-
-    <!-- Connect -->
-    <div>
-      <h3 class="font-display text-lg tracking-wide text-off-white">Connect</h3>
-      <ul class="mt-4 space-y-2 text-sm">
-        <li><a href={SITE.socials.instagramAgency} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">Instagram · @vr_entt</a></li>
-        <li><a href={SITE.socials.instagramDjVic} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">Instagram · @djvicofficial</a></li>
-        <li><a href={SITE.socials.instagramVicFix} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">Instagram · @thevicfix</a></li>
-        <li><a href={SITE.socials.youtube} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">YouTube · VREntertainment67</a></li>
-        <li><a href={SITE.whatsapp} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">WhatsApp chat →</a></li>
-      </ul>
+<footer class="rule bg-paper">
+  <div class="mx-auto max-w-[1400px] px-5 py-16 lg:px-10">
+    <!-- Top: big wordmark + newsletter -->
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="mono-label">// {SITE.tagline}</p>
+        <a href="/" class="mt-3 block font-display text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[0.9] tracking-tight text-ink">
+          VR Entertainment
+        </a>
+      </div>
 
       <!-- Newsletter -->
-      <form data-newsletter class="mt-6">
-        <label for="footer-email" class="text-xs uppercase tracking-widest text-warm-grey">Get the night brief</label>
-        <div class="mt-2 flex gap-2">
-          <input
-            id="footer-email"
-            name="email"
-            type="email"
-            required
-            placeholder="you@email.com"
-            class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2 text-sm text-off-white placeholder:text-warm-grey/60 focus:border-gold focus:outline-none"
-          />
-          <button type="submit" class="rounded-sm bg-gold px-4 py-2 text-sm font-semibold text-near-black hover:bg-gold-light">Join</button>
+      <form data-newsletter class="w-full max-w-sm">
+        <label for="footer-email" class="mono-label">Get the night brief</label>
+        <div class="mt-3 flex gap-2">
+          <input id="footer-email" name="email" type="email" required placeholder="you@email.com" class="field" />
+          <button type="submit" class="btn shrink-0">Join</button>
         </div>
-        <!-- honeypot -->
         <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-        <p data-newsletter-msg class="mt-2 text-xs text-warm-grey" role="status" aria-live="polite"></p>
+        <p data-newsletter-msg class="mono-label mt-2" role="status" aria-live="polite"></p>
       </form>
     </div>
-  </div>
 
-  <div class="border-t border-white/10">
-    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-warm-grey lg:flex-row lg:px-8">
-      <p>© {new Date().getFullYear()} {SITE.nap.business}. All rights reserved.</p>
-      <p>{SITE.tagline}</p>
+    <!-- Columns -->
+    <div class="rule mt-14 grid gap-10 pt-12 md:grid-cols-4">
+      <div>
+        <p class="mono-label mb-4">Explore</p>
+        <ul class="space-y-2 text-sm">
+          {NAV.map((i) => <li><a href={i.href} class="text-grey transition-colors hover:text-ink">{i.label}</a></li>)}
+          <li><a href="/contact" class="text-grey transition-colors hover:text-ink">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="mono-label mb-4">Services</p>
+        <ul class="space-y-2 text-sm">
+          {SERVICES.slice(0, 6).map((s) => <li><a href={`/services/${s.slug}`} class="text-grey transition-colors hover:text-ink">{s.title}</a></li>)}
+          <li><a href="/services" class="text-accent transition-colors hover:text-ink">All services →</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="mono-label mb-4">Connect</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href={SITE.socials.instagramAgency} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">Instagram · @vr_entt</a></li>
+          <li><a href={SITE.socials.instagramDjVic} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">Instagram · @djvicofficial</a></li>
+          <li><a href={SITE.socials.instagramVicFix} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">Instagram · @thevicfix</a></li>
+          <li><a href={SITE.socials.youtube} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">YouTube · VREntertainment67</a></li>
+          <li><a href={SITE.whatsapp} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">WhatsApp chat →</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="mono-label mb-4">Studio</p>
+        <address class="space-y-1 text-sm not-italic text-grey">
+          <p>{SITE.nap.business}</p>
+          <p>{SITE.nap.street}</p>
+          <p>{SITE.nap.locality} {SITE.nap.postalCode}</p>
+          <p><a href={`tel:${SITE.nap.phoneE164}`} class="transition-colors hover:text-ink">{SITE.nap.phoneDisplay}</a></p>
+          <p><a href={`mailto:${SITE.email}`} class="transition-colors hover:text-ink">{SITE.email}</a></p>
+        </address>
+      </div>
+    </div>
+
+    <!-- Baseline -->
+    <div class="rule mt-12 flex flex-col gap-2 pt-6 md:flex-row md:items-center md:justify-between">
+      <p class="mono-label">©{year} {SITE.nap.business} — All rights reserved</p>
+      <p class="mono-label">Bengaluru · IN</p>
     </div>
   </div>
 </footer>
 
 <script>
-  // Footer newsletter → /api/subscribe
   const form = document.querySelector('form[data-newsletter]') as HTMLFormElement | null;
   const msg = document.querySelector('[data-newsletter-msg]') as HTMLElement | null;
   form?.addEventListener('submit', async (e) => {
@@ -101,7 +93,6 @@ import { SITE, NAV, SERVICES } from '@/lib/site';
       if (out.ok) {
         form.reset();
         msg.textContent = 'You’re in. Watch your inbox.';
-        msg.classList.add('text-gold');
       } else {
         msg.textContent = out.error || 'Something went wrong.';
       }

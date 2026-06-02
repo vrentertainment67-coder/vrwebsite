@@ -1,8 +1,8 @@
 ---
 /**
- * Drag-to-reveal before/after image comparison.
- * Accessible: the handle is a range input, so it's keyboard-operable.
- * Uses solid placeholder panels when no image is supplied (TODO: real assets).
+ * Drag-to-reveal before/after image comparison (light editorial).
+ * Keyboard-operable via a range input; touch + mouse via the same input.
+ * Uses neutral placeholder panels when no image is supplied (TODO: real assets).
  */
 interface Props {
   before?: string;
@@ -22,7 +22,7 @@ const id = 'ba-' + Math.random().toString(36).slice(2, 8);
 ---
 
 <div
-  class="ba-slider group relative aspect-[16/10] w-full select-none overflow-hidden rounded-md border border-white/10"
+  class="ba-slider relative aspect-[16/10] w-full select-none overflow-hidden rounded-lg border border-hairline bg-surface"
   data-ba
   role="group"
   aria-label={alt}
@@ -33,12 +33,12 @@ const id = 'ba-' + Math.random().toString(36).slice(2, 8);
       after ? (
         <img src={after} alt={`${alt} — after`} class="h-full w-full object-cover" loading="lazy" decoding="async" />
       ) : (
-        <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#14110a] to-[#1f1a0c]">
-          <span class="font-display text-5xl text-gold/40">AFTER</span>
+        <div class="flex h-full w-full items-center justify-center bg-[#efece4]">
+          <span class="font-display text-5xl font-extrabold tracking-tight text-accent/50">AFTER</span>
         </div>
       )
     }
-    <span class="absolute bottom-3 right-3 rounded bg-black/60 px-2 py-1 text-xs font-medium text-gold">{afterLabel}</span>
+    <span class="mono-label absolute bottom-3 right-3 rounded bg-paper/85 px-2 py-1 !text-accent">{afterLabel}</span>
   </div>
 
   <!-- BEFORE (clipped, on top) -->
@@ -47,23 +47,22 @@ const id = 'ba-' + Math.random().toString(36).slice(2, 8);
       before ? (
         <img src={before} alt={`${alt} — before`} class="h-full w-full object-cover grayscale" loading="lazy" decoding="async" />
       ) : (
-        <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#0c0c0c] to-[#1a1a1a]">
-          <span class="font-display text-5xl text-warm-grey/40">BEFORE</span>
+        <div class="flex h-full w-full items-center justify-center bg-[#e2ded3]">
+          <span class="font-display text-5xl font-extrabold tracking-tight text-grey/50">BEFORE</span>
         </div>
       )
     }
-    <span class="absolute bottom-3 left-3 rounded bg-black/60 px-2 py-1 text-xs font-medium text-off-white">{beforeLabel}</span>
+    <span class="mono-label absolute bottom-3 left-3 rounded bg-paper/85 px-2 py-1">{beforeLabel}</span>
   </div>
 
   <!-- Divider line + handle -->
   <div class="ba-divider pointer-events-none absolute inset-y-0" style="left: 50%;" data-ba-divider>
-    <div class="absolute inset-y-0 -ml-px w-0.5 bg-gold"></div>
-    <div class="absolute top-1/2 -ml-5 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-gold text-near-black shadow-lg">
+    <div class="absolute inset-y-0 -ml-px w-0.5 bg-ink"></div>
+    <div class="absolute top-1/2 -ml-5 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-ink text-paper shadow-lg">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 7l-5 5 5 5V7zm8 0v10l5-5-5-5z"/></svg>
     </div>
   </div>
 
-  <!-- Range input drives the reveal (keyboard accessible) -->
   <label for={id} class="sr-only">Reveal slider</label>
   <input
     id={id}

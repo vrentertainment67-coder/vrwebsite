@@ -1,0 +1,28 @@
+---
+/**
+ * Full-width kinetic type reveal — lines slide/fade in on scroll.
+ * Pure typography, no images. Accent word(s) per line via markup.
+ */
+interface Props {
+  lines: { text: string; accent?: boolean }[];
+}
+const { lines } = Astro.props;
+---
+
+<section class="border-y border-hairline bg-paper py-24 lg:py-36" data-kinetic>
+  <div class="mx-auto max-w-[1400px] px-5 lg:px-10">
+    {
+      lines.map((line) => (
+        <p
+          data-kinetic-line
+          class:list={[
+            'font-display text-[clamp(2.5rem,9vw,7rem)] font-extrabold leading-[0.95] tracking-tight',
+            line.accent ? 'text-accent' : 'text-ink',
+          ]}
+        >
+          {line.text}
+        </p>
+      ))
+    }
+  </div>
+</section>

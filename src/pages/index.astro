@@ -1,18 +1,57 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Marquee from '@/components/Marquee.astro';
+import SectionLabel from '@/components/SectionLabel.astro';
+import Clock from '@/components/Clock.astro';
 import SegmentCard from '@/components/SegmentCard.astro';
 import ServiceCard from '@/components/ServiceCard.astro';
+import WorkCard from '@/components/WorkCard.astro';
+import PricingCard from '@/components/PricingCard.astro';
+import KineticStatement from '@/components/KineticStatement.astro';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import { SEGMENTS, SERVICES, PROCESS, SITE } from '@/lib/site';
+import { CASE_STUDIES } from '@/lib/work';
 import { getReadClient } from '@/lib/supabase';
 
-const heroWords = 'WE BUILD THE BRANDS THAT OWN THE NIGHT.'.split(' ');
+// Lowercase, editorial. Word-by-word reveal keeps real spaces (no jam bug).
+const heroWords = 'we build the brands that own the night.'.split(' ');
 
-// Published testimonials (built from Supabase). If the table is empty or the
-// fetch fails (e.g. no creds at build), the whole section is hidden — never
-// shows placeholders. Edit/add rows in the `testimonials` table, then redeploy.
+// Per-service tag chips (technical metadata).
+const serviceTags: Record<string, string[]> = {
+  'web-design-development': ['Astro', 'Tailwind', 'SEO', 'CMS'],
+  'artist-dj-websites': ['EPK', 'Booking', 'Mixes'],
+  'seo-and-local-seo': ['Local', 'Technical', 'Content'],
+  'social-content-and-reels': ['Reels', 'Shooting', 'Editing'],
+  'video-and-podcast-production': ['Film', 'Audio', 'Studio'],
+  'branding-and-press-kits': ['Identity', 'EPK', 'Logo'],
+  'event-and-nightlife-marketing': ['Campaigns', 'Ads', 'Footfall'],
+  'consulting-and-growth-strategy': ['Roadmap', 'Audit', 'Growth'],
+};
+
+// Work tags + year (TODO(metrics): 38→92 / 68% being verified before publish).
+const workTags: Record<string, string[]> = {
+  djvicofficial: ['Web Design', 'SEO', 'Astro'],
+  flingit: ['Product', 'Platform', 'Build'],
+  'the-vic-fix': ['Video', 'Distribution', 'Growth'],
+};
+
+const schema = [
+  {
+    '@type': 'PodcastSeries',
+    name: 'The Vic Fix',
+    url: `${SITE.url}/the-vic-fix`,
+    description: 'India’s nightlife, on the record — a documentary platform on the people who run the night.',
+  },
+  {
+    '@type': 'Service',
+    serviceType: 'Nightlife & hospitality growth marketing',
+    provider: { '@id': `${SITE.url}/#organization` },
+    areaServed: 'IN',
+  },
+];
+
+// Published testimonials (Supabase). Section hidden entirely if none.
 interface Testimonial {
   name: string;
   role: string | null;
@@ -32,45 +71,6 @@ try {
 } catch {
   testimonials = [];
 }
-
-// Homepage JSON-LD: the org/person/localbusiness come from JsonLd.astro globally.
-// Add a PodcastSeries node for The Vic Fix and a Service summary.
-const schema = [
-  {
-    '@type': 'PodcastSeries',
-    name: 'The Vic Fix',
-    url: `${SITE.url}/the-vic-fix`,
-    description: 'India’s nightlife, on the record — a documentary platform on the people who run the night.',
-  },
-  {
-    '@type': 'Service',
-    serviceType: 'Nightlife & hospitality growth marketing',
-    provider: { '@id': `${SITE.url}/#organization` },
-    areaServed: 'IN',
-  },
-];
-
-// TODO(metrics): case-study numbers below are being verified before publish.
-const cases = [
-  {
-    title: 'djvicofficial.com',
-    metric: 'SEO score 38 → 92.',
-    body: 'Built on Astro. Ranking and booking.',
-    href: '/work/djvicofficial',
-  },
-  {
-    title: 'Flingit',
-    metric: 'Built, shipped, run end-to-end.',
-    body: 'A full nightlife rewards platform.',
-    href: '/work/flingit',
-  },
-  {
-    title: 'The Vic Fix',
-    metric: '68% episode-view growth.',
-    body: 'Season 1 → Season 2.',
-    href: '/work/the-vic-fix',
-  },
-];
 ---
 
 <Layout
@@ -79,182 +79,139 @@ const cases = [
   path="/"
   schema={schema}
 >
-  <!-- ─────────────── 1. HERO ─────────────── -->
-  <section class="grain relative flex min-h-[100svh] items-center overflow-hidden">
-    <!-- Full-bleed media (TODO: drop a real club/festival loop at /hero.mp4 + /hero-poster.jpg) -->
-    <div data-hero-media class="absolute inset-0 -z-10">
-      <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#120a0a] to-[#000]"></div>
-      {/* No `autoplay` attribute: playback is started by JS only when motion is
-          allowed (see reveal.ts). preload="none" means reduced-motion users (and
-          the first paint) never download the clip — the poster stands in. */}
-      <video
-        data-hero-video
-        class="h-full w-full object-cover opacity-50"
-        muted
-        loop
-        playsinline
-        preload="none"
-        poster="/hero-poster.jpg"
-        aria-hidden="true"
-      >
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
-      <!-- dark grade overlay -->
-      <div class="absolute inset-0 bg-gradient-to-t from-near-black via-near-black/60 to-near-black/30"></div>
-    </div>
+  <!-- ─────────────── HERO ─────────────── -->
+  <section class="border-b border-hairline bg-paper px-5 pt-36 pb-16 lg:px-10 lg:pt-48">
+    <div class="mx-auto max-w-[1400px]">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <p class="flex items-center gap-3">
+          <span class="section-index">// VR ENTERTAINMENT</span>
+          <span class="mono-label">Growth agency for the night economy</span>
+        </p>
+        <Clock />
+      </div>
 
-    <div class="relative z-10 mx-auto w-full max-w-7xl px-5 pt-28 lg:px-8">
-      <p class="eyebrow mb-5">Growth agency for the night economy</p>
       <h1
         data-words
-        class="max-w-4xl font-display text-[clamp(3rem,9vw,8rem)] leading-[0.92] text-off-white"
-        style="perspective: 800px;"
+        class="mt-10 font-display text-[clamp(3rem,12vw,11rem)] font-extrabold leading-[0.88] tracking-[-0.03em] text-ink"
       >
-        {/* Real breakable space between words so spacing never depends on a
-            utility class, the SSR text reads "WE BUILD THE…", and the line can
-            still wrap. inline-block is required for the GSAP transform. */}
         {heroWords.map((w, i) => (
           <Fragment>{i > 0 ? ' ' : ''}<span class="word inline-block">{w}</span></Fragment>
         ))}
       </h1>
-      <p class="mt-7 max-w-2xl text-lg text-warm-grey md:text-xl" data-reveal data-reveal-delay="0.6">
-        Websites, content and growth systems for venues, artists and hospitality brands — built by
-        people who actually live in the industry.
-      </p>
-      <div class="mt-9 flex flex-wrap items-center gap-4" data-reveal data-reveal-delay="0.8">
-        <a href="/contact" class="btn-cta">Book a Strategy Call</a>
-        <a href="/work" class="btn-ghost">See the Work</a>
-      </div>
-    </div>
 
-    <a href="#problem" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-warm-grey/70 hover:text-gold" aria-label="Scroll down">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-    </a>
-  </section>
-
-  <!-- credential marquee -->
-  <Marquee items={['Universal Music', 'Flingit', '18 Countries', 'Featured on The Vic Fix', '19 Years On The Decks', '₹1L/mo Retainer']} />
-
-  <!-- ─────────────── 2. THE PROBLEM ─────────────── -->
-  <section id="problem" class="relative mx-auto max-w-7xl px-5 py-24 lg:px-8">
-    <div class="grid items-center gap-12 lg:grid-cols-2">
-      <div data-reveal>
-        <p class="eyebrow mb-5">The problem</p>
-        <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] leading-[0.95] text-off-white">
-          Most agencies have never set foot in a green room.
-        </h2>
-        <p class="mt-6 max-w-xl text-lg text-warm-grey">
-          They’ll sell you a website that looks like every other website and content that sounds
-          like a brochure. Nightlife doesn’t move like that. We know — because we’re in the booth,
-          in the studio, and on the floor every week.
+      <div class="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <p class="max-w-xl text-lg text-grey md:text-xl" data-reveal data-reveal-delay="0.5">
+          Websites, content and growth systems for venues, artists and hospitality brands — built by
+          people who actually live in the industry.
         </p>
-      </div>
-      <!-- Split visual: sterile vs real (TODO: real nightlife footage/stills) -->
-      <div class="grid grid-cols-2 gap-3" data-reveal data-reveal-delay="0.2">
-        <div class="flex aspect-[3/4] items-end rounded-md bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] p-4">
-          <span class="text-xs uppercase tracking-widest text-warm-grey/60">Stock. Sterile.</span>
-        </div>
-        <div class="flex aspect-[3/4] items-end rounded-md bg-gradient-to-b from-[#2a0d0d] to-[#120505] p-4 ring-1 ring-signal-red/30">
-          <span class="text-xs uppercase tracking-widest text-off-white">Real nightlife.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────── 3. WHO WE HELP ─────────────── -->
-  <section class="bg-deep-black py-24">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-      <div class="mb-12 max-w-2xl" data-reveal>
-        <p class="eyebrow mb-5">Who we help</p>
-        <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">Who we build for.</h2>
-      </div>
-      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {SEGMENTS.map((s) => <SegmentCard title={s.title} pitch={s.pitch} href={`/who-we-help/${s.slug}`} />)}
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────── 4. THE ARSENAL (SERVICES) ─────────────── -->
-  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-    <div class="mb-12 max-w-2xl" data-reveal>
-      <p class="eyebrow mb-5">The arsenal</p>
-      <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">
-        Everything you need to grow. Nothing you don’t.
-      </h2>
-    </div>
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      {SERVICES.map((s) => <ServiceCard title={s.title} blurb={s.blurb} href={`/services/${s.slug}`} />)}
-    </div>
-    <div class="mt-10" data-reveal>
-      <a href="/services" class="btn-ghost">Explore Services</a>
-    </div>
-  </section>
-
-  <!-- ─────────────── 5. PROOF (CASE STUDIES) ─────────────── -->
-  <section class="bg-deep-black py-24">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-      <div class="mb-12 max-w-2xl" data-reveal>
-        <p class="eyebrow mb-5">Proof</p>
-        <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">Receipts.</h2>
-      </div>
-
-      <!-- Featured before/after slider (highest-converting interaction) -->
-      <div class="mb-10 grid items-center gap-8 lg:grid-cols-2" data-reveal>
-        <BeforeAfterSlider
-          beforeLabel="Old site · SEO 38"
-          afterLabel="New build · SEO 92"
-          alt="djvicofficial.com redesign before and after"
-        />
-        <div>
-          <h3 class="font-display text-3xl text-off-white">djvicofficial.com</h3>
-          <p class="mt-3 text-lg text-warm-grey">
-            {/* TODO(metrics): verify 38 → 92 before publish */}
-            SEO score 38 → 92. Built on Astro. Ranking and booking.
-          </p>
-          <a href="/work/djvicofficial" class="mt-4 inline-block text-gold hover:text-gold-light">Read the case study →</a>
+        <div class="flex flex-wrap items-center gap-5" data-reveal data-reveal-delay="0.7">
+          <a href="/contact" class="btn">Book a Strategy Call</a>
+          <a href="/work" class="btn-text">See the Work →</a>
         </div>
       </div>
 
-      <div class="grid gap-5 md:grid-cols-3">
-        {
-          cases.map((c) => (
-            <a href={c.href} data-reveal class="glow-gold rounded-md border border-white/10 bg-white/[0.02] p-6">
-              <h3 class="font-display text-2xl text-off-white">{c.title}</h3>
-              <p class="mt-3 font-display text-3xl text-gold">{c.metric}</p>
-              <p class="mt-2 text-sm text-warm-grey">{c.body}</p>
-            </a>
-          ))
-        }
+      <p class="mono-label mt-12 border-t border-hairline pt-5">
+        Universal Music · 18 Countries · Featured on The Vic Fix · 19 Years On The Decks
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust marquee -->
+  <Marquee />
+
+  <!-- ─────────────── // 01 WHO WE HELP ─────────────── -->
+  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+    <SectionLabel index="01" label="Who We Help" title="Who we build for." />
+    <div class="mt-12">
+      {SEGMENTS.map((s, i) => (
+        <SegmentCard title={s.title} pitch={s.pitch} href={`/who-we-help/${s.slug}`} index={`0${i + 1}`} />
+      ))}
+    </div>
+  </section>
+
+  <!-- ─────────────── // 02 SERVICES ─────────────── -->
+  <section class="border-t border-hairline bg-surface">
+    <div class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+      <SectionLabel
+        index="02"
+        label="The Arsenal"
+        title="Everything you need to grow. Nothing you don’t."
+      />
+      <div class="mt-12">
+        {SERVICES.map((s, i) => (
+          <ServiceCard
+            title={s.title}
+            blurb={s.blurb}
+            href={`/services/${s.slug}`}
+            index={`0${i + 1}`}
+            tags={serviceTags[s.slug] ?? []}
+          />
+        ))}
       </div>
       <div class="mt-10" data-reveal>
-        <a href="/work" class="btn-ghost">See all work</a>
+        <a href="/services" class="btn-outline">Explore Services</a>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── 6. THE UNFAIR ADVANTAGE ─────────────── -->
-  <section class="grain relative overflow-hidden py-28">
-    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#120a04] via-near-black to-[#0a0604]"></div>
-    <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[0.85fr_1fr] lg:px-8">
-      <!-- DJ Vic portrait (real) -->
-      <div class="relative mx-auto max-w-sm lg:mx-0" data-reveal>
-        <div class="absolute -inset-3 -z-10 rounded-md bg-gold/10 blur-2xl"></div>
-        <img
-          src="/brand/dj-vic.jpg"
-          alt="DJ Vic — Vikas Naik, founder of VR Entertainment"
-          width="700"
-          height="394"
-          loading="lazy"
-          decoding="async"
-          class="w-full rounded-md border border-white/10 object-cover"
-        />
+  <!-- ─────────────── // 03 WORK ─────────────── -->
+  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+    <SectionLabel index="03" label="Work" title="Receipts." description="The brands we’ve built, and what changed after." />
+
+    <!-- Featured before/after (djvicofficial) -->
+    <div class="mt-12 grid items-center gap-8 lg:grid-cols-2" data-reveal>
+      <BeforeAfterSlider
+        beforeLabel="Old site · SEO 38"
+        afterLabel="New build · SEO 92"
+        alt="djvicofficial.com redesign before and after"
+      />
+      <div>
+        <p class="mono-label">djvicofficial.com — YR/ 2026</p>
+        <h3 class="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink">SEO score 38 → 92.</h3>
+        {/* TODO(metrics): verify 38 → 92 before publish */}
+        <p class="mt-3 text-lg text-grey">Built on Astro. Ranking and booking.</p>
+        <a href="/work/djvicofficial" class="btn-text mt-5">Read the case study →</a>
       </div>
-      <div data-reveal data-reveal-delay="0.15">
-        <p class="eyebrow mb-6">The unfair advantage</p>
-        <h2 class="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] leading-[0.95] text-off-white">
+    </div>
+
+    <div class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-3">
+      {CASE_STUDIES.map((c) => (
+        <WorkCard
+          href={`/work/${c.slug}`}
+          client={c.client}
+          title={c.title}
+          descriptor={c.summary}
+          metricLabel={c.metricLabel}
+          metricAfter={c.metricAfter}
+          tags={workTags[c.slug] ?? []}
+          year="2026"
+        />
+      ))}
+    </div>
+    <div class="mt-12" data-reveal>
+      <a href="/work" class="btn-outline">See all work</a>
+    </div>
+  </section>
+
+  <!-- ─────────────── KINETIC STATEMENT ─────────────── -->
+  <KineticStatement
+    lines={[
+      { text: 'we listen.' },
+      { text: 'we build.' },
+      { text: 'we grow' },
+      { text: 'the night economy.', accent: true },
+    ]}
+  />
+
+  <!-- ─────────────── // 04 THE UNFAIR ADVANTAGE ─────────────── -->
+  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1fr]">
+      <SectionLabel index="04" label="The Unfair Advantage" />
+      <div data-reveal>
+        <h2 class="font-display text-[clamp(2rem,5vw,3.75rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
           We don’t just market the nightlife industry. We’re part of it.
         </h2>
-        <p class="mt-7 max-w-2xl text-lg text-warm-grey">
+        <p class="mt-6 max-w-2xl text-lg text-grey">
           19 years behind the decks. 18 countries. A Universal Music partnership. A podcast that the
           industry actually watches. When we build your brand, we build it from the inside.
         </p>
@@ -262,86 +219,116 @@ const cases = [
     </div>
   </section>
 
-  <!-- ─────────────── 7. THE VIC FIX FEATURE ─────────────── -->
-  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-    <div class="grid items-center gap-12 lg:grid-cols-2">
-      <div class="order-2 lg:order-1" data-reveal>
-        <p class="eyebrow mb-5">Our platform</p>
-        <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] leading-[0.95] text-off-white">
+  <!-- ─────────────── THE VIC FIX ─────────────── -->
+  <section class="border-y border-hairline bg-surface">
+    <div class="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:px-10">
+      <div data-reveal>
+        <p class="mono-label">// Our platform</p>
+        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
           The Vic Fix — India’s nightlife, on the record.
         </h2>
-        <p class="mt-6 max-w-xl text-lg text-warm-grey">
+        <p class="mt-5 max-w-xl text-lg text-grey">
           Our own documentary platform on the people who run the night. It’s how we prove what we
           can build for you.
         </p>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a href="/the-vic-fix" class="btn-cta">Watch</a>
-          <a href="/contact" class="btn-ghost">Partner with the show</a>
+        <div class="mt-7 flex flex-wrap items-center gap-5">
+          <a href="/the-vic-fix" class="btn">Watch</a>
+          <a href="/contact" class="btn-text">Partner with the show →</a>
         </div>
       </div>
-      <!-- Vic Fix logo + teaser (TODO: swap to an embedded reel/teaser when ready) -->
-      <div class="order-1 lg:order-2" data-reveal data-reveal-delay="0.2">
-        <div class="relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-[#1a0a0a] to-[#0a0a0a]">
-          <img
-            src="/brand/the-vic-fix-logo.png"
-            alt="The Vic Fix"
-            width="320"
-            height="180"
-            loading="lazy"
-            decoding="async"
-            class="max-h-[55%] w-auto object-contain opacity-90"
-          />
-          <span class="absolute bottom-3 left-3 text-xs uppercase tracking-widest text-warm-grey">The Vic Fix · Teaser</span>
-        </div>
+      <div data-reveal data-reveal-delay="0.15" class="flex items-center justify-center rounded-lg border border-hairline bg-paper p-12">
+        <img
+          src="/brand/the-vic-fix-logo.png"
+          alt="The Vic Fix"
+          width="320"
+          height="180"
+          loading="lazy"
+          decoding="async"
+          class="max-h-28 w-auto object-contain"
+        />
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── 8. PROCESS ─────────────── -->
-  <section class="bg-deep-black py-20">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-      <div class="grid gap-6 md:grid-cols-4">
-        {
-          PROCESS.map((step, i) => (
-            <div data-reveal data-reveal-delay={`${i * 0.1}`} class="flex items-baseline gap-4">
-              <span class="font-display text-5xl text-gold/40">0{i + 1}</span>
-              <div>
-                <h3 class="font-display text-3xl text-off-white">{step}</h3>
-                {i < PROCESS.length - 1 && <span class="text-warm-grey">→</span>}
-              </div>
-            </div>
-          ))
-        }
+  <!-- ─────────────── // 05 PROCESS ─────────────── -->
+  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+    <SectionLabel index="05" label="Process" title="How we work." />
+    <div class="mt-12 grid gap-px overflow-hidden rounded-lg border border-hairline bg-hairline md:grid-cols-4">
+      {PROCESS.map((step, i) => (
+        <div data-reveal class="bg-paper p-7">
+          <span class="section-index">0{i + 1}</span>
+          <h3 class="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink">{step}</h3>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ─────────────── // 06 PRICING ─────────────── -->
+  <section class="border-t border-hairline bg-surface">
+    <div class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+      <SectionLabel
+        index="06"
+        label="Pricing"
+        title="Pick a starting point."
+        description="Fixed-scope kits to launch fast, or a monthly retainer to compound. Book a call for custom scope."
+      />
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {/* TODO(VIC): set fixed prices for the two kits when confirmed. */}
+        <PricingCard
+          name="DJ Website in a Box"
+          price="On request"
+          cadence="fixed scope"
+          blurb="A booking-ready artist site that works while you tour."
+          features={['Cinematic artist site', 'EPK + booking section', 'Mobile-first, SEO-ready', 'Domain + deploy handled']}
+          href="/dj-website-in-a-box"
+          cta="Start my site"
+        />
+        <PricingCard
+          name="Growth Retainer"
+          price="From ₹1L"
+          cadence="/mo"
+          blurb="The compounding option — we run growth end-to-end, every month."
+          features={['Web + SEO + content', 'Reels & campaigns', 'Monthly strategy', 'Priority on new work']}
+          href="/contact"
+          cta="Book a call"
+          featured={true}
+        />
+        <PricingCard
+          name="Venue Launch Kit"
+          price="On request"
+          cadence="fixed scope"
+          blurb="Everything a new venue needs to open loud."
+          features={['Brand + press kit', 'Site with events + bookings', 'Local SEO', 'Launch campaign']}
+          href="/venue-launch-kit"
+          cta="Launch my venue"
+        />
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── 9. TESTIMONIALS (only renders when published rows exist) ─────────────── -->
+  <!-- ─────────────── TESTIMONIALS (hidden if none published) ─────────────── -->
   {
     testimonials.length > 0 && (
-      <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-        <div class="mb-12 max-w-2xl" data-reveal>
-          <p class="eyebrow mb-5">Testimonials</p>
-          <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">What they say after.</h2>
-        </div>
+      <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+        <SectionLabel label="Testimonials" title="What they say after." />
         <div
           class:list={[
-            'grid gap-5',
+            'mt-12 grid gap-6',
             testimonials.length === 1 ? 'max-w-2xl' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3',
           ]}
         >
           {testimonials.map((t) => (
-            <figure data-reveal class="rounded-md border border-white/10 bg-white/[0.02] p-7">
-              <blockquote class="pull-quote text-xl text-off-white">“{t.quote}”</blockquote>
+            <figure data-reveal class="rounded-lg border border-hairline bg-surface p-7">
+              <blockquote class="text-lg text-ink">“{t.quote}”</blockquote>
               <figcaption class="mt-5 flex items-center gap-3">
                 {t.avatar ? (
                   <img src={t.avatar} alt={t.name} width="40" height="40" loading="lazy" class="h-10 w-10 rounded-full object-cover" />
                 ) : (
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-gold/40 to-warm-grey/20 text-sm font-semibold text-near-black">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-hairline font-mono text-sm text-ink">
                     {t.name.charAt(0)}
                   </span>
                 )}
-                <span class="text-sm text-warm-grey">
+                <span class="mono-label">
                   {t.name}
                   {t.role && <>, {t.role}</>}
                   {t.company && <> · {t.company}</>}
@@ -354,34 +341,32 @@ const cases = [
     )
   }
 
-  <!-- ─────────────── 10. LEAD MAGNET (FREE AUDIT) ─────────────── -->
-  <section id="free-audit" class="grain relative overflow-hidden py-24">
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-deep-black to-near-black"></div>
-    <div class="mx-auto max-w-3xl px-5 text-center lg:px-8">
+  <!-- ─────────────── FREE AUDIT ─────────────── -->
+  <section id="free-audit" class="border-t border-hairline bg-surface">
+    <div class="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 lg:grid-cols-2 lg:px-10 lg:py-32">
       <div data-reveal>
-        <p class="eyebrow mx-auto mb-5 w-fit">Free audit</p>
-        <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">
+        <p class="mono-label">// Free audit</p>
+        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
           Not ready to talk? Get the free audit.
         </h2>
-        <p class="mx-auto mt-5 max-w-xl text-lg text-warm-grey">
+        <p class="mt-5 max-w-md text-lg text-grey">
           We’ll show you the three things hurting your bookings or footfall right now. No call required.
         </p>
       </div>
-      <div class="mt-10" data-reveal data-reveal-delay="0.15">
+      <div data-reveal data-reveal-delay="0.15">
         <AuditForm />
       </div>
     </div>
   </section>
 
-  <!-- ─────────────── 11. FINAL CTA (SCARCITY) ─────────────── -->
-  <section class="bg-deep-black py-28">
-    <div class="mx-auto max-w-4xl px-5 text-center lg:px-8" data-reveal>
-      <h2 class="font-display text-[clamp(2.4rem,6vw,5rem)] leading-[0.95] text-off-white">
+  <!-- ─────────────── FINAL CTA ─────────────── -->
+  <section class="mx-auto max-w-[1400px] px-5 py-28 lg:px-10 lg:py-36">
+    <div data-reveal>
+      <p class="mono-label">// Limited intake</p>
+      <h2 class="mt-5 max-w-4xl font-display text-[clamp(2.5rem,7vw,6rem)] font-extrabold leading-[0.95] tracking-tight text-ink">
         We take three new clients a quarter. Make it count.
       </h2>
-      <div class="mt-9">
-        <a href="/contact" class="btn-cta text-xl">Book a Strategy Call</a>
-      </div>
+      <a href="/contact" class="btn mt-10">Book a Strategy Call</a>
     </div>
   </section>
 </Layout>

@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import LeadForm from '@/components/LeadForm.astro';
 
-// TODO: confirm inclusions + pricing before publish.
+// TODO(VIC): confirm inclusions + pricing before publish.
 const includes = [
   'Cinematic one-page or multi-page artist site',
   'Booking-ready contact + EPK section',
@@ -23,33 +23,29 @@ const includes = [
     title="DJ Website in a Box."
     subtitle="A brand that books gigs while you sleep — designed, built and deployed for you."
   >
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href="#start" class="btn-cta">Start my site</a>
-      <a href="/work/djvicofficial" class="btn-ghost">See an example</a>
+    <div class="mt-8 flex flex-wrap items-center gap-5">
+      <a href="#start" class="btn">Start my site</a>
+      <a href="/work/djvicofficial" class="btn-text">See an example →</a>
     </div>
   </PageHero>
 
-  <section class="mx-auto max-w-3xl px-5 py-16 lg:px-8">
-    <div data-reveal>
-      <p class="eyebrow mb-5">What’s inside</p>
-      <ul class="mt-4 space-y-3">
-        {
-          includes.map((item) => (
-            <li class="flex items-start gap-3 text-lg text-off-white">
-              <span class="mt-1 text-gold">✓</span>
-              <span>{item}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="mt-6 text-sm text-warm-grey">Pricing &amp; turnaround: TODO — confirm before publish.</p>
-    </div>
+  <section class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
+    <p class="mono-label" data-reveal>// What’s inside</p>
+    <ul class="mt-8 max-w-2xl">
+      {includes.map((item, i) => (
+        <li data-reveal class="flex items-baseline gap-4 border-b border-hairline py-4 text-lg text-ink">
+          <span class="section-index">0{i + 1}</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="mono-label mt-6" data-reveal>// Pricing &amp; turnaround: TODO — confirm before publish</p>
   </section>
 
-  <section id="start" class="bg-deep-black py-16">
-    <div class="mx-auto flex max-w-3xl flex-col items-center px-5 text-center lg:px-8" data-reveal>
-      <h2 class="font-display text-4xl text-off-white">Let’s build your site.</h2>
-      <div class="mt-8 flex justify-center"><LeadForm source="service-page" segment="artist" /></div>
+  <section id="start" class="border-t border-hairline bg-surface">
+    <div class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10">
+      <h2 class="font-display text-[clamp(2rem,5vw,3.25rem)] font-extrabold tracking-tight text-ink" data-reveal>Let’s build your site.</h2>
+      <div class="mt-8" data-reveal data-reveal-delay="0.1"><LeadForm source="service-page" segment="artist" /></div>
     </div>
   </section>
 </Layout>

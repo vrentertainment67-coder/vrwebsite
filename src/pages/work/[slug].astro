@@ -10,50 +10,50 @@ export function getStaticPaths() {
 const { c } = Astro.props;
 ---
 
-<Layout
-  title={`${c.title} — Work — VR Entertainment`}
-  description={c.summary}
-  path={`/work/${c.slug}`}
->
-  <PageHero eyebrow={c.client} title={c.title} subtitle={c.summary} />
+<Layout title={`${c.title} — Work — VR Entertainment`} description={c.summary} path={`/work/${c.slug}`}>
+  <PageHero eyebrow={`${c.client} · YR/ 2026`} title={c.title} subtitle={c.summary} />
 
-  <section class="mx-auto max-w-5xl px-5 py-16 lg:px-8">
+  <section class="mx-auto max-w-5xl px-5 py-16 lg:px-10">
     {c.hasSlider && (
       <div class="mb-12" data-reveal>
-        <BeforeAfterSlider beforeLabel={`Before · ${c.metricLabel} ${c.metricBefore}`} afterLabel={`After · ${c.metricLabel} ${c.metricAfter}`} alt={`${c.title} before and after`} />
+        <BeforeAfterSlider
+          beforeLabel={`Before · ${c.metricLabel} ${c.metricBefore}`}
+          afterLabel={`After · ${c.metricLabel} ${c.metricAfter}`}
+          alt={`${c.title} before and after`}
+        />
       </div>
     )}
 
     <!-- Metric callout — TODO(metrics): verify before publish -->
-    <div class="mb-12 flex flex-wrap items-end gap-6 rounded-md border border-white/10 bg-white/[0.02] p-7" data-reveal>
+    <div class="mb-12 flex flex-wrap items-end gap-8 rounded-lg border border-hairline bg-surface p-7" data-reveal>
       <div>
-        <p class="text-xs uppercase tracking-widest text-warm-grey">{c.metricLabel}</p>
-        <p class="font-display text-2xl text-warm-grey">{c.metricBefore}</p>
+        <p class="mono-label">{c.metricLabel}</p>
+        <p class="font-display text-2xl font-extrabold tracking-tight text-grey">{c.metricBefore}</p>
       </div>
-      <span class="font-display text-3xl text-gold">→</span>
+      <span class="font-display text-3xl font-extrabold text-accent">→</span>
       <div>
-        <p class="text-xs uppercase tracking-widest text-warm-grey">After</p>
-        <p class="font-display text-5xl text-gold">{c.metricAfter}</p>
+        <p class="mono-label">After</p>
+        <p class="font-display text-5xl font-extrabold tracking-tight text-accent">{c.metricAfter}</p>
       </div>
     </div>
 
     <div class="grid gap-10 md:grid-cols-3" data-reveal>
       <div>
-        <h2 class="font-display text-2xl text-off-white">The problem</h2>
-        <p class="mt-3 text-warm-grey">{c.problem}</p>
+        <p class="mono-label mb-2">// The problem</p>
+        <p class="text-grey">{c.problem}</p>
       </div>
       <div>
-        <h2 class="font-display text-2xl text-off-white">The approach</h2>
-        <p class="mt-3 text-warm-grey">{c.approach}</p>
+        <p class="mono-label mb-2">// The approach</p>
+        <p class="text-grey">{c.approach}</p>
       </div>
       <div>
-        <h2 class="font-display text-2xl text-off-white">The result</h2>
-        <p class="mt-3 text-warm-grey">{c.result}</p>
+        <p class="mono-label mb-2">// The result</p>
+        <p class="text-grey">{c.result}</p>
       </div>
     </div>
 
-    <div class="mt-14 text-center" data-reveal>
-      <a href="/contact" class="btn-cta">Book a Strategy Call</a>
+    <div class="mt-14" data-reveal>
+      <a href="/contact" class="btn">Book a Strategy Call</a>
     </div>
   </section>
 </Layout>

@@ -57,6 +57,22 @@ function init() {
     });
   }
 
+  // Kinetic statement — lines slide/fade up on scroll
+  const kineticLines = gsap.utils.toArray<HTMLElement>('[data-kinetic-line]');
+  kineticLines.forEach((line) => {
+    gsap.fromTo(
+      line,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: line, start: 'top 88%', once: true },
+      }
+    );
+  });
+
   // Hero video slow scale on scroll
   const heroMedia = document.querySelector<HTMLElement>('[data-hero-media]');
   if (heroMedia) {

@@ -25,25 +25,23 @@ const schema = [
     title="The Vic Fix — India’s nightlife, on the record."
     subtitle="A documentary platform on the people who run the night. It’s how we prove what we can build for you."
   >
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href={SITE.socials.youtube} target="_blank" rel="noopener" class="btn-cta">Watch</a>
-      <a href="/contact" class="btn-ghost">Partner with the show</a>
+    <div class="mt-8 flex flex-wrap items-center gap-5">
+      <a href={SITE.socials.youtube} target="_blank" rel="noopener" class="btn">Watch</a>
+      <a href="/contact" class="btn-text">Partner with the show →</a>
     </div>
   </PageHero>
 
-  <!-- TODO: embed real reels/teasers + episode grid (Supabase-driven optional) -->
-  <section class="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-    <div class="grid gap-5 md:grid-cols-3">
-      {
-        [1, 2, 3].map((n) => (
-          <div data-reveal class="group relative flex aspect-video items-center justify-center overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-[#1a0a0a] to-[#0a0a0a]">
-            <span class="flex h-14 w-14 items-center justify-center rounded-full bg-signal-red shadow-lg shadow-signal-red/40 transition-transform group-hover:scale-110">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-            <span class="absolute bottom-3 left-3 text-xs uppercase tracking-widest text-warm-grey">Episode {n} · TODO</span>
-          </div>
-        ))
-      }
+  <!-- TODO(VIC): embed real reels/teasers + episode grid -->
+  <section class="mx-auto max-w-[1400px] px-5 py-16 lg:px-10">
+    <div class="grid gap-6 md:grid-cols-3">
+      {[1, 2, 3].map((n) => (
+        <div data-reveal class="group relative flex aspect-video items-center justify-center overflow-hidden rounded-lg border border-hairline bg-surface">
+          <span class="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper transition-transform group-hover:scale-110">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="mono-label absolute bottom-3 left-3">Episode {n} · TODO</span>
+        </div>
+      ))}
     </div>
   </section>
 </Layout>

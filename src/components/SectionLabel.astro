@@ -1,0 +1,26 @@
+---
+/**
+ * Swiss section header: mono index (// 0N), large display headline,
+ * optional one-line description.
+ */
+interface Props {
+  index?: string; // e.g. "01"
+  label: string; // e.g. "WHO WE HELP"
+  title?: string;
+  description?: string;
+}
+const { index, label, title, description } = Astro.props;
+---
+
+<div class="max-w-3xl" data-reveal>
+  <p class="flex items-center gap-3">
+    {index && <span class="section-index">// {index}</span>}
+    <span class="mono-label">{label}</span>
+  </p>
+  {
+    title && (
+      <h2 class="mt-5 text-[clamp(2rem,5vw,3.75rem)] leading-[0.98] text-ink">{title}</h2>
+    )
+  }
+  {description && <p class="mt-4 max-w-xl text-lg text-grey">{description}</p>}
+</div>
