@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
 
 # The @astrojs/netlify adapter wires SSR endpoints (the /api/* routes) as
 # Netlify Functions automatically. Set SUPABASE_SERVICE_ROLE_KEY and the other
