@@ -43,6 +43,18 @@ function init() {
       { opacity: 0, y: '0.4em', rotateX: -40 },
       { opacity: 1, y: 0, rotateX: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.2 }
     );
+    // Safety net: if rAF ever stalls (e.g. backgrounded tab), force the final
+    // visible state via a timer so the headline is never left invisible.
+    setTimeout(() => gsap.set(words, { opacity: 1, y: 0, rotateX: 0 }), 1600);
+  }
+
+  // Start the hero video only here (motion allowed). Under prefers-reduced-motion
+  // we returned early above, so it's never downloaded or played — poster stays.
+  const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (heroVideo) {
+    heroVideo.play().catch(() => {
+      /* autoplay blocked — poster remains, no error surfaced */
+    });
   }
 
   // Hero video slow scale on scroll

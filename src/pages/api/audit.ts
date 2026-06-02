@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getServerClient } from '@/lib/supabase';
-import { isEmail, str, isBot, json, readBody } from '@/lib/validation';
+import { isEmail, str, isBot, json, readBody, FAIL_MSG } from '@/lib/validation';
 
 export const prerender = false;
 
@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
     if (error) {
       console.error('[api/audit] insert error', error);
-      return json({ ok: false, error: 'Could not submit right now. Please try again.' }, 500);
+      return json({ ok: false, error: FAIL_MSG }, 500);
     }
 
     // Optional: forward to MailerLite as a subscriber (best-effort, non-blocking).
@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ ok: true });
   } catch (err) {
     console.error('[api/audit]', err);
-    return json({ ok: false, error: 'Server not configured.' }, 500);
+    return json({ ok: false, error: FAIL_MSG }, 500);
   }
 };
 

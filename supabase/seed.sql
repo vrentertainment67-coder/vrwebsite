@@ -1,0 +1,23 @@
+-- ════════════════════════════════════════════════════════════════
+-- VR Entertainment — seed data (run AFTER schema.sql)
+-- ════════════════════════════════════════════════════════════════
+--
+-- TESTIMONIALS
+-- The homepage shows the testimonials section ONLY when there is at least one
+-- row with published = true. Until then, the section is hidden — no placeholder
+-- quotes ever appear publicly.
+--
+-- TODO(VIC): fill in a REAL client quote below, then flip `published` to true
+-- and re-run this block (or run it in the Supabase SQL editor). Leave
+-- published = false until the quote is genuine and approved.
+--
+-- insert into testimonials (name, role, company, quote, avatar, sort_order, published)
+-- values (
+--   'REAL NAME',                         -- name
+--   'Owner',                             -- role            (nullable)
+--   'Venue / Brand name',                -- company         (nullable)
+--   'A real quote from a real client, in their words.',  -- quote
+--   null,                                -- avatar URL      (nullable)
+--   1,                                   -- sort_order
+--   false                                -- published → set true once approved
+-- );

@@ -31,7 +31,6 @@ Copy `.env.example` → `.env` and set:
 | `SUPABASE_URL` | server | Supabase project URL (`https://srvznhpfgynwxqmpfdmf.supabase.co`) |
 | `SUPABASE_SERVICE_ROLE_KEY` | **server only** | Service-role key for server-side inserts. **Never expose to the client / never commit.** |
 | `PUBLIC_SUPABASE_URL` | public | Optional — only if a safe client read is ever added |
-| `PUBLIC_CALENDLY_URL` | public | Calendly scheduling link embedded on `/contact` |
 | `MAILERLITE_API_KEY` | server only | Optional — forwards audit/newsletter signups to MailerLite |
 
 > The service role key bypasses Row Level Security, so it lives **only** in `.env` and is read **only** inside `src/pages/api/*.ts`. Set it locally in `.env`, and in production under **Netlify → Site settings → Environment variables**.
@@ -77,7 +76,6 @@ Search the codebase for `TODO` to find every spot awaiting real assets or verifi
 - **OG image** — add `public/og-default.jpg`.
 - **Case-study metrics** — `38 → 92`, `68%`, etc. are marked `TODO(metrics)` pending verification.
 - **Testimonials** — placeholders marked `TODO(testimonials)`; real quotes can live in the `testimonials` table.
-- **Calendly** — set `PUBLIC_CALENDLY_URL` to embed the live scheduler on `/contact`.
 
 ---
 

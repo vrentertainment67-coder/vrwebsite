@@ -7,8 +7,6 @@ interface ImportMetaEnv {
   readonly SUPABASE_SERVICE_ROLE_KEY: string;
   /** Optional public Supabase URL for any safe client reads. */
   readonly PUBLIC_SUPABASE_URL: string;
-  /** Public Calendly scheduling URL embedded on /contact. */
-  readonly PUBLIC_CALENDLY_URL: string;
   /** Server-only: MailerLite API key (optional newsletter forwarding). */
   readonly MAILERLITE_API_KEY: string;
 }

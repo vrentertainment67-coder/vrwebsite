@@ -2,6 +2,10 @@
 
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** User-facing fallback for any server/DB failure — never a fake success. */
+export const FAIL_MSG =
+  'Something went wrong on our end. Please try again, or WhatsApp us at +91 81053 63636.';
+
 export function isEmail(value: unknown): value is string {
   return typeof value === 'string' && EMAIL_RE.test(value.trim());
 }

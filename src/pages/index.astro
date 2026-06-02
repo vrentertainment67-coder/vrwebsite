@@ -6,8 +6,32 @@ import ServiceCard from '@/components/ServiceCard.astro';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
 import AuditForm from '@/components/AuditForm.astro';
 import { SEGMENTS, SERVICES, PROCESS, SITE } from '@/lib/site';
+import { getReadClient } from '@/lib/supabase';
 
 const heroWords = 'WE BUILD THE BRANDS THAT OWN THE NIGHT.'.split(' ');
+
+// Published testimonials (built from Supabase). If the table is empty or the
+// fetch fails (e.g. no creds at build), the whole section is hidden — never
+// shows placeholders. Edit/add rows in the `testimonials` table, then redeploy.
+interface Testimonial {
+  name: string;
+  role: string | null;
+  company: string | null;
+  quote: string;
+  avatar: string | null;
+}
+let testimonials: Testimonial[] = [];
+try {
+  const supabase = getReadClient();
+  const { data } = await supabase
+    .from('testimonials')
+    .select('name, role, company, quote, avatar')
+    .eq('published', true)
+    .order('sort_order', { ascending: true });
+  testimonials = data ?? [];
+} catch {
+  testimonials = [];
+}
 
 // Homepage JSON-LD: the org/person/localbusiness come from JsonLd.astro globally.
 // Add a PodcastSeries node for The Vic Fix and a Service summary.
@@ -60,12 +84,16 @@ const cases = [
     <!-- Full-bleed media (TODO: drop a real club/festival loop at /hero.mp4 + /hero-poster.jpg) -->
     <div data-hero-media class="absolute inset-0 -z-10">
       <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#120a0a] to-[#000]"></div>
+      {/* No `autoplay` attribute: playback is started by JS only when motion is
+          allowed (see reveal.ts). preload="none" means reduced-motion users (and
+          the first paint) never download the clip — the poster stands in. */}
       <video
+        data-hero-video
         class="h-full w-full object-cover opacity-50"
-        autoplay
         muted
         loop
         playsinline
+        preload="none"
         poster="/hero-poster.jpg"
         aria-hidden="true"
       >
@@ -82,7 +110,12 @@ const cases = [
         class="max-w-4xl font-display text-[clamp(3rem,9vw,8rem)] leading-[0.92] text-off-white"
         style="perspective: 800px;"
       >
-        {heroWords.map((w) => <span class="word mr-[0.25em] inline-block">{w}</span>)}
+        {/* Real breakable space between words so spacing never depends on a
+            utility class, the SSR text reads "WE BUILD THE…", and the line can
+            still wrap. inline-block is required for the GSAP transform. */}
+        {heroWords.map((w, i) => (
+          <Fragment>{i > 0 ? ' ' : ''}<span class="word inline-block">{w}</span></Fragment>
+        ))}
       </h1>
       <p class="mt-7 max-w-2xl text-lg text-warm-grey md:text-xl" data-reveal data-reveal-delay="0.6">
         Websites, content and growth systems for venues, artists and hospitality brands — built by
@@ -283,29 +316,43 @@ const cases = [
     </div>
   </section>
 
-  <!-- ─────────────── 9. TESTIMONIALS ─────────────── -->
-  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-    <div class="mb-12 max-w-2xl" data-reveal>
-      <p class="eyebrow mb-5">Testimonials</p>
-      <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">What they say after.</h2>
-    </div>
-    <!-- TODO(testimonials): replace placeholders with real quotes from the `testimonials` table -->
-    <div class="grid gap-5 md:grid-cols-3">
-      {
-        [1, 2, 3].map((n) => (
-          <figure data-reveal class="rounded-md border border-white/10 bg-white/[0.02] p-7">
-            <blockquote class="pull-quote text-xl text-off-white">
-              “Placeholder quote — real client testimonial pending.”
-            </blockquote>
-            <figcaption class="mt-5 flex items-center gap-3">
-              <span class="h-10 w-10 rounded-full bg-gradient-to-br from-gold/40 to-warm-grey/20"></span>
-              <span class="text-sm text-warm-grey">Name, Role · Company <span class="text-warm-grey/50">(TODO)</span></span>
-            </figcaption>
-          </figure>
-        ))
-      }
-    </div>
-  </section>
+  <!-- ─────────────── 9. TESTIMONIALS (only renders when published rows exist) ─────────────── -->
+  {
+    testimonials.length > 0 && (
+      <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+        <div class="mb-12 max-w-2xl" data-reveal>
+          <p class="eyebrow mb-5">Testimonials</p>
+          <h2 class="font-display text-[clamp(2.2rem,5vw,4rem)] text-off-white">What they say after.</h2>
+        </div>
+        <div
+          class:list={[
+            'grid gap-5',
+            testimonials.length === 1 ? 'max-w-2xl' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3',
+          ]}
+        >
+          {testimonials.map((t) => (
+            <figure data-reveal class="rounded-md border border-white/10 bg-white/[0.02] p-7">
+              <blockquote class="pull-quote text-xl text-off-white">“{t.quote}”</blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                {t.avatar ? (
+                  <img src={t.avatar} alt={t.name} width="40" height="40" loading="lazy" class="h-10 w-10 rounded-full object-cover" />
+                ) : (
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-gold/40 to-warm-grey/20 text-sm font-semibold text-near-black">
+                    {t.name.charAt(0)}
+                  </span>
+                )}
+                <span class="text-sm text-warm-grey">
+                  {t.name}
+                  {t.role && <>, {t.role}</>}
+                  {t.company && <> · {t.company}</>}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <!-- ─────────────── 10. LEAD MAGNET (FREE AUDIT) ─────────────── -->
   <section id="free-audit" class="grain relative overflow-hidden py-24">

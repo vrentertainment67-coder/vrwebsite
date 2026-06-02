@@ -15,7 +15,9 @@ const {
   title,
   description,
   path,
-  image = '/og-default.jpg',
+  // Falls back to the real hero poster so social cards are never a broken image.
+  // TODO(VIC): a purpose-built 1200×630 /og-default.jpg would be ideal.
+  image = '/hero-poster.jpg',
   type = 'website',
   noindex = false,
 } = Astro.props;

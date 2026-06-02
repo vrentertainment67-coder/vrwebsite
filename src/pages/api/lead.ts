@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getServerClient } from '@/lib/supabase';
-import { isEmail, str, isBot, json, readBody } from '@/lib/validation';
+import { isEmail, str, isBot, json, readBody, FAIL_MSG } from '@/lib/validation';
 
 // SSR endpoint — keeps the service role key server-side only.
 export const prerender = false;
@@ -39,11 +39,11 @@ export const POST: APIRoute = async ({ request }) => {
     });
     if (error) {
       console.error('[api/lead] insert error', error);
-      return json({ ok: false, error: 'Could not submit right now. Please try again.' }, 500);
+      return json({ ok: false, error: FAIL_MSG }, 500);
     }
     return json({ ok: true });
   } catch (err) {
     console.error('[api/lead]', err);
-    return json({ ok: false, error: 'Server not configured.' }, 500);
+    return json({ ok: false, error: FAIL_MSG }, 500);
   }
 };
