@@ -51,6 +51,11 @@ const { title, description, path, image, type, noindex, schema = [], bare = fals
     </script>
   </head>
   <body class="min-h-screen bg-paper text-ink antialiased">
+    {!bare && (
+      <div id="preloader" aria-hidden="true">
+        <span class="pre-mark">VR</span>
+      </div>
+    )}
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"

@@ -9,6 +9,7 @@ import PricingCard from '@/components/PricingCard.astro';
 import KineticStatement from '@/components/KineticStatement.astro';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
 import BrowserFrame from '@/components/BrowserFrame.astro';
+import PhoneFrame from '@/components/PhoneFrame.astro';
 import VideoFrame from '@/components/VideoFrame.astro';
 import VideoModal from '@/components/VideoModal.astro';
 import AuditForm from '@/components/AuditForm.astro';
@@ -81,6 +82,11 @@ const testimonials = await getTestimonials();
           <Fragment>{i > 0 ? ' ' : ''}<span class="word inline-block">{w}</span></Fragment>
         ))}
       </h1>
+
+      <!-- Drawn accent underline (icon stroke-draw) -->
+      <svg class="mt-6 w-full max-w-md" height="8" viewBox="0 0 400 8" fill="none" aria-hidden="true">
+        <path data-draw d="M2 6 C 120 1, 280 1, 398 6" stroke="#c2410c" stroke-width="2" stroke-linecap="round" />
+      </svg>
 
       <div class="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <p class="max-w-xl text-lg text-grey md:text-xl" data-reveal data-reveal-delay="0.5">
@@ -218,6 +224,28 @@ const testimonials = await getTestimonials();
           19 years behind the decks. 18 countries. A Universal Music partnership. A podcast that the
           industry actually watches. When we build your brand, we build it from the inside.
         </p>
+
+        <!-- Count-up stats -->
+        <div class="mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-hairline bg-hairline">
+          <div class="bg-paper p-6">
+            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-ink">
+              <span data-countup="19">19</span>
+            </p>
+            <p class="mono-label mt-1">Years on the decks</p>
+          </div>
+          <div class="bg-paper p-6">
+            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-ink">
+              <span data-countup="18">18</span>
+            </p>
+            <p class="mono-label mt-1">Countries</p>
+          </div>
+          <div class="bg-paper p-6">
+            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-accent">
+              <span data-countup="92">92</span>
+            </p>
+            <p class="mono-label mt-1">SEO score · djvic</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -259,6 +287,26 @@ const testimonials = await getTestimonials();
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </span>
       </button>
+    </div>
+  </section>
+
+  <!-- ─────────────── SOCIAL / REELS (phone frames) ─────────────── -->
+  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+    <SectionLabel
+      label="Social & Reels"
+      title="Content that lives where the night does."
+      description="Scroll-stopping vertical content, shot by people who live in the scene."
+    />
+    <div class="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+      {/* TODO(VIC): drop reel screenshots / clips into these phone frames */}
+      {[1, 2, 3, 4].map((n) => (
+        <div data-reveal data-reveal-delay={`${n * 0.05}`}>
+          <PhoneFrame label="Reel" />
+        </div>
+      ))}
+    </div>
+    <div class="mt-10" data-reveal>
+      <a href="/services/social-content-and-reels" class="btn-outline">Social Content & Reels →</a>
     </div>
   </section>
 
