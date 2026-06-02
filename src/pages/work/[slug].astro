@@ -1,0 +1,63 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
+import { CASE_STUDIES } from '@/lib/work';
+
+export function getStaticPaths() {
+  return CASE_STUDIES.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+const { c } = Astro.props;
+---
+
+<Layout
+  title={`${c.title} — Work — VR Entertainment`}
+  description={c.summary}
+  path={`/work/${c.slug}`}
+>
+  <PageHero eyebrow={c.client} title={c.title} subtitle={c.summary} />
+
+  <section class="mx-auto max-w-5xl px-5 py-16 lg:px-8">
+    {c.hasSlider && (
+      <div class="mb-12" data-reveal>
+        <BeforeAfterSlider beforeLabel={`Before · ${c.metricLabel} ${c.metricBefore}`} afterLabel={`After · ${c.metricLabel} ${c.metricAfter}`} alt={`${c.title} before and after`} />
+      </div>
+    )}
+
+    <!-- Metric callout — TODO(metrics): verify before publish -->
+    <div class="mb-12 flex flex-wrap items-end gap-6 rounded-md border border-white/10 bg-white/[0.02] p-7" data-reveal>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-warm-grey">{c.metricLabel}</p>
+        <p class="font-display text-2xl text-warm-grey">{c.metricBefore}</p>
+      </div>
+      <span class="font-display text-3xl text-gold">→</span>
+      <div>
+        <p class="text-xs uppercase tracking-widest text-warm-grey">After</p>
+        <p class="font-display text-5xl text-gold">{c.metricAfter}</p>
+      </div>
+    </div>
+
+    <div class="grid gap-10 md:grid-cols-3" data-reveal>
+      <div>
+        <h2 class="font-display text-2xl text-off-white">The problem</h2>
+        <p class="mt-3 text-warm-grey">{c.problem}</p>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl text-off-white">The approach</h2>
+        <p class="mt-3 text-warm-grey">{c.approach}</p>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl text-off-white">The result</h2>
+        <p class="mt-3 text-warm-grey">{c.result}</p>
+      </div>
+    </div>
+
+    <div class="mt-14 text-center" data-reveal>
+      <a href="/contact" class="btn-cta">Book a Strategy Call</a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

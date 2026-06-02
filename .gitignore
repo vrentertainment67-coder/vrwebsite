@@ -1,0 +1,25 @@
+# build output
+dist/
+.netlify/
+.vercel/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# environment — never commit real keys
+.env
+.env.production
+.env.*.local
+
+# logs
+npm-debug.log*
+*.log
+
+# editor / os
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+Thumbs.db

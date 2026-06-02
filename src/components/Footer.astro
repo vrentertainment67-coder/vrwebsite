@@ -1,0 +1,112 @@
+---
+import { SITE, NAV, SERVICES } from '@/lib/site';
+---
+
+<footer class="relative border-t border-white/10 bg-deep-black">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-4 lg:px-8">
+    <!-- Brand + NAP -->
+    <div class="lg:col-span-1">
+      <a href="/" class="flex items-center gap-2">
+        <span class="font-display text-2xl text-off-white">VR</span>
+        <span class="font-display text-2xl text-gold">Entertainment</span>
+      </a>
+      <p class="mt-4 max-w-xs text-sm text-warm-grey">{SITE.tagline}</p>
+      <address class="mt-5 not-italic text-sm leading-relaxed text-warm-grey">
+        {SITE.nap.business}<br />
+        {SITE.nap.street}<br />
+        {SITE.nap.locality} {SITE.nap.postalCode}<br />
+        <a href={`tel:${SITE.nap.phoneE164}`} class="hover:text-gold">{SITE.nap.phoneDisplay}</a><br />
+        <a href={`mailto:${SITE.email}`} class="hover:text-gold">{SITE.email}</a>
+      </address>
+    </div>
+
+    <!-- Explore -->
+    <div>
+      <h3 class="font-display text-lg tracking-wide text-off-white">Explore</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        {NAV.map((i) => (
+          <li><a href={i.href} class="text-warm-grey hover:text-gold">{i.label}</a></li>
+        ))}
+        <li><a href="/contact" class="text-warm-grey hover:text-gold">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div>
+      <h3 class="font-display text-lg tracking-wide text-off-white">Services</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        {SERVICES.slice(0, 6).map((s) => (
+          <li><a href={`/services/${s.slug}`} class="text-warm-grey hover:text-gold">{s.title}</a></li>
+        ))}
+        <li><a href="/services" class="text-gold hover:text-gold-light">All services →</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect -->
+    <div>
+      <h3 class="font-display text-lg tracking-wide text-off-white">Connect</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href={SITE.socials.instagramAgency} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">Instagram · @vr_entt</a></li>
+        <li><a href={SITE.socials.instagramDjVic} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">Instagram · @djvicofficial</a></li>
+        <li><a href={SITE.socials.instagramVicFix} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">Instagram · @thevicfix</a></li>
+        <li><a href={SITE.socials.youtube} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">YouTube · VREntertainment67</a></li>
+        <li><a href={SITE.whatsapp} class="text-warm-grey hover:text-gold" rel="noopener" target="_blank">WhatsApp chat →</a></li>
+      </ul>
+
+      <!-- Newsletter -->
+      <form data-newsletter class="mt-6">
+        <label for="footer-email" class="text-xs uppercase tracking-widest text-warm-grey">Get the night brief</label>
+        <div class="mt-2 flex gap-2">
+          <input
+            id="footer-email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@email.com"
+            class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2 text-sm text-off-white placeholder:text-warm-grey/60 focus:border-gold focus:outline-none"
+          />
+          <button type="submit" class="rounded-sm bg-gold px-4 py-2 text-sm font-semibold text-near-black hover:bg-gold-light">Join</button>
+        </div>
+        <!-- honeypot -->
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+        <p data-newsletter-msg class="mt-2 text-xs text-warm-grey" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-warm-grey lg:flex-row lg:px-8">
+      <p>© {new Date().getFullYear()} {SITE.nap.business}. All rights reserved.</p>
+      <p>{SITE.tagline}</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Footer newsletter → /api/subscribe
+  const form = document.querySelector('form[data-newsletter]') as HTMLFormElement | null;
+  const msg = document.querySelector('[data-newsletter-msg]') as HTMLElement | null;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!msg) return;
+    msg.textContent = 'Subscribing…';
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const out = await res.json();
+      if (out.ok) {
+        form.reset();
+        msg.textContent = 'You’re in. Watch your inbox.';
+        msg.classList.add('text-gold');
+      } else {
+        msg.textContent = out.error || 'Something went wrong.';
+      }
+    } catch {
+      msg.textContent = 'Network error — try again.';
+    }
+  });
+</script>

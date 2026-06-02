@@ -1,0 +1,206 @@
+@import 'tailwindcss';
+
+/* Self-hosted fonts (perf) */
+@import '@fontsource/bebas-neue/400.css';
+@import '@fontsource/oswald/400.css';
+@import '@fontsource/oswald/600.css';
+@import '@fontsource/oswald/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/playfair-display/400-italic.css';
+
+/* ───────────────────────────────────────────────────────────
+   DESIGN SYSTEM — VR Entertainment
+   "Walking into the best club in the city at midnight."
+   ─────────────────────────────────────────────────────────── */
+@theme {
+  /* Color tokens */
+  --color-near-black: #0a0a0a; /* canvas / base background */
+  --color-deep-black: #080808; /* section contrast */
+  --color-gold: #c9a84c; /* accent, emphasis lines — used sparingly */
+  --color-gold-light: #e2c475;
+  --color-signal-red: #ff3b3b; /* CTAs ONLY — nothing else */
+  --color-off-white: #e8e8e0; /* body text */
+  --color-warm-grey: #8a8878; /* secondary text */
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-quote: 'Playfair Display', Georgia, serif;
+
+  /* Motion */
+  --ease-cinematic: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ─────────────────────────  base  ───────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-near-black);
+  color: var(--color-off-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #000;
+}
+
+/* Display headings — Bebas is single-weight; force 400 to avoid faux-bold */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────  texture / glow  ──────────────────── */
+/* Subtle film-grain noise overlay for dark sections */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Soft neon-ish gold glow on hover */
+.glow-gold {
+  transition: box-shadow 0.4s var(--ease-cinematic),
+    transform 0.4s var(--ease-cinematic), border-color 0.4s var(--ease-cinematic);
+}
+.glow-gold:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.4),
+    0 12px 40px -12px rgba(201, 168, 76, 0.35);
+  transform: translateY(-4px);
+}
+
+/* ──────────────────────  components  ─────────────────────── */
+/* Primary CTA — signal red, used ONLY for calls to action */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-signal-red);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease-cinematic), box-shadow 0.3s var(--ease-cinematic), filter 0.3s;
+  box-shadow: 0 8px 30px -8px rgba(255, 59, 59, 0.5);
+}
+.btn-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 40px -8px rgba(255, 59, 59, 0.65);
+}
+
+/* Ghost / secondary button */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(232, 232, 224, 0.4);
+  color: var(--color-off-white);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease-cinematic);
+}
+.btn-ghost:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Gold accent rule above section headings */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+.eyebrow::before {
+  content: '';
+  width: 2.25rem;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.pull-quote {
+  font-family: var(--font-quote);
+  font-style: italic;
+}
+
+/* ──────────────────  scroll-reveal motion  ───────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+/* If JS/GSAP never runs, content must still be visible */
+.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ───────────────  accessibility / reduced motion  ────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Visible keyboard focus on the dark theme */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}

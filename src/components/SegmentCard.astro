@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  pitch: string;
+  href: string;
+}
+const { title, pitch, href } = Astro.props;
+---
+
+<a
+  href={href}
+  data-reveal
+  class="glow-gold group relative flex flex-col justify-between overflow-hidden rounded-md border border-white/10 bg-white/[0.02] p-7 min-h-[220px]"
+>
+  <div class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gold/5 blur-2xl transition-opacity group-hover:bg-gold/15"></div>
+  <h3 class="relative font-display text-3xl leading-none text-off-white transition-colors group-hover:text-gold">
+    {title}
+  </h3>
+  <div class="relative">
+    <p class="pull-quote text-lg text-warm-grey">{pitch}</p>
+    <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gold opacity-0 transition-opacity group-hover:opacity-100">
+      Explore →
+    </span>
+  </div>
+</a>

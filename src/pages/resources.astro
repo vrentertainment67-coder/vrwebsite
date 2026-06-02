@@ -1,0 +1,33 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import AuditForm from '@/components/AuditForm.astro';
+---
+
+<Layout
+  title="Resources — VR Entertainment"
+  description="Free audits and growth playbooks for venues, artists and hospitality brands."
+  path="/resources"
+>
+  <PageHero
+    eyebrow="Resources"
+    title="Tools to grow the night."
+    subtitle="Start with a free audit. More playbooks coming soon."
+  />
+
+  <section id="free-audit" class="mx-auto max-w-3xl px-5 py-16 text-center lg:px-8">
+    <div data-reveal>
+      <h2 class="font-display text-4xl text-off-white">Get the free audit.</h2>
+      <p class="mx-auto mt-4 max-w-xl text-warm-grey">
+        We’ll show you the three things hurting your bookings or footfall right now. No call required.
+      </p>
+    </div>
+    <div class="mt-10" data-reveal data-reveal-delay="0.15"><AuditForm /></div>
+  </section>
+
+  <!-- TODO: guides / templates / downloads grid -->
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

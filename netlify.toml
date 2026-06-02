@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# The @astrojs/netlify adapter wires SSR endpoints (the /api/* routes) as
+# Netlify Functions automatically. Set SUPABASE_SERVICE_ROLE_KEY and the other
+# secrets in Site settings → Environment variables (NOT in this file).

@@ -1,0 +1,30 @@
+---
+// Moving credential marquee. Items repeated twice for a seamless loop.
+interface Props {
+  items?: string[];
+}
+const {
+  items = [
+    '18 Countries',
+    'Universal Music',
+    'The Vic Fix',
+    '19 Years On The Decks',
+    'Flingit',
+    '₹1L/mo Retainer',
+  ],
+} = Astro.props;
+const doubled = [...items, ...items];
+---
+
+<div class="relative overflow-hidden border-y border-white/10 bg-deep-black py-5" aria-hidden="true">
+  <div class="marquee-track">
+    {
+      doubled.map((item) => (
+        <span class="mx-8 flex items-center gap-8 whitespace-nowrap font-display text-xl tracking-wide text-warm-grey">
+          {item}
+          <span class="h-1.5 w-1.5 rounded-full bg-gold/70"></span>
+        </span>
+      ))
+    }
+  </div>
+</div>

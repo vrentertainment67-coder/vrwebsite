@@ -1,0 +1,68 @@
+---
+/**
+ * Global structured data: Organization, LocalBusiness, and Person (Vikas Naik).
+ * Per-page Service / PodcastSeries schema can be passed via the `extra` prop.
+ */
+import { SITE } from '@/lib/site';
+
+interface Props {
+  extra?: object[];
+}
+const { extra = [] } = Astro.props;
+
+const sameAs = [
+  SITE.socials.instagramAgency,
+  SITE.socials.instagramDjVic,
+  SITE.socials.instagramVicFix,
+  SITE.socials.youtube,
+];
+
+const address = {
+  '@type': 'PostalAddress',
+  streetAddress: SITE.nap.street,
+  addressLocality: SITE.nap.locality,
+  addressRegion: SITE.nap.region,
+  postalCode: SITE.nap.postalCode,
+  addressCountry: SITE.nap.country,
+};
+
+const graph = [
+  {
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.name,
+    url: SITE.url,
+    email: SITE.email,
+    telephone: SITE.nap.phoneDisplay,
+    description: 'A growth agency for nightlife, hospitality, and the artists who power them.',
+    address,
+    sameAs,
+  },
+  {
+    '@type': 'LocalBusiness',
+    '@id': `${SITE.url}/#localbusiness`,
+    name: SITE.name,
+    url: SITE.url,
+    email: SITE.email,
+    telephone: SITE.nap.phoneDisplay,
+    address,
+    priceRange: '₹₹₹',
+    areaServed: 'IN',
+  },
+  {
+    '@type': 'Person',
+    '@id': `${SITE.url}/#vikas-naik`,
+    name: SITE.founder.name,
+    alternateName: SITE.founder.alias,
+    jobTitle: 'Founder & DJ',
+    worksFor: { '@id': `${SITE.url}/#organization` },
+    description: SITE.founder.bio,
+    sameAs: [SITE.socials.instagramDjVic, SITE.socials.youtube],
+  },
+  ...extra,
+];
+
+const jsonld = { '@context': 'https://schema.org', '@graph': graph };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonld)} is:inline />

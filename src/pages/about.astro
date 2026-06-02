@@ -1,0 +1,64 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Marquee from '@/components/Marquee.astro';
+import { SITE } from '@/lib/site';
+---
+
+<Layout
+  title="About — VR Entertainment"
+  description="Founded by DJ Vic (Vikas Naik): 19+ years DJing, 18+ countries, a Universal Music partnership, and the creator of The Vic Fix. We don’t just market nightlife — we’re part of it."
+  path="/about"
+>
+  <PageHero
+    eyebrow="About"
+    title="We’re part of the night. Not just selling to it."
+    subtitle="VR Entertainment is a growth agency for nightlife, hospitality, and the artists who power them — founded by DJ Vic."
+  />
+
+  <Marquee />
+
+  <section class="mx-auto max-w-6xl px-5 py-20 lg:px-8">
+    <div class="grid items-center gap-12 lg:grid-cols-[0.8fr_1fr]">
+      <div class="relative mx-auto max-w-sm lg:mx-0" data-reveal>
+        <div class="absolute -inset-3 -z-10 rounded-md bg-gold/10 blur-2xl"></div>
+        <img
+          src="/brand/dj-vic.jpg"
+          alt="DJ Vic — Vikas Naik, founder of VR Entertainment"
+          width="700"
+          height="394"
+          loading="lazy"
+          decoding="async"
+          class="w-full rounded-md border border-white/10 object-cover"
+        />
+      </div>
+      <div data-reveal data-reveal-delay="0.15">
+        <p class="eyebrow mb-5">The founder</p>
+        <h2 class="font-display text-4xl text-off-white">DJ Vic — Vikas Naik</h2>
+        <p class="mt-6 text-lg text-warm-grey">{SITE.founder.bio}</p>
+        <p class="mt-4 text-lg text-warm-grey">
+          19 years behind the decks. 18 countries. A Universal Music partnership. A podcast the
+          industry actually watches. When we build your brand, we build it from the inside.
+        </p>
+        <a href="/contact" class="btn-cta mt-8">Work with us</a>
+      </div>
+    </div>
+
+    <!-- Leadership — Ritika Mishra (CFO). TODO: add her photo to /brand/ritika-mishra.jpg
+         (not present on the current live site; awaiting a real photo from the client). -->
+    <div class="mt-20 border-t border-white/10 pt-12" data-reveal>
+      <p class="eyebrow mb-5">Leadership</p>
+      <div class="flex items-center gap-5">
+        <span class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold/40 to-warm-grey/20 font-display text-2xl text-near-black">RM</span>
+        <div>
+          <h3 class="font-display text-2xl text-off-white">Ritika Mishra</h3>
+          <p class="text-sm text-warm-grey">Chief Financial Officer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

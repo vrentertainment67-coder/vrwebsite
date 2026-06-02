@@ -1,0 +1,71 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import { SITE } from '@/lib/site';
+
+const calendly = import.meta.env.PUBLIC_CALENDLY_URL;
+const hasCalendly = calendly && calendly !== '__set_in_env__';
+---
+
+<Layout
+  title="Contact — Book a Strategy Call — VR Entertainment"
+  description="Book a strategy call, request a free audit, or message us on WhatsApp. Let’s build the brand that owns your night."
+  path="/contact"
+>
+  <PageHero
+    eyebrow="Let’s talk"
+    title="Book a strategy call."
+    subtitle="Pick a time, send a message, or WhatsApp us. We take three new clients a quarter — make it count."
+  />
+
+  <section class="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-2 lg:px-8">
+    <!-- Calendly -->
+    <div data-reveal>
+      <h2 class="font-display text-3xl text-off-white">Grab a time</h2>
+      {
+        hasCalendly ? (
+          <div
+            class="calendly-inline-widget mt-5 overflow-hidden rounded-md border border-white/10"
+            data-url={calendly}
+            style="min-width:320px;height:680px;"
+          />
+        ) : (
+          <div class="mt-5 rounded-md border border-dashed border-white/20 bg-white/[0.02] p-8 text-center text-warm-grey">
+            {/* TODO: set PUBLIC_CALENDLY_URL in env to embed the live scheduler */}
+            <p>Calendly scheduler loads here once <code class="text-gold">PUBLIC_CALENDLY_URL</code> is set.</p>
+            <a href={SITE.whatsapp} class="btn-ghost mt-5">WhatsApp us instead</a>
+          </div>
+        )
+      }
+    </div>
+
+    <!-- Form + direct contact -->
+    <div data-reveal data-reveal-delay="0.15">
+      <h2 class="font-display text-3xl text-off-white">Or send a message</h2>
+      <div class="mt-5"><LeadForm source="contact" /></div>
+
+      <div class="mt-10 border-t border-white/10 pt-6 text-sm text-warm-grey">
+        <p><a href={`tel:${SITE.nap.phoneE164}`} class="hover:text-gold">{SITE.nap.phoneDisplay}</a></p>
+        <p><a href={`mailto:${SITE.email}`} class="hover:text-gold">{SITE.email}</a></p>
+        <p><a href={SITE.whatsapp} target="_blank" rel="noopener" class="hover:text-gold">WhatsApp chat →</a></p>
+        <address class="mt-3 not-italic">
+          {SITE.nap.business}, {SITE.nap.street}, {SITE.nap.locality} {SITE.nap.postalCode}
+        </address>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+{hasCalendly && (
+  <script
+    is:inline
+    type="text/javascript"
+    src="https://assets.calendly.com/assets/external/widget.js"
+    async
+  ></script>
+)}
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

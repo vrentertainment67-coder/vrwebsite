@@ -1,0 +1,87 @@
+---
+/** Strategy-call / contact form → POST /api/lead. */
+interface Props {
+  source?: string;
+  segment?: string;
+}
+const { source = 'contact', segment = '' } = Astro.props;
+---
+
+<form data-lead-form class="w-full max-w-xl text-left">
+  <input type="hidden" name="source" value={source} />
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="lead-name" class="mb-1 block text-xs uppercase tracking-widest text-warm-grey">Name <span class="text-signal-red">*</span></label>
+      <input id="lead-name" name="name" type="text" required autocomplete="name"
+        class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2.5 text-off-white placeholder:text-warm-grey/50 focus:border-gold focus:outline-none" />
+    </div>
+    <div>
+      <label for="lead-email" class="mb-1 block text-xs uppercase tracking-widest text-warm-grey">Email <span class="text-signal-red">*</span></label>
+      <input id="lead-email" name="email" type="email" required autocomplete="email"
+        class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2.5 text-off-white placeholder:text-warm-grey/50 focus:border-gold focus:outline-none" />
+    </div>
+    <div>
+      <label for="lead-phone" class="mb-1 block text-xs uppercase tracking-widest text-warm-grey">Phone</label>
+      <input id="lead-phone" name="phone" type="tel" autocomplete="tel"
+        class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2.5 text-off-white placeholder:text-warm-grey/50 focus:border-gold focus:outline-none" />
+    </div>
+    <div>
+      <label for="lead-segment" class="mb-1 block text-xs uppercase tracking-widest text-warm-grey">You are a…</label>
+      <select id="lead-segment" name="segment"
+        class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2.5 text-off-white focus:border-gold focus:outline-none">
+        <option value="" class="bg-near-black">Select…</option>
+        <option value="venue" selected={segment === 'venue'} class="bg-near-black">Venue / Club</option>
+        <option value="artist" selected={segment === 'artist'} class="bg-near-black">Artist / DJ</option>
+        <option value="brand" selected={segment === 'brand'} class="bg-near-black">Hospitality / Beverage Brand</option>
+        <option value="event" selected={segment === 'event'} class="bg-near-black">Festival / Event</option>
+        <option value="other" selected={segment === 'other'} class="bg-near-black">Other</option>
+      </select>
+    </div>
+    <div class="sm:col-span-2">
+      <label for="lead-message" class="mb-1 block text-xs uppercase tracking-widest text-warm-grey">What do you want to grow?</label>
+      <textarea id="lead-message" name="message" rows="4"
+        class="w-full rounded-sm border border-white/15 bg-white/5 px-3 py-2.5 text-off-white placeholder:text-warm-grey/50 focus:border-gold focus:outline-none"></textarea>
+    </div>
+  </div>
+
+  <!-- honeypot -->
+  <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+  <button type="submit" class="btn-cta mt-6 w-full justify-center sm:w-auto">Book a Strategy Call</button>
+  <p data-lead-msg class="mt-3 text-sm text-warm-grey" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  const form = document.querySelector('form[data-lead-form]') as HTMLFormElement | null;
+  const msg = document.querySelector('[data-lead-msg]') as HTMLElement | null;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!msg) return;
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true;
+    msg.classList.remove('text-gold', 'text-signal-red');
+    msg.textContent = 'Sending…';
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const out = await res.json();
+      if (out.ok) {
+        form.reset();
+        msg.textContent = '✓ Got it. We’ll be in touch within one business day.';
+        msg.classList.add('text-gold');
+      } else {
+        msg.textContent = out.error || 'Something went wrong.';
+        msg.classList.add('text-signal-red');
+      }
+    } catch {
+      msg.textContent = 'Network error — please try again.';
+      msg.classList.add('text-signal-red');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

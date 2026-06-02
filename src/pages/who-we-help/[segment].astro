@@ -1,0 +1,58 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import { SEGMENTS, SERVICES } from '@/lib/site';
+
+export function getStaticPaths() {
+  return SEGMENTS.map((s) => ({ params: { segment: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+
+// Light per-segment service emphasis (placeholder mapping; refine with real copy).
+const emphasis = SERVICES.slice(0, 4);
+---
+
+<Layout
+  title={`${s.title} — VR Entertainment`}
+  description={`${s.pitch} Websites, content and growth systems for ${s.title.toLowerCase()}, built from inside the nightlife industry.`}
+  path={`/who-we-help/${s.slug}`}
+>
+  <PageHero eyebrow="Who we help" title={s.title} subtitle={s.pitch}>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="/contact" class="btn-cta">Book a Strategy Call</a>
+      <a href="#audit" class="btn-ghost">Get a free audit</a>
+    </div>
+  </PageHero>
+
+  <!-- TODO: segment-specific proof, problem framing and copy. Scaffold below. -->
+  <section class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+    <h2 class="font-display text-4xl text-off-white" data-reveal>What we build for you.</h2>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        emphasis.map((svc) => (
+          <a href={`/services/${svc.slug}`} data-reveal class="glow-gold rounded-md border border-white/10 bg-white/[0.02] p-6">
+            <h3 class="font-display text-2xl text-off-white">{svc.title}</h3>
+            <p class="mt-2 text-sm text-warm-grey">{svc.blurb}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="audit" class="bg-deep-black py-20">
+    <div class="mx-auto flex max-w-3xl flex-col items-center px-5 text-center lg:px-8" data-reveal>
+      <p class="eyebrow mb-5">Let’s talk</p>
+      <h2 class="font-display text-4xl text-off-white">Ready to own the night?</h2>
+      <p class="mt-4 max-w-xl text-warm-grey">Tell us what you want to grow. We’ll come back with a plan.</p>
+      <div class="mt-8 flex justify-center">
+        <LeadForm source="service-page" segment={s.segment} />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

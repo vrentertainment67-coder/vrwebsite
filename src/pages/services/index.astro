@@ -1,0 +1,48 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import { SERVICES, SITE } from '@/lib/site';
+
+const schema = [
+  {
+    '@type': 'Service',
+    serviceType: 'Nightlife & hospitality growth services',
+    provider: { '@id': `${SITE.url}/#organization` },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Services',
+      itemListElement: SERVICES.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.title, url: `${SITE.url}/services/${s.slug}` },
+      })),
+    },
+  },
+];
+---
+
+<Layout
+  title="Services — VR Entertainment"
+  description="Web design, SEO, content, video, branding and growth strategy for venues, artists and hospitality brands. Everything you need to grow. Nothing you don’t."
+  path="/services"
+  schema={schema}
+>
+  <PageHero
+    eyebrow="The arsenal"
+    title="Everything you need to grow. Nothing you don’t."
+    subtitle="A full stack of services built by people who live in the night economy."
+  />
+
+  <section class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {SERVICES.map((s) => <ServiceCard title={s.title} blurb={s.blurb} href={`/services/${s.slug}`} />)}
+    </div>
+    <div class="mt-12 text-center" data-reveal>
+      <a href="/contact" class="btn-cta">Book a Strategy Call</a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

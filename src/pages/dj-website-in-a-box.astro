@@ -1,0 +1,59 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import LeadForm from '@/components/LeadForm.astro';
+
+// TODO: confirm inclusions + pricing before publish.
+const includes = [
+  'Cinematic one-page or multi-page artist site',
+  'Booking-ready contact + EPK section',
+  'Mobile-first, fast, SEO-ready build',
+  'Your music, mixes and socials wired in',
+  'Domain + deploy handled for you',
+];
+---
+
+<Layout
+  title="DJ Website in a Box — VR Entertainment"
+  description="A booking-ready artist website, built fast. A brand that books gigs while you sleep."
+  path="/dj-website-in-a-box"
+>
+  <PageHero
+    eyebrow="Productized offer"
+    title="DJ Website in a Box."
+    subtitle="A brand that books gigs while you sleep — designed, built and deployed for you."
+  >
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="#start" class="btn-cta">Start my site</a>
+      <a href="/work/djvicofficial" class="btn-ghost">See an example</a>
+    </div>
+  </PageHero>
+
+  <section class="mx-auto max-w-3xl px-5 py-16 lg:px-8">
+    <div data-reveal>
+      <p class="eyebrow mb-5">What’s inside</p>
+      <ul class="mt-4 space-y-3">
+        {
+          includes.map((item) => (
+            <li class="flex items-start gap-3 text-lg text-off-white">
+              <span class="mt-1 text-gold">✓</span>
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 text-sm text-warm-grey">Pricing &amp; turnaround: TODO — confirm before publish.</p>
+    </div>
+  </section>
+
+  <section id="start" class="bg-deep-black py-16">
+    <div class="mx-auto flex max-w-3xl flex-col items-center px-5 text-center lg:px-8" data-reveal>
+      <h2 class="font-display text-4xl text-off-white">Let’s build your site.</h2>
+      <div class="mt-8 flex justify-center"><LeadForm source="service-page" segment="artist" /></div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>
