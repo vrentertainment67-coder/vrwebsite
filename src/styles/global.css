@@ -14,12 +14,15 @@
    ─────────────────────────────────────────────────────────── */
 @theme {
   /* Color tokens */
-  --color-paper: #f4f2ed;      /* warm off-white canvas */
-  --color-surface: #ffffff;     /* card surfaces */
-  --color-ink: #0a0a0a;         /* primary text + CTAs */
-  --color-grey: #6b6a64;        /* secondary text */
-  --color-hairline: #e0ddd4;    /* borders / rules */
-  --color-accent: #a6822e;      /* deepened ochre — used sparingly */
+  /* Dark editorial: charcoal canvas, off-white foreground, burnt-orange accent.
+     Token roles are semantic — `paper` = background, `ink` = foreground/CTA fill —
+     so components (light-on-dark buttons, etc.) cascade from these values. */
+  --color-paper: #0e0e0d;      /* charcoal canvas */
+  --color-surface: #161513;     /* card surfaces (slightly raised) */
+  --color-ink: #eceae3;         /* primary text + CTA fills (off-white) */
+  --color-grey: #9a968c;        /* secondary text */
+  --color-hairline: #2a2824;    /* borders / rules */
+  --color-accent: #c2410c;      /* burnt orange — used sparingly */
 
   /* Typography */
   --font-display: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
