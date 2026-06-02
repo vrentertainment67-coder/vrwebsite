@@ -1,0 +1,59 @@
+---
+/**
+ * Browser device frame — dots + a real address bar. Drop a screenshot inside,
+ * or pass a slot (e.g. the before/after slider). `tall` makes a full-page
+ * capture scroll within the frame on hover (the "alive" effect).
+ */
+interface Props {
+  url: string; // shown in the address bar, e.g. "djvicofficial.com"
+  src?: string; // screenshot
+  alt?: string;
+  tall?: boolean;
+}
+const { url, src, alt = `${url} screenshot`, tall = false } = Astro.props;
+const hasSlot = Astro.slots.has('default');
+---
+
+<div class="overflow-hidden rounded-xl border border-hairline bg-surface shadow-2xl shadow-black/40">
+  <!-- top bar -->
+  <div class="flex items-center gap-3 border-b border-hairline bg-paper/60 px-4 py-2.5">
+    <span class="flex gap-1.5" aria-hidden="true">
+      <span class="h-2.5 w-2.5 rounded-full bg-hairline"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-hairline"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-hairline"></span>
+    </span>
+    <span class="mx-auto flex w-full max-w-xs items-center gap-2 truncate rounded-md border border-hairline bg-surface px-3 py-1 font-mono text-xs text-grey">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      {url}
+    </span>
+  </div>
+
+  <!-- viewport -->
+  {
+    hasSlot ? (
+      <div class="bg-surface"><slot /></div>
+    ) : src ? (
+      <div class:list={['relative overflow-hidden bg-surface', tall ? 'ba-scroll aspect-[16/10] group' : 'aspect-[16/10]']}>
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          class:list={[
+            'w-full',
+            tall
+              ? 'absolute inset-x-0 top-0 h-auto transition-transform duration-[2200ms] ease-out group-hover:[transform:translateY(calc(-100%+62%))]'
+              : 'h-full object-cover object-top',
+          ]}
+        />
+      </div>
+    ) : (
+      /* TODO(VIC): supply a full-page screenshot for {url} */
+      <div class="flex aspect-[16/10] items-center justify-center bg-[#1c1b18]">
+        <span class="font-mono text-xs uppercase tracking-wider text-grey/60">{url} · screenshot TODO</span>
+      </div>
+    )
+  }
+</div>

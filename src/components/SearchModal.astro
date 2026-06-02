@@ -1,0 +1,56 @@
+---
+import Modal from '@/components/Modal.astro';
+/**
+ * Site search overlay. Lazy-loads the Pagefind UI (built into /pagefind/ at
+ * build time) the first time the modal opens. No-ops gracefully in dev where
+ * the index doesn't exist yet.
+ */
+---
+
+<Modal id="site-search" title="Search" size="max-w-2xl">
+  <div
+    id="pagefind-search"
+    style="
+      --pagefind-ui-scale: 0.9;
+      --pagefind-ui-primary: #c2410c;
+      --pagefind-ui-text: #eceae3;
+      --pagefind-ui-background: #161513;
+      --pagefind-ui-border: #2a2824;
+      --pagefind-ui-tag: #1c1b18;
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-font: 'Inter', system-ui, sans-serif;
+    "
+  >
+  </div>
+  <p class="mono-label mt-3">Press ESC to close</p>
+</Modal>
+
+<script>
+  let loaded = false;
+  const modal = document.getElementById('site-search');
+  modal?.addEventListener('modal:open', () => {
+    if (loaded) return;
+    loaded = true;
+    // CSS
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/pagefind/pagefind-ui.css';
+    document.head.appendChild(css);
+    // JS → init
+    const js = document.createElement('script');
+    js.src = '/pagefind/pagefind-ui.js';
+    js.onload = () => {
+      // @ts-ignore — global provided by pagefind-ui.js
+      if (window.PagefindUI) {
+        // @ts-ignore
+        new window.PagefindUI({ element: '#pagefind-search', showSubResults: true, showImages: false });
+        setTimeout(() => modal?.querySelector<HTMLInputElement>('input')?.focus(), 50);
+      }
+    };
+    js.onerror = () => {
+      const el = document.getElementById('pagefind-search');
+      if (el) el.innerHTML = '<p class="mono-label">Search index builds on deploy — available on the live site.</p>';
+    };
+    document.body.appendChild(js);
+  });
+</script>

@@ -9,6 +9,10 @@ interface ImportMetaEnv {
   readonly PUBLIC_SUPABASE_URL: string;
   /** Server-only: MailerLite API key (optional newsletter forwarding). */
   readonly MAILERLITE_API_KEY: string;
+  /** Public: Umami analytics script URL (cookieless). */
+  readonly PUBLIC_UMAMI_SCRIPT_URL: string;
+  /** Public: Umami website id. */
+  readonly PUBLIC_UMAMI_WEBSITE_ID: string;
 }
 
 interface ImportMeta {

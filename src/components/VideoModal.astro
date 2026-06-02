@@ -1,0 +1,51 @@
+---
+import Modal from '@/components/Modal.astro';
+/**
+ * Video modal. Lazy-loads a YouTube embed on open, unloads on close (so audio
+ * stops). Falls back to a "watch on YouTube" link until a real video id is set.
+ */
+interface Props {
+  id: string;
+  title: string;
+  youtubeId?: string; // TODO(VIC): real Vic Fix video id
+  watchUrl: string; // channel / fallback link
+}
+const { id, title, youtubeId, watchUrl } = Astro.props;
+const embed = youtubeId ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0` : '';
+---
+
+<Modal id={id} title={title} size="max-w-4xl">
+  <div class="aspect-video w-full overflow-hidden rounded-lg bg-black" data-video-host data-embed={embed}>
+    {
+      youtubeId ? (
+        <iframe
+          data-video-iframe
+          class="h-full w-full"
+          src=""
+          title={title}
+          loading="lazy"
+          allow="accelerated-destination; autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+        />
+      ) : (
+        <div class="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+          {/* TODO(VIC): add a real Vic Fix video id to embed it here */}
+          <p class="mono-label">Trailer coming soon</p>
+          <a href={watchUrl} target="_blank" rel="noopener" class="btn">Watch on YouTube →</a>
+        </div>
+      )
+    }
+  </div>
+</Modal>
+
+<script>
+  // Lazy-load the embed only while the modal is open; clear on close to stop audio.
+  document.querySelectorAll<HTMLElement>('[data-video-host]').forEach((host) => {
+    const modal = host.closest('[data-modal]');
+    const iframe = host.querySelector<HTMLIFrameElement>('[data-video-iframe]');
+    const embed = host.dataset.embed || '';
+    if (!modal || !iframe || !embed) return;
+    modal.addEventListener('modal:open', () => { if (iframe.src !== embed) iframe.src = embed; });
+    modal.addEventListener('modal:close', () => { iframe.src = ''; });
+  });
+</script>

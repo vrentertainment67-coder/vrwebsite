@@ -66,6 +66,19 @@ create table if not exists testimonials (
   published boolean default false
 );
 
+-- BLOG / insights (lightweight CMS — edit rows in the Supabase dashboard)
+create table if not exists blog_posts (
+  id uuid primary key default gen_random_uuid(),
+  slug text unique not null,
+  title text not null,
+  excerpt text,
+  body_md text,            -- markdown, rendered with `marked`
+  cover_image text,
+  published boolean default false,
+  published_at timestamptz default now(),
+  sort_order int default 0
+);
+
 -- ─────────────────  Row Level Security  ─────────────────
 -- Inserts happen server-side via the service role key (which bypasses RLS),
 -- so there are NO public insert/select policies on the lead tables.
@@ -74,6 +87,7 @@ alter table audit_requests enable row level security;
 alter table subscribers enable row level security;
 alter table case_studies enable row level security;
 alter table testimonials enable row level security;
+alter table blog_posts enable row level security;
 
 -- Public may READ published content only:
 drop policy if exists "public read published case studies" on case_studies;
@@ -82,6 +96,10 @@ create policy "public read published case studies" on case_studies
 
 drop policy if exists "public read published testimonials" on testimonials;
 create policy "public read published testimonials" on testimonials
+  for select using (published = true);
+
+drop policy if exists "public read published blog posts" on blog_posts;
+create policy "public read published blog posts" on blog_posts
   for select using (published = true);
 
 -- No public policies on leads / audit_requests / subscribers (server-side writes only).

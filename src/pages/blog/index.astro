@@ -1,0 +1,48 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { getBlogPosts } from '@/lib/content';
+
+const posts = await getBlogPosts();
+const fmt = (d: string | null) =>
+  d ? new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(d)) : '';
+---
+
+<Layout
+  title="Blog — VR Entertainment"
+  description="Notes on nightlife growth, web, content and brand — from inside the industry."
+  path="/blog"
+>
+  <PageHero eyebrow="Insights" title="The night brief." subtitle="Notes on growing brands in the night economy." />
+
+  <section class="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
+    {
+      posts.length === 0 ? (
+        <p class="mono-label" data-reveal>// First posts coming soon.</p>
+      ) : (
+        <div class="grid gap-x-8 gap-y-12 md:grid-cols-3">
+          {posts.map((p) => (
+            <a href={`/blog/${p.slug}`} data-reveal class="group block">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg border border-hairline bg-surface">
+                {p.cover_image ? (
+                  <img src={p.cover_image} alt={p.title} loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                ) : (
+                  <div class="flex h-full w-full items-center justify-center bg-[#1c1b18]">
+                    <span class="mono-label">// VR</span>
+                  </div>
+                )}
+              </div>
+              <p class="mono-label mt-4">{fmt(p.published_at)}</p>
+              <h2 class="mt-1 font-display text-2xl font-extrabold tracking-tight text-ink transition-colors group-hover:text-accent">{p.title}</h2>
+              {p.excerpt && <p class="mt-2 text-sm text-grey">{p.excerpt}</p>}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</Layout>
+
+<script>
+  import '@/scripts/reveal.ts';
+</script>

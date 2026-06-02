@@ -1,0 +1,94 @@
+---
+/**
+ * Accessible modal/dialog.
+ * Open with any element carrying  data-modal-open="<id>".
+ * Close with Escape, backdrop click, or any  data-modal-close  inside.
+ * Focus is trapped while open and restored to the trigger on close.
+ */
+interface Props {
+  id: string;
+  title?: string;
+  /** max width utility, e.g. "max-w-3xl" */
+  size?: string;
+}
+const { id, title, size = 'max-w-3xl' } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<div
+  id={id}
+  class="modal fixed inset-0 z-[90] hidden items-center justify-center p-4"
+  data-modal
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={title ? titleId : undefined}
+  aria-hidden="true"
+>
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-modal-close aria-hidden="true"></div>
+  <div class:list={['relative w-full overflow-hidden rounded-xl border border-hairline bg-surface shadow-2xl shadow-black/60', size]}>
+    <div class="flex items-center justify-between gap-4 border-b border-hairline px-5 py-3">
+      <p class="mono-label" id={title ? titleId : undefined}>{title}</p>
+      <button data-modal-close class="text-grey transition-colors hover:text-ink" aria-label="Close dialog">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="p-5"><slot /></div>
+  </div>
+</div>
+
+<script>
+  // Single delegated controller handles every modal on the page.
+  if (!(window as any).__modalInit) {
+    (window as any).__modalInit = true;
+    const FOCUSABLE = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+    let open: HTMLElement | null = null;
+    let lastFocus: HTMLElement | null = null;
+
+    function show(modal: HTMLElement) {
+      open = modal;
+      lastFocus = document.activeElement as HTMLElement;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const f = modal.querySelector<HTMLElement>(FOCUSABLE);
+      f?.focus();
+      modal.dispatchEvent(new CustomEvent('modal:open'));
+    }
+    function hide(modal: HTMLElement) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      modal.dispatchEvent(new CustomEvent('modal:close'));
+      open = null;
+      lastFocus?.focus();
+    }
+
+    document.addEventListener('click', (e) => {
+      const trigger = (e.target as HTMLElement).closest('[data-modal-open]');
+      if (trigger) {
+        const id = trigger.getAttribute('data-modal-open')!;
+        const modal = document.getElementById(id);
+        if (modal) { e.preventDefault(); show(modal); }
+        return;
+      }
+      if ((e.target as HTMLElement).closest('[data-modal-close]') && open) hide(open);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!open) return;
+      if (e.key === 'Escape') { hide(open); return; }
+      if (e.key === 'Tab') {
+        const items = Array.from(open.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((el) => el.offsetParent !== null);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+</script>

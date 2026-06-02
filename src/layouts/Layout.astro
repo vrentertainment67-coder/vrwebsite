@@ -4,6 +4,7 @@ import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import SEO from '@/components/SEO.astro';
 import JsonLd from '@/components/JsonLd.astro';
+import SearchModal from '@/components/SearchModal.astro';
 import { SITE } from '@/lib/site';
 
 interface Props {
@@ -32,6 +33,18 @@ const { title, description, path, image, type, noindex, schema = [], bare = fals
     <meta name="generator" content={Astro.generator} />
     <SEO title={title} description={description} path={path} image={image} type={type} noindex={noindex} />
     <JsonLd extra={schema} />
+    {
+      /* Umami — cookieless, privacy-friendly analytics. No cookie banner needed.
+         Set PUBLIC_UMAMI_SCRIPT_URL + PUBLIC_UMAMI_WEBSITE_ID in env to enable. */
+      import.meta.env.PUBLIC_UMAMI_WEBSITE_ID && import.meta.env.PUBLIC_UMAMI_SCRIPT_URL && (
+        <script
+          is:inline
+          defer
+          src={import.meta.env.PUBLIC_UMAMI_SCRIPT_URL}
+          data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
+        />
+      )
+    }
     <script is:inline>
       // Swap no-js → js as early as possible so reveal animations can run.
       document.documentElement.classList.remove('no-js');
@@ -52,6 +65,8 @@ const { title, description, path, image, type, noindex, schema = [], bare = fals
     </main>
 
     {!bare && <Footer />}
+
+    {!bare && <SearchModal />}
 
     <!-- Floating WhatsApp button -->
     {!bare && (

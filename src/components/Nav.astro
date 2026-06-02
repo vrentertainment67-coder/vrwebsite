@@ -34,18 +34,26 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       }
     </ul>
 
-    <div class="hidden lg:block">
+    <div class="hidden items-center gap-4 lg:flex">
+      <button data-modal-open="site-search" class="text-ink/70 transition-colors hover:text-accent" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
       <a href="/contact" class="btn !py-2.5 !px-5">Book a Call</a>
     </div>
 
-    <!-- Mobile toggle -->
-    <button id="nav-toggle" class="lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-ink">
-        <line x1="3" y1="7" x2="21" y2="7"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="17" x2="21" y2="17"></line>
-      </svg>
-    </button>
+    <!-- Mobile: search + hamburger -->
+    <div class="flex items-center gap-4 lg:hidden">
+      <button data-modal-open="site-search" class="text-ink" aria-label="Search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-ink">
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="17" x2="21" y2="17"></line>
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile menu overlay -->

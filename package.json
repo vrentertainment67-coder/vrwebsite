@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -21,6 +21,10 @@
     "@tailwindcss/postcss": "^4.3.0",
     "astro": "^6.4.2",
     "gsap": "^3.15.0",
+    "marked": "^18.0.4",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
   }
 }

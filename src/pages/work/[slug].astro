@@ -2,12 +2,14 @@
 import Layout from '@/layouts/Layout.astro';
 import PageHero from '@/components/PageHero.astro';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider.astro';
+import BrowserFrame from '@/components/BrowserFrame.astro';
 import { CASE_STUDIES } from '@/lib/work';
 
 export function getStaticPaths() {
   return CASE_STUDIES.map((c) => ({ params: { slug: c.slug }, props: { c } }));
 }
 const { c } = Astro.props;
+const frameUrl = c.slug === 'djvicofficial' ? 'djvicofficial.com' : c.slug === 'flingit' ? 'flingit.in' : `${c.slug}.com`;
 ---
 
 <Layout title={`${c.title} — Work — VR Entertainment`} description={c.summary} path={`/work/${c.slug}`}>
@@ -16,11 +18,13 @@ const { c } = Astro.props;
   <section class="mx-auto max-w-5xl px-5 py-16 lg:px-10">
     {c.hasSlider && (
       <div class="mb-12" data-reveal>
-        <BeforeAfterSlider
-          beforeLabel={`Before · ${c.metricLabel} ${c.metricBefore}`}
-          afterLabel={`After · ${c.metricLabel} ${c.metricAfter}`}
-          alt={`${c.title} before and after`}
-        />
+        <BrowserFrame url={frameUrl}>
+          <BeforeAfterSlider
+            beforeLabel={`Before · ${c.metricLabel} ${c.metricBefore}`}
+            afterLabel={`After · ${c.metricLabel} ${c.metricAfter}`}
+            alt={`${c.title} before and after`}
+          />
+        </BrowserFrame>
       </div>
     )}
 
