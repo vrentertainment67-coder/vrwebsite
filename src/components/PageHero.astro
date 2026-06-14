@@ -14,7 +14,7 @@ const { index, eyebrow, title, subtitle } = Astro.props;
       {index && <span class="section-index">// {index}</span>}
       {eyebrow && <span class="mono-label">{eyebrow}</span>}
     </p>
-    <h1 class="mt-6 max-w-5xl font-display text-[clamp(2.6rem,8vw,6rem)] font-extrabold leading-[0.95] tracking-tight text-ink">
+    <h1 class="mt-6 max-w-5xl font-display text-[clamp(2.6rem,8vw,6rem)] font-light leading-[0.95] tracking-normal text-ink">
       {title}
     </h1>
     {subtitle && <p class="mt-6 max-w-2xl text-lg text-grey md:text-xl">{subtitle}</p>}

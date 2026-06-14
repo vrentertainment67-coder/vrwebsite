@@ -11,7 +11,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   <nav class="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 lg:px-10">
     <!-- Brand -->
     <a href="/" class="flex items-baseline gap-2" aria-label="VR Entertainment home">
-      <span class="font-display text-xl font-extrabold tracking-tight text-ink">VR Entertainment</span>
+      <span class="font-display text-xl font-light tracking-normal text-ink">VR Entertainment</span>
       <span class="mono-label hidden sm:inline">®</span>
     </a>
 
@@ -68,7 +68,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       {
         NAV.map((item) => (
           <li>
-            <a href={item.href} class="font-display text-3xl font-extrabold tracking-tight text-ink hover:text-accent">
+            <a href={item.href} class="font-display text-3xl font-light tracking-normal text-ink hover:text-accent">
               {item.label}
             </a>
           </li>

@@ -22,7 +22,7 @@ const { name, price, cadence, blurb, features, href, cta = 'Book a call', featur
 >
   <p class:list={['mono-label', featured && '!text-paper/70']}>{name}</p>
   <div class="mt-4 flex items-baseline gap-1">
-    <span class="font-display text-4xl font-extrabold tracking-tight">{price}</span>
+    <span class="font-display text-4xl font-light tracking-normal">{price}</span>
     {cadence && <span class:list={['text-sm', featured ? 'text-paper/70' : 'text-grey']}>{cadence}</span>}
   </div>
   <p class:list={['mt-3 text-sm', featured ? 'text-paper/80' : 'text-grey']}>{blurb}</p>

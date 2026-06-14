@@ -16,7 +16,7 @@ const { title, pitch, href, index } = Astro.props;
   <div class="flex items-baseline gap-5">
     {index && <span class="section-index shrink-0">{index}</span>}
     <div>
-      <h3 class="font-display text-[clamp(1.6rem,3.5vw,2.5rem)] font-extrabold leading-none tracking-tight text-ink transition-colors group-hover:text-accent">
+      <h3 class="font-display text-[clamp(1.6rem,3.5vw,2.5rem)] font-light leading-none tracking-normal text-ink transition-colors group-hover:text-accent">
         {title}
       </h3>
       <p class="mt-2 text-grey">{pitch}</p>

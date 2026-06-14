@@ -76,7 +76,7 @@ const testimonials = await getTestimonials();
 
       <h1
         data-words
-        class="mt-10 font-display text-[clamp(3rem,12vw,11rem)] font-extrabold leading-[0.88] tracking-[-0.03em] text-ink"
+        class="mt-10 font-display text-[clamp(3rem,12vw,11rem)] font-light leading-[0.88] tracking-[0.01em] text-ink"
       >
         {heroWords.map((w, i) => (
           <Fragment>{i > 0 ? ' ' : ''}<span class="word inline-block">{w}</span></Fragment>
@@ -158,7 +158,7 @@ const testimonials = await getTestimonials();
       </BrowserFrame>
       <div>
         <p class="mono-label">djvicofficial.com — YR/ 2026</p>
-        <h3 class="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink">SEO score 38 → 92.</h3>
+        <h3 class="mt-2 font-display text-3xl font-light tracking-normal text-ink">SEO score 38 → 92.</h3>
         {/* TODO(metrics): verify 38 → 92 before publish */}
         <p class="mt-3 text-lg text-grey">Built on Astro. Ranking and booking.</p>
         <div class="mt-4 flex flex-wrap gap-2">
@@ -176,7 +176,7 @@ const testimonials = await getTestimonials();
         <div class="mt-4 flex items-start justify-between gap-4">
           <div>
             <p class="mono-label">Flingit — YR/ 2026</p>
-            <a href="/work/flingit" class="font-display text-2xl font-extrabold tracking-tight text-ink transition-colors hover:text-accent">Flingit</a>
+            <a href="/work/flingit" class="font-display text-2xl font-light tracking-normal text-ink transition-colors hover:text-accent">Flingit</a>
             <p class="mt-1 text-sm text-grey">A full nightlife rewards platform — built, shipped, run end-to-end.</p>
           </div>
         </div>
@@ -187,7 +187,7 @@ const testimonials = await getTestimonials();
         <VideoFrame title="The Vic Fix" modalId="vicfix-home" label="The Vic Fix" />
         <div class="mt-4">
           <p class="mono-label">The Vic Fix — YR/ 2026</p>
-          <a href="/work/the-vic-fix" class="font-display text-2xl font-extrabold tracking-tight text-ink transition-colors hover:text-accent">The Vic Fix</a>
+          <a href="/work/the-vic-fix" class="font-display text-2xl font-light tracking-normal text-ink transition-colors hover:text-accent">The Vic Fix</a>
           <p class="mt-1 text-sm text-grey">68% episode-view growth, Season 1 → Season 2.</p>
           <div class="mt-3 flex flex-wrap gap-2">{workTags['the-vic-fix'].map((t) => <span class="chip">{t}</span>)}</div>
         </div>
@@ -217,7 +217,7 @@ const testimonials = await getTestimonials();
     <div class="grid gap-12 lg:grid-cols-[0.9fr_1fr]">
       <SectionLabel index="04" label="The Unfair Advantage" />
       <div data-reveal>
-        <h2 class="font-display text-[clamp(2rem,5vw,3.75rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
+        <h2 class="font-display text-[clamp(2rem,5vw,3.75rem)] font-light leading-[0.98] tracking-normal text-ink">
           We don’t just market the nightlife industry. We’re part of it.
         </h2>
         <p class="mt-6 max-w-2xl text-lg text-grey">
@@ -228,19 +228,19 @@ const testimonials = await getTestimonials();
         <!-- Count-up stats -->
         <div class="mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-hairline bg-hairline">
           <div class="bg-paper p-6">
-            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-ink">
+            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-light tracking-normal text-ink">
               <span data-countup="19">19</span>
             </p>
             <p class="mono-label mt-1">Years on the decks</p>
           </div>
           <div class="bg-paper p-6">
-            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-ink">
+            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-light tracking-normal text-ink">
               <span data-countup="18">18</span>
             </p>
             <p class="mono-label mt-1">Countries</p>
           </div>
           <div class="bg-paper p-6">
-            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-accent">
+            <p class="font-display text-[clamp(2.5rem,5vw,4rem)] font-light tracking-normal text-accent">
               <span data-countup="92">92</span>
             </p>
             <p class="mono-label mt-1">SEO score · djvic</p>
@@ -255,7 +255,7 @@ const testimonials = await getTestimonials();
     <div class="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:px-10">
       <div data-reveal>
         <p class="mono-label">// Our platform</p>
-        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
+        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-light leading-[0.98] tracking-normal text-ink">
           The Vic Fix — India’s nightlife, on the record.
         </h2>
         <p class="mt-5 max-w-xl text-lg text-grey">
@@ -317,7 +317,7 @@ const testimonials = await getTestimonials();
       {PROCESS.map((step, i) => (
         <div data-reveal class="bg-paper p-7">
           <span class="section-index">0{i + 1}</span>
-          <h3 class="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink">{step}</h3>
+          <h3 class="mt-4 font-display text-3xl font-light tracking-normal text-ink">{step}</h3>
         </div>
       ))}
     </div>
@@ -406,7 +406,7 @@ const testimonials = await getTestimonials();
     <div class="mx-auto grid max-w-[1400px] gap-12 px-5 py-24 lg:grid-cols-2 lg:px-10 lg:py-32">
       <div data-reveal>
         <p class="mono-label">// Free audit</p>
-        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-ink">
+        <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] font-light leading-[0.98] tracking-normal text-ink">
           Not ready to talk? Get the free audit.
         </h2>
         <p class="mt-5 max-w-md text-lg text-grey">
@@ -423,7 +423,7 @@ const testimonials = await getTestimonials();
   <section class="mx-auto max-w-[1400px] px-5 py-28 lg:px-10 lg:py-36">
     <div data-reveal>
       <p class="mono-label">// Limited intake</p>
-      <h2 class="mt-5 max-w-4xl font-display text-[clamp(2.5rem,7vw,6rem)] font-extrabold leading-[0.95] tracking-tight text-ink">
+      <h2 class="mt-5 max-w-4xl font-display text-[clamp(2.5rem,7vw,6rem)] font-light leading-[0.95] tracking-normal text-ink">
         We take three new clients a quarter. Make it count.
       </h2>
       <a href="/contact" class="btn mt-10">Book a Strategy Call</a>
