@@ -63,64 +63,89 @@ const testimonials = await getTestimonials();
   path="/"
   schema={schema}
 >
-  <!-- ─────────────── HERO ─────────────── -->
-  <section class="border-b border-hairline bg-paper px-5 pt-36 pb-16 lg:px-10 lg:pt-48">
-    <div class="mx-auto max-w-[1400px]">
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        <p class="flex items-center gap-3">
-          <span class="section-index">// VR ENTERTAINMENT</span>
-          <span class="mono-label">Growth agency for the night economy</span>
-        </p>
-        <Clock />
-      </div>
+  <!-- ─────────────── HERO (Mercury: full-bleed, centered, email+pill) ─────────────── -->
+  <section class="relative flex min-h-[100svh] items-center justify-center overflow-hidden border-b border-hairline">
+    <!-- Atmospheric background. TODO(VIC): drop a full-bleed night-economy photo at /hero-bg.jpg -->
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <div class="absolute inset-0 bg-paper"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(120%_85%_at_50%_-10%,rgba(194,65,12,0.12),transparent_55%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(100%_100%_at_50%_120%,rgba(0,0,0,0.55),transparent)]"></div>
+    </div>
+
+    <div class="mx-auto max-w-3xl px-5 py-32 text-center">
+      <p class="mono-label flex items-center justify-center gap-2">
+        <span class="section-index">// VR Entertainment</span> — Growth Agency
+      </p>
 
       <h1
         data-words
-        class="mt-10 font-display text-[clamp(3rem,12vw,11rem)] font-light leading-[0.88] tracking-[0.01em] text-ink"
+        class="mx-auto mt-8 font-display text-[clamp(2.75rem,8vw,6.5rem)] font-light leading-[1.02] tracking-[0.01em] text-ink"
       >
         {heroWords.map((w, i) => (
           <Fragment>{i > 0 ? ' ' : ''}<span class="word inline-block">{w}</span></Fragment>
         ))}
       </h1>
 
-      <!-- Drawn accent underline (icon stroke-draw) -->
-      <svg class="mt-6 w-full max-w-md" height="8" viewBox="0 0 400 8" fill="none" aria-hidden="true">
-        <path data-draw d="M2 6 C 120 1, 280 1, 398 6" stroke="#c2410c" stroke-width="2" stroke-linecap="round" />
-      </svg>
-
-      <div class="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <p class="max-w-xl text-lg text-grey md:text-xl" data-reveal data-reveal-delay="0.5">
-          Websites, content and growth systems for venues, artists and hospitality brands — built by
-          people who actually live in the industry.
-        </p>
-        <div class="flex flex-wrap items-center gap-5" data-reveal data-reveal-delay="0.7">
-          <a href="/contact" class="btn">Book a Strategy Call</a>
-          <a href="/work" class="btn-text">See the Work →</a>
-        </div>
-      </div>
-
-      <p class="mono-label mt-12 border-t border-hairline pt-5">
-        Universal Music · 18 Countries · Featured on The Vic Fix · 19 Years On The Decks
+      <p class="mx-auto mt-7 max-w-xl text-lg text-grey" data-reveal data-reveal-delay="0.4">
+        Websites, content and growth systems for venues, artists and hospitality brands — built by
+        people who actually live in the industry.
       </p>
+
+      <!-- Joined email input + pill (posts to /api/audit) -->
+      <form data-hero-form class="mx-auto mt-9 flex w-full max-w-md items-stretch" data-reveal data-reveal-delay="0.6">
+        <label for="hero-email" class="sr-only">Email</label>
+        <input
+          id="hero-email"
+          name="email"
+          type="email"
+          required
+          placeholder="you@email.com"
+          class="w-full rounded-l-full border border-r-0 border-lead/60 bg-transparent px-5 py-3.5 text-ink placeholder:text-grey/55 focus:border-accent focus:outline-none"
+        />
+        <button type="submit" class="btn shrink-0" style="border-top-left-radius:0;border-bottom-left-radius:0">Get started</button>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+      </form>
+      <p data-hero-msg class="mono-label mt-3 h-4" role="status" aria-live="polite"></p>
+
+      <div class="mt-5"><a href="/work" class="btn-text">See the work →</a></div>
+
+      <div class="mt-14 flex items-center justify-center"><Clock /></div>
+      <p class="mono-label mt-4">Universal Music · 18 Countries · Featured on The Vic Fix · 19 Years</p>
     </div>
   </section>
 
   <!-- Trust marquee -->
   <Marquee />
 
-  <!-- ─────────────── // 01 WHO WE HELP ─────────────── -->
-  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+  <!-- Event banner → /the-final -->
+  <a
+    href="/the-final"
+    class="group block border-b border-hairline bg-surface transition-colors hover:bg-raised"
+    data-reveal
+  >
+    <div class="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-3 px-5 py-4 lg:px-8">
+      <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="section-index">// Event</span>
+        <span class="text-ink">The Final — football’s biggest final, live at Lolas, Bengaluru.</span>
+        <span class="text-grey">Sun 19 Jul · 21+</span>
+      </p>
+      <span class="btn-text">Pre-book →</span>
+    </div>
+  </a>
+
+  <!-- ─────────────── // 01 WHO WE HELP (feature-list) ─────────────── -->
+  <section class="mx-auto max-w-[1200px] px-5 py-28 lg:px-8 lg:py-36">
     <SectionLabel index="01" label="Who We Help" title="Who we build for." />
-    <div class="mt-12">
+    <div class="mt-14">
       {SEGMENTS.map((s, i) => (
         <SegmentCard title={s.title} pitch={s.pitch} href={`/who-we-help/${s.slug}`} index={`0${i + 1}`} />
       ))}
     </div>
   </section>
 
-  <!-- ─────────────── // 02 SERVICES ─────────────── -->
+  <!-- ─────────────── // 02 SERVICES (feature-list) ─────────────── -->
   <section class="border-t border-hairline bg-surface">
-    <div class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+    <div class="mx-auto max-w-[1200px] px-5 py-28 lg:px-8 lg:py-36">
       <SectionLabel
         index="02"
         label="The Arsenal"
@@ -310,14 +335,14 @@ const testimonials = await getTestimonials();
     </div>
   </section>
 
-  <!-- ─────────────── // 05 PROCESS ─────────────── -->
-  <section class="mx-auto max-w-[1400px] px-5 py-24 lg:px-10 lg:py-32">
+  <!-- ─────────────── // 05 PROCESS (feature-list) ─────────────── -->
+  <section class="mx-auto max-w-[1200px] px-5 py-28 lg:px-8 lg:py-36">
     <SectionLabel index="05" label="Process" title="How we work." />
-    <div class="mt-12 grid gap-px overflow-hidden rounded-lg border border-hairline bg-hairline md:grid-cols-4">
+    <div class="mt-14">
       {PROCESS.map((step, i) => (
-        <div data-reveal class="bg-paper p-7">
-          <span class="section-index">0{i + 1}</span>
-          <h3 class="mt-4 font-display text-3xl font-light tracking-normal text-ink">{step}</h3>
+        <div data-reveal class="flex items-baseline gap-6 border-b border-lead/30 py-7">
+          <span class="section-index shrink-0">0{i + 1}</span>
+          <h3 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-light leading-[1.05] tracking-normal text-ink">{step}</h3>
         </div>
       ))}
     </div>
@@ -433,4 +458,36 @@ const testimonials = await getTestimonials();
 
 <script>
   import '@/scripts/reveal.ts';
+</script>
+
+<script>
+  // Hero email capture → /api/audit (lead magnet)
+  const form = document.querySelector('form[data-hero-form]') as HTMLFormElement | null;
+  const msg = document.querySelector('[data-hero-msg]') as HTMLElement | null;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!msg) return;
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true;
+    msg.textContent = 'Sending…';
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ...data, segment: 'other' }),
+      });
+      const out = await res.json();
+      if (out.ok) {
+        form.reset();
+        msg.textContent = '✓ Got it — we’ll be in touch within 48 hours.';
+      } else {
+        msg.textContent = out.error || 'Something went wrong.';
+      }
+    } catch {
+      msg.textContent = 'Network error — please try again.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
 </script>

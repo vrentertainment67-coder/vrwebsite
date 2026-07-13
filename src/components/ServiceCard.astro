@@ -12,14 +12,14 @@ const { title, blurb, href, index, tags = [] } = Astro.props;
 <a
   href={href}
   data-reveal
-  class="group grid grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-2 border-b border-hairline py-6 transition-colors hover:border-ink"
+  class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 gap-y-2 border-b border-lead/30 py-7 transition-colors hover:border-ink"
 >
-  {index && <span class="section-index self-start pt-1">/{index}</span>}
+  {index && <span class="section-index pt-2">/{index}</span>}
   <div>
-    <h3 class="font-display text-2xl font-light tracking-normal text-ink transition-colors group-hover:text-accent">
+    <h3 class="font-display text-[clamp(1.4rem,3vw,2.25rem)] font-light leading-[1.1] tracking-normal text-ink transition-colors group-hover:text-accent">
       {title}
     </h3>
-    <p class="mt-1 max-w-xl text-sm text-grey">{blurb}</p>
+    <p class="mt-1.5 max-w-xl text-sm text-grey">{blurb}</p>
     {
       tags.length > 0 && (
         <div class="mt-3 flex flex-wrap gap-2">
@@ -28,5 +28,5 @@ const { title, blurb, href, index, tags = [] } = Astro.props;
       )
     }
   </div>
-  <span class="mono-label self-start pt-1 transition-transform group-hover:translate-x-1">→</span>
+  <span class="mono-label pt-2 transition-transform group-hover:translate-x-1">→</span>
 </a>

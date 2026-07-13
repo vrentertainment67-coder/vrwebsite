@@ -1,0 +1,238 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { event } from '@/data/the-final';
+import { SITE } from '@/lib/site';
+// Event-only fonts (deck identity), scoped to this page's bundle.
+import '@fontsource/bebas-neue/400.css';
+import '@fontsource/playfair-display/400-italic.css';
+
+const money = (n: number | null) => (n == null ? '' : '₹' + n.toLocaleString('en-IN'));
+
+const waMsg = encodeURIComponent(
+  "Hi! I'd like to pre-book for The Final at Lolas on 19 July. Package: ____, Guests: ____"
+);
+const waHref = `https://wa.me/${event.contacts.whatsappPrimary}?text=${waMsg}`;
+const waAndre = `https://wa.me/${event.contacts.whatsappSecondary}`;
+
+const ogImage = '/hero-poster.jpg'; // TODO(VIC): dedicated 1200×630 "THE FINAL · LOLAS" art (no FIFA/team marks)
+const desc =
+  "Football's biggest final on the big screen at Lolas. Doors 10 PM, kickoff 12:30 AM. Scored live by DJ Andre + DJ Vic. Pre-book now.";
+
+// Event JSON-LD (neutral naming, no FIFA marks)
+const schema = [
+  {
+    '@type': 'Event',
+    name: event.name,
+    description: desc,
+    startDate: '2026-07-20T00:30:00+05:30',
+    endDate: '2026-07-20T03:30:00+05:30',
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    image: [new URL(ogImage, SITE.url).toString()],
+    location: {
+      '@type': 'Place',
+      name: event.venue.name,
+      address: { '@type': 'PostalAddress', addressLocality: event.venue.city, addressCountry: 'IN' },
+    },
+    performer: [
+      { '@type': 'PerformingGroup', name: 'DJ Andre' },
+      { '@type': 'Person', name: 'DJ Vic' },
+    ],
+    organizer: { '@id': `${SITE.url}/#organization` },
+    offers: event.packages
+      .filter((p) => p.price != null)
+      .map((p) => ({
+        '@type': 'Offer',
+        name: p.name,
+        price: p.price,
+        priceCurrency: 'INR',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE.url}/the-final`,
+      })),
+  },
+];
+
+const faqs = [
+  { q: 'When & where?', a: `${event.when.dateLabel} at ${event.venue.name}, ${event.venue.city}. Doors ${event.when.doors}, kickoff ${event.when.kickoff}, close ${event.when.closes}.` },
+  { q: 'What’s included?', a: 'Entry gets you in the room for the full night (food & drinks à la carte, ₹500 redeemable). The Unlimited Pour adds unlimited premium scotch + mixers all night. VIP is reserved prime-view seating on request.' },
+  { q: 'Is it 21+?', a: 'Yes — this is a 21+ event. Please carry a valid ID.' },
+  { q: 'Is there food?', a: 'Yes, food is available à la carte through the night.' },
+  { q: 'Getting home late?', a: 'We finish at 3:30 AM — please plan a cab. Don’t drink and drive.' },
+  { q: 'Is the screening licensed?', a: 'Yes — a licensed screening at the venue on the big screen with full sound.' },
+];
+---
+
+<Layout
+  title="The Final · Live at Lolas, Bengaluru"
+  description={desc}
+  path="/the-final"
+  image={ogImage}
+  schema={schema}
+  bare={true}
+>
+  <div class="ev min-h-screen bg-[#0A0A0A] text-[#E8E8E0]">
+    <!-- HERO -->
+    <section class="mx-auto max-w-5xl px-6 pt-20 pb-14">
+      <p class="text-[#C9A84C] tracking-[0.3em] text-xs font-semibold">SUNDAY NIGHT · LATE</p>
+      <h1 class="ev-display text-7xl md:text-9xl leading-none mt-3 text-[#E8E8E0]">THE FINAL</h1>
+      <p class="ev-italic text-2xl md:text-3xl text-[#C9A84C] mt-2">live at {event.venue.name}, {event.venue.city}</p>
+      <p class="text-[#8A8878] mt-5 max-w-2xl">
+        {event.tagline} Doors {event.when.doors} · Kickoff {event.when.kickoff} · Scored live by DJ Andre + DJ Vic.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a href={waHref} target="_blank" rel="noopener" data-umami-event="whatsapp_click" class="bg-[#FF3B3B] text-white font-semibold px-6 py-3 rounded-lg transition-transform hover:-translate-y-0.5">Reserve on WhatsApp</a>
+        <a href="#prebook" class="border border-[#2A2A22] px-6 py-3 rounded-lg transition-colors hover:border-[#C9A84C]">Pre-book your spot</a>
+      </div>
+      <p class="text-[#8A8878] text-xs mt-4">{event.when.ageNote.replace('only', '').trim()} · Limited to {event.capacity}</p>
+    </section>
+
+    <!-- RUN OF NIGHT -->
+    <section class="mx-auto max-w-5xl px-6 py-10">
+      <h2 class="ev-display text-4xl text-[#E8E8E0] mb-6">Run of night</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {event.runOfNight.map((s, i) => (
+          <div class="bg-[#16150F] border border-[#2A2A22] rounded-xl p-5">
+            <div class="w-9 h-9 rounded-full bg-[#C9A84C] text-[#0A0A0A] ev-display text-xl grid place-items-center">{i + 1}</div>
+            <p class="text-[#C9A84C] font-semibold mt-3">{s.time}</p>
+            <p class="text-[#E8E8E0] font-semibold">{s.title}</p>
+            <p class="text-[#8A8878] text-sm mt-2">{s.note}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="mx-auto max-w-5xl px-6 py-10">
+      <h2 class="ev-display text-4xl mb-6 text-[#E8E8E0]">Choose your night</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        {event.packages.map((p) => (
+          <div class:list={['rounded-xl p-6 bg-[#16150F] border', p.featured ? 'border-[#C9A84C]' : 'border-[#2A2A22]']}>
+            {p.featured && <p class="text-[#C9A84C] text-[0.65rem] tracking-[0.2em] font-semibold uppercase">Most popular</p>}
+            <p class="ev-display text-2xl text-[#C9A84C] mt-1">{p.name}</p>
+            <p class="text-3xl font-bold mt-1 text-[#E8E8E0]">{money(p.price) || 'On request'}</p>
+            <p class="text-[#8A8878] text-xs">{p.priceNote}</p>
+            <p class="text-sm mt-3 text-[#E8E8E0]">{p.blurb}</p>
+            <button type="button" data-pkg={p.id} class="pkg-cta inline-flex items-center gap-1 mt-4 text-[#C9A84C] font-semibold">Pre-book →</button>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PRE-BOOK -->
+    <section id="prebook" class="mx-auto max-w-2xl px-6 py-14">
+      <h2 class="ev-display text-4xl mb-2 text-[#E8E8E0]">Pre-book your spot</h2>
+      <p class="text-[#8A8878] mb-6">Reserve now — we’ll confirm on WhatsApp. Limited to {event.capacity}.</p>
+
+      <form id="prebook-form" class="grid gap-3">
+        <input name="name" required placeholder="Name" class="bg-[#141414] border border-[#2A2A22] rounded-lg px-4 py-3 text-[#E8E8E0] placeholder:text-[#8A8878] focus:border-[#C9A84C] focus:outline-none" />
+        <input name="whatsapp" required inputmode="tel" placeholder="WhatsApp number" class="bg-[#141414] border border-[#2A2A22] rounded-lg px-4 py-3 text-[#E8E8E0] placeholder:text-[#8A8878] focus:border-[#C9A84C] focus:outline-none" />
+        <input name="email" type="email" placeholder="Email (optional)" class="bg-[#141414] border border-[#2A2A22] rounded-lg px-4 py-3 text-[#E8E8E0] placeholder:text-[#8A8878] focus:border-[#C9A84C] focus:outline-none" />
+        <select name="package" class="bg-[#141414] border border-[#2A2A22] rounded-lg px-4 py-3 text-[#E8E8E0] focus:border-[#C9A84C] focus:outline-none">
+          {event.packages.map((p) => <option value={p.id} class="bg-[#141414]">{p.name}</option>)}
+        </select>
+        <input name="guests" type="number" min="1" value="1" class="bg-[#141414] border border-[#2A2A22] rounded-lg px-4 py-3 text-[#E8E8E0] focus:border-[#C9A84C] focus:outline-none" />
+        <!-- honeypot -->
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+        <button type="submit" class="bg-[#FF3B3B] text-white font-semibold px-6 py-3 rounded-lg transition-transform hover:-translate-y-0.5">Pre-book</button>
+      </form>
+      <p id="prebook-msg" class="mt-3 text-sm text-[#C9A84C] hidden" role="status" aria-live="polite"></p>
+
+      <a href={waHref} target="_blank" rel="noopener" data-umami-event="whatsapp_click" class="inline-block mt-4 border border-[#2A2A22] px-6 py-3 rounded-lg transition-colors hover:border-[#C9A84C]">…or reserve on WhatsApp</a>
+    </section>
+
+    {event.sponsor.showBranding && (
+      <p class="text-center text-[#8A8878] text-sm py-6">{event.sponsor.creditLine}</p>
+    )}
+
+    <!-- FAQ -->
+    <section class="mx-auto max-w-2xl px-6 py-10">
+      <h2 class="ev-display text-4xl mb-6 text-[#E8E8E0]">Good to know</h2>
+      <div class="divide-y divide-[#2A2A22] border-y border-[#2A2A22]">
+        {faqs.map((f) => (
+          <details class="group py-4">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 text-[#E8E8E0] font-semibold list-none">
+              {f.q}
+              <span class="text-[#C9A84C] transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-[#8A8878] text-sm mt-2">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-[#2A2A22] mt-10">
+      <div class="mx-auto max-w-5xl px-6 py-8 text-[#8A8878] text-sm">
+        <p class="text-[#E8E8E0] font-semibold">DJ Andre + The Vic Fix</p>
+        <p class="mt-2">
+          <a href={`mailto:${event.contacts.bookingsEmail}`} class="hover:text-[#C9A84C]">{event.contacts.bookingsEmail}</a>
+          · <a href={waHref} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">WhatsApp +91 8105 363636 (Vic)</a>
+          · <a href={waAndre} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">+91 99451 94781 (Andre)</a>
+        </p>
+        <p class="mt-1">
+          <a href={event.socials.thevicfix} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">@thevicfix</a>
+          · <a href={event.socials.djvic} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">@djvicofficial</a>
+        </p>
+        <p class="mt-3 text-xs">Drink responsibly. 21+ event.</p>
+      </div>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .ev-display { font-family: 'Bebas Neue', sans-serif; font-weight: 400; letter-spacing: 0.01em; }
+  .ev-italic { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400; }
+  .ev summary::-webkit-details-marker { display: none; }
+</style>
+
+<script>
+  // Package "Pre-book" buttons → pre-select + scroll to the form.
+  const form = document.getElementById('prebook-form') as HTMLFormElement | null;
+  const select = form?.querySelector('select[name="package"]') as HTMLSelectElement | null;
+
+  function selectPkg(id: string) {
+    if (select && id) select.value = id;
+    document.getElementById('prebook')?.scrollIntoView({ behavior: 'smooth' });
+  }
+  document.querySelectorAll<HTMLElement>('.pkg-cta').forEach((btn) => {
+    btn.addEventListener('click', () => selectPkg(btn.dataset.pkg || ''));
+  });
+  // Support /the-final?pkg=unlimited
+  const q = new URLSearchParams(location.search).get('pkg');
+  if (q && select) select.value = q;
+
+  // Submit → /api/prebook (server route, service-role insert)
+  const msg = document.getElementById('prebook-msg');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!msg) return;
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true;
+    msg.classList.remove('hidden');
+    msg.style.color = '#C9A84C';
+    msg.textContent = 'Sending…';
+    const f = new FormData(form);
+    const data = Object.fromEntries(f.entries());
+    try {
+      const res = await fetch('/api/prebook', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const out = await res.json();
+      if (out.ok) {
+        (window as any).umami?.track?.('prebooking_submit');
+        form.reset();
+        msg.textContent = 'You’re on the list — we’ll confirm your spot on WhatsApp.';
+      } else {
+        msg.style.color = '#FF3B3B';
+        msg.textContent = out.error || 'Something went wrong — please reserve on WhatsApp instead.';
+      }
+    } catch {
+      msg.style.color = '#FF3B3B';
+      msg.textContent = 'Something went wrong — please reserve on WhatsApp instead.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

@@ -23,8 +23,8 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
             <a
               href={item.href}
               class:list={[
-                'font-mono text-xs uppercase tracking-wider transition-colors hover:text-accent',
-                isActive(item.href) ? 'text-accent' : 'text-ink/70',
+                'text-sm transition-colors hover:text-accent',
+                isActive(item.href) ? 'text-accent' : 'text-ink/75',
               ]}
             >
               {item.label}
