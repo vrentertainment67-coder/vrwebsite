@@ -9,8 +9,8 @@ export const event = {
   venue: {
     name: 'Lolas',
     city: 'Bengaluru',
-    address: 'TODO: full Lolas address', // Vic to confirm
-    mapsUrl: 'TODO: Google Maps link', // Vic to confirm
+    address: 'Lolas, Bengaluru', // TODO(VIC): full street address if you want it shown
+    mapsUrl: 'https://share.google/m6ybeRvhWqgvGsRsk',
   },
   when: {
     dateLabel: 'Sunday 19 → Monday 20 July 2026',

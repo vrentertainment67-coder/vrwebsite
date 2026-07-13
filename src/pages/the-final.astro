@@ -14,7 +14,7 @@ const waMsg = encodeURIComponent(
 const waHref = `https://wa.me/${event.contacts.whatsappPrimary}?text=${waMsg}`;
 const waAndre = `https://wa.me/${event.contacts.whatsappSecondary}`;
 
-const ogImage = '/hero-poster.jpg'; // TODO(VIC): dedicated 1200×630 "THE FINAL · LOLAS" art (no FIFA/team marks)
+const ogImage = '/the-final-og.jpg'; // 1200×628 "THE FINAL · LOLAS" banner (no FIFA/team marks)
 const desc =
   "Football's biggest final on the big screen at Lolas. Doors 10 PM, kickoff 12:30 AM. Scored live by DJ Andre + DJ Vic. Pre-book now.";
 
@@ -83,7 +83,10 @@ const faqs = [
         <a href={waHref} target="_blank" rel="noopener" data-umami-event="whatsapp_click" class="bg-[#FF3B3B] text-white font-semibold px-6 py-3 rounded-lg transition-transform hover:-translate-y-0.5">Reserve on WhatsApp</a>
         <a href="#prebook" class="border border-[#2A2A22] px-6 py-3 rounded-lg transition-colors hover:border-[#C9A84C]">Pre-book your spot</a>
       </div>
-      <p class="text-[#8A8878] text-xs mt-4">{event.when.ageNote.replace('only', '').trim()} · Limited to {event.capacity}</p>
+      <p class="text-[#8A8878] text-xs mt-4">
+        {event.when.ageNote.replace('only', '').trim()} · Limited to {event.capacity} ·
+        <a href={event.venue.mapsUrl} target="_blank" rel="noopener" class="text-[#C9A84C] hover:underline">Directions →</a>
+      </p>
     </section>
 
     <!-- RUN OF NIGHT -->
@@ -172,6 +175,10 @@ const faqs = [
         <p class="mt-1">
           <a href={event.socials.thevicfix} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">@thevicfix</a>
           · <a href={event.socials.djvic} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">@djvicofficial</a>
+        </p>
+        <p class="mt-1">
+          {event.venue.name}, {event.venue.city} ·
+          <a href={event.venue.mapsUrl} target="_blank" rel="noopener" class="hover:text-[#C9A84C]">Directions →</a>
         </p>
         <p class="mt-3 text-xs">Drink responsibly. 21+ event.</p>
       </div>
