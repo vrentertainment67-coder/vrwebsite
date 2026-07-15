@@ -54,10 +54,11 @@ export const event = {
   },
 
   passes: [
-    { id: 'early', name: 'Early Bird', price: 1000, note: 'first 100 guests', featured: true },
-    { id: 'standard', name: 'Standard', price: 1500, note: 'thereafter', featured: false },
+    { id: 'early', name: 'Early Bird', price: 1000, note: 'first 100 guests', cover: 'Full cover', featured: true },
+    { id: 'standard', name: 'Standard', price: 1500, note: 'thereafter', cover: 'Full cover', featured: false },
   ],
-  passesNote: 'Limited capacity. Pre-register to lock your spot — passes confirmed first-come.',
+  passesNote:
+    'Both passes are full cover. Limited capacity. Pre-register to lock your spot — passes confirmed first-come.',
 
   knowBeforeYouGo: [
     'Venue: Lolas, Bangalore',
