@@ -42,8 +42,9 @@ import { PROJECTS, projectTagLine } from '@/lib/content';
               alt={`${p.name} homepage`}
               width="1200"
               height="750"
-              loading={i === 0 ? 'eager' : 'lazy'}
+              loading="lazy"
               decoding="async"
+              fetchpriority="low"
               class:list={['shot', i === 0 && 'is-on']}
               data-i={i}
             />

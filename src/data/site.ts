@@ -2,8 +2,7 @@
 export const SITE = {
   name: 'VR Entertainment',
   url: 'https://vrentertainment.digital',
-  // Footer reference uses hello@; older material uses bookings@ (open item in the brief).
-  email: 'hello@vrentertainment.digital',
+  email: 'bookings@vrentertainment.digital',
   phoneDisplay: '+91 81053 63636',
   phoneE164: '+918105363636',
   whatsapp: 'https://wa.me/918105363636',

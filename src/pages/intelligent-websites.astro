@@ -12,14 +12,14 @@ const description =
 const faqs = [
   { q: 'Will the concierge make things up?', a: 'It answers only from the information you give it. If it doesn’t know, it says so and hands the guest to your team.' },
   { q: 'Can my team update it without you?', a: 'Yes. Events, menus and FAQs live in a simple admin, and the concierge picks up changes automatically.' },
-  { q: 'What does it cost to run each month?', a: '[Hosting and AI usage, from ₹ x/month. Fill in once costs are set.]' },
+  { q: 'What does it cost to run each month?', a: 'Hosting, AI usage and updates are covered by a care plan from ₹7,500 a month, or ₹15,000 for venue sites with the concierge. Your Monday brief is included.' },
   { q: 'Can you upgrade my existing site?', a: 'Often, yes. Start with a Site Intelligence Score and we’ll tell you whether to add modules or rebuild.' },
 ];
 
 const tiers = [
-  { kicker: 'Artists & DJs', name: 'Launch', price: 'from [₹ price]', desc: 'EPK and mixes · booking assistant · smart enquiries · AI-ready search · Monday brief', note: '[x] weeks · fixed scope', featured: false },
-  { kicker: 'Most chosen · Venues & brands', name: 'Venue & Brand', price: 'from [₹ price]', desc: 'Everything in Launch · concierge · events engine · reservations integration · time-of-day homepage', note: '[x] weeks · fixed scope', featured: true },
-  { kicker: 'Products', name: 'Platform', price: 'scoped per project', desc: 'Accounts, data and admin dashboards. Built and run end to end, like Flingit.', note: 'Discovery sprint first', featured: false },
+  { kicker: 'Artists & DJs', name: 'Launch', price: 'from ₹75,000', priceNote: '+ GST', desc: 'EPK and mixes · booking assistant · smart enquiries · AI-ready search · Monday brief', note: '3–4 weeks · fixed scope', featured: false },
+  { kicker: 'Most chosen · Venues & brands', name: 'Venue & Brand', price: 'from ₹2,50,000', priceNote: '+ GST', desc: 'Everything in Launch · concierge · events engine · reservations integration · time-of-day homepage', note: '6–8 weeks · fixed scope', featured: true },
+  { kicker: 'Products', name: 'Platform', price: 'scoped per project', priceNote: 'typically ₹8L+', desc: 'Accounts, data and admin dashboards. Built and run end to end, like Flingit.', note: 'Discovery sprint first', featured: false },
 ];
 
 const schema = [
@@ -146,7 +146,10 @@ const schema = [
             <article class:list={['tier vr-lift-6 vr-reveal', t.featured && 'is-featured']}>
               <span class:list={['mono kicker', t.featured && 'kicker-on']}>{t.kicker}</span>
               <span class="tname">{t.name}</span>
-              <span class="price">{t.price}</span>
+              <span class="price-row">
+                <span class="price">{t.price}</span>
+                <span class="pnote mono">{t.priceNote}</span>
+              </span>
               <span class="desc">{t.desc}</span>
               <span class="mono note">{t.note}</span>
             </article>
@@ -154,6 +157,7 @@ const schema = [
         }
       </div>
       <p class="addon vr-reveal">Any tier can add Growth Ops from ₹1L/month after launch.</p>
+      <p class="terms mono vr-reveal">50% to start · 30% at design sign-off · 20% at launch · prices exclude 18% GST</p>
     </section>
 
     <!-- FAQ -->
@@ -270,8 +274,12 @@ const schema = [
   .kicker { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
   .kicker-on { color: var(--accent-on-fg); }
   .tname { font-size: 44px; font-weight: 500; letter-spacing: -0.04em; }
+  .price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
   .price { font-family: var(--font-serif); font-size: 30px; }
+  .pnote { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .is-featured .pnote { opacity: 0.72; color: inherit; }
   .desc { font-size: 16px; line-height: 1.7; color: var(--muted); }
+  .terms { margin: 0; font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
   .is-featured .desc { color: inherit; opacity: 0.72; }
   .note { margin-top: auto; font-size: 12px; color: var(--muted); }
   .is-featured .note { opacity: 0.72; color: inherit; }
