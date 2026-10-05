@@ -1,0 +1,46 @@
+---
+import { HOME_MODULES } from '@/data/modules';
+---
+
+<section class="band">
+  <div class="inner">
+    <div class="head vr-reveal">
+      <h2 class="h2">A brochure waits. <span class="it">Ours work the room.</span></h2>
+      <p class="sub">Five modules, each one switched on and trained on your own information.</p>
+    </div>
+    <div class="rows">
+      {
+        HOME_MODULES.map((m) => (
+          <div class="row vr-row vr-reveal">
+            <span class="n mono">{m.n}</span>
+            <span class="name">{m.name}</span>
+            <span class="body">{m.body}</span>
+            <span class="vr-row-arrow" aria-hidden="true">→</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .band { background: var(--inverse-bg); color: var(--inverse-fg); transition: background-color var(--dur-theme) ease, color var(--dur-theme) ease; }
+  .inner { max-width: var(--container); margin: 0 auto; padding: var(--section-y) var(--gutter); display: flex; flex-direction: column; gap: 56px; }
+  .head { display: flex; flex-wrap: wrap; gap: 24px 80px; align-items: end; }
+  .h2 { flex: 1 1 640px; margin: 0; font-weight: 500; font-size: var(--text-h2-sm); line-height: 0.98; letter-spacing: var(--tracking-heading); }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .sub { flex: 1 1 300px; margin: 0; font-size: 17px; line-height: 1.6; opacity: 0.72; }
+  .rows { display: flex; flex-direction: column; border-top: 1px solid var(--inverse-line); }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px 40px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--inverse-line);
+  }
+  .n { font-size: 12px; opacity: 0.6; width: 40px; }
+  .mono { font-family: var(--font-mono); }
+  .name { flex: 0 0 280px; font-size: clamp(30px, 3vw, 44px); letter-spacing: -0.03em; }
+  .body { flex: 1 1 320px; font-size: 17px; line-height: 1.55; opacity: 0.72; }
+</style>

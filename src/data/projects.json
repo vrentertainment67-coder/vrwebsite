@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "dj-vic",
+    "name": "DJ Vic",
+    "domain": "djvicofficial.com",
+    "url": "https://djvicofficial.com",
+    "image": "/assets/work/djvic.jpg",
+    "vertical": "artist",
+    "tags": ["Artist & DJ", "Astro"],
+    "metric": { "value": "38 → 92", "label": "SEO score after the rebuild" },
+    "blurb": "A cinematic booking site for an international DJ. Visitors are routed by event type (weddings, corporate, club), with remixes and The Vic Fix alongside and a 24-hour reply promise.",
+    "quote": null
+  },
+  {
+    "slug": "lloyds-pro-sound",
+    "name": "Lloyd’s Pro Sound & Lighting",
+    "domain": "lloydsprosound.com",
+    "url": "https://lloydsprosound.com",
+    "image": "/assets/work/lloyds.jpg",
+    "vertical": "events",
+    "tags": ["Event production", "Astro"],
+    "metric": null,
+    "blurb": "Sound, light and music, run by one team. Since 2008, 1,000+ events and a 4.7★ Google rating are up front, with event-type pages and direct WhatsApp booking.",
+    "quote": "[Ask Lloyd for a one-line quote]"
+  },
+  {
+    "slug": "dj-gags",
+    "name": "DJ Gags",
+    "domain": "djgags.com",
+    "url": "https://djgags.com",
+    "image": "/assets/work/djgags.jpg",
+    "vertical": "artist",
+    "tags": ["Artist & DJ", "New Delhi"],
+    "metric": null,
+    "blurb": "“The Room Never Lies.” A photography-led site for a DJ, producer and remixer. 26 years and six residencies serve as proof, with availability checks and WhatsApp booking above the fold.",
+    "quote": null
+  },
+  {
+    "slug": "snla",
+    "name": "SNLA · Sapna Naik Landscape Architecture",
+    "domain": "snla.in",
+    "url": "https://snla.in",
+    "image": "/assets/work/snla.jpg",
+    "vertical": "other",
+    "tags": ["Landscape architecture"],
+    "metric": null,
+    "blurb": "A full-bleed, image-first portfolio where the projects do the talking. Minimal navigation keeps attention on the work, with project pages, careers and contact one click away.",
+    "quote": null
+  },
+  {
+    "slug": "supriya-bopanna",
+    "name": "Supriya Bopanna",
+    "domain": "supriyabopanna.com",
+    "url": "https://supriyabopanna.com",
+    "image": "/assets/work/supriya.jpg",
+    "vertical": "other",
+    "tags": ["Private practice", "Bengaluru"],
+    "metric": null,
+    "blurb": "A quiet, editorial site for a psychologist: a custom “perspective” wordmark, serif type and generous whitespace. It explains plainly how sessions work and who the practice is for.",
+    "quote": null
+  }
+]

@@ -1,0 +1,113 @@
+---
+/** Site Intelligence Score capture → /api/score. Phase 1 = capture + notify. */
+---
+<section id="score" class="sec">
+  <div class="panel vr-reveal">
+    <div class="copy">
+      <span class="mono eyebrow">Free · two minutes</span>
+      <h2 class="h2">How intelligent is <span class="it">your</span> website?</h2>
+    </div>
+    <form id="score-form" class="form">
+      <label for="vr-url">Your website</label>
+      <input id="vr-url" name="url" type="url" required placeholder="yourvenue.com" autocomplete="url" />
+      <label for="vr-email" class="mt">Where to send it</label>
+      <div class="field-row">
+        <input id="vr-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" />
+        <button type="submit">Get my score →</button>
+      </div>
+      <!-- honeypot -->
+      <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+      <p class="hint" id="score-msg" role="status" aria-live="polite">
+        You’ll get a score out of 100 and the three fixes that matter most.
+      </p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .sec { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter) var(--section-y); }
+  .panel {
+    border-radius: var(--radius-panel);
+    border: 1px solid var(--line);
+    background: var(--card);
+    padding: clamp(36px, 6vw, 88px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-items: flex-end;
+    transition: background-color var(--dur-theme) ease, border-color var(--dur-theme) ease;
+  }
+  .copy { flex: 1 1 560px; display: flex; flex-direction: column; gap: 22px; }
+  .mono { font-family: var(--font-mono); }
+  .eyebrow { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--accent); }
+  .h2 { margin: 0; font-weight: 500; font-size: clamp(44px, 6.4vw, 104px); line-height: 0.94; letter-spacing: var(--tracking-display); }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+
+  .form { flex: 1 1 380px; display: flex; flex-direction: column; gap: 8px; }
+  .form label { font-size: 14px; color: var(--muted); }
+  .form .mt { margin-top: 8px; }
+  .field-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .form input {
+    flex: 1 1 220px;
+    min-width: 0;
+    font: inherit;
+    font-size: 18px;
+    min-height: var(--btn-h);
+    padding: 0 22px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: transparent;
+    color: inherit;
+    box-sizing: border-box;
+  }
+  .form input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hp { position: absolute; left: -9999px; }
+  .form button {
+    font: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    min-height: var(--btn-h);
+    padding: 0 28px;
+    border-radius: var(--radius-pill);
+    border: 0;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+  .hint { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+</style>
+
+<script>
+  const form = document.getElementById('score-form') as HTMLFormElement | null;
+  const msg = document.getElementById('score-msg');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!msg) return;
+    const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+    btn.disabled = true;
+    msg.textContent = 'Sending…';
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    // capture utm params if present
+    const utm: Record<string, string> = {};
+    new URLSearchParams(location.search).forEach((v, k) => { if (k.startsWith('utm_')) utm[k] = v; });
+    try {
+      const res = await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ...data, utm }),
+      });
+      const out = await res.json();
+      if (out.ok) {
+        (window as any).umami?.track?.('score_request');
+        form.reset();
+        msg.textContent = 'We’ll email your score within 24 hours.';
+      } else {
+        msg.textContent = out.error || 'Something went wrong — please try again.';
+      }
+    } catch {
+      msg.textContent = 'Network error — please try again.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

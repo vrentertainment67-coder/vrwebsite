@@ -1,0 +1,240 @@
+---
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { SCENES } from '@/lib/content';
+
+const words = ['answer.', 'book.', 'rank.', 'adapt.', 'report.'];
+const scene = SCENES.night; // SSR/no-JS default; the client island updates on theme change
+---
+
+<section class="hero">
+  <div class="hero-top vr-rise">
+    <div class="status">
+      <span class="vr-pulse dot" aria-hidden="true"></span>
+      Bengaluru · <span id="hero-clock">—</span> · this page is in <span id="hero-mode">Late-night</span> mode
+    </div>
+    <ThemeToggle />
+  </div>
+
+  <h1 class="hero-h1 vr-rise-2">
+    <span class="line">Websites</span>
+    <span class="line roller-line">
+      <span>that</span>
+      <span class="roller" aria-hidden="true">
+        <span class="roller-col" id="hero-words">
+          {words.map((w) => <span class="word">{w}</span>)}
+        </span>
+      </span>
+      <span class="sr-only">that answer, book, rank, adapt and report.</span>
+    </span>
+  </h1>
+
+  <div class="hero-grid vr-rise-3">
+    <div class="hero-left">
+      <p class="lead">
+        An intelligent website studio for venues, hospitality brands and artists. We build sites
+        that answer guests, take bookings, rank in AI search and change with the hour,
+        <span class="em">like this one just did.</span>
+      </p>
+      <div class="cta-row">
+        <a href="/#score" class="btn btn-solid">Get your Site Intelligence Score <span aria-hidden="true">→</span></a>
+        <a href="/#work" class="btn btn-outline">See the work</a>
+      </div>
+    </div>
+
+    <!-- Live concierge demo card -->
+    <div class="card" aria-label="Live demo: an intelligent venue website">
+      <div class="card-bar">
+        <span class="mono muted">[yourvenue].in</span>
+        <span class="mono live" id="sc-live">Live · Late-night</span>
+      </div>
+      <div class="card-head">
+        <div class="mono muted" id="sc-kicker">{scene.kicker}</div>
+        <div class="card-title" id="sc-title">{scene.title}</div>
+        <div class="muted sm" id="sc-sub">{scene.sub}</div>
+      </div>
+      <div class="chat">
+        <div class="bubble bubble-guest" id="sc-guest">{scene.guest}</div>
+        <div class="reply-row">
+          <span class="ai" aria-hidden="true">AI</span>
+          <div class="bubble bubble-ai">
+            <span id="sc-reply">{scene.reply}</span><span class="vr-caret caret" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="chips" id="sc-chips">
+          {scene.chips.map((c) => <span class="chip">{c}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 48px var(--gutter) 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .hero-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .status {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: 0 0 auto; }
+
+  .hero-h1 {
+    margin: 0;
+    font-weight: 500;
+    font-size: var(--text-hero);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+  }
+  .line { display: block; }
+  .roller-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.22em; }
+  .roller {
+    display: inline-block;
+    height: 0.98em;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+  .roller-col {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(0);
+    transition: transform 0.9s var(--ease-inout);
+  }
+  .word {
+    display: block;
+    height: 0.98em;
+    line-height: 0.98;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+  }
+
+  .hero-grid { display: flex; flex-wrap: wrap; gap: 48px; align-items: stretch; }
+  .hero-left {
+    flex: 1 1 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .lead {
+    margin: 0;
+    font-size: var(--text-lead);
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 520px;
+    font-weight: 300;
+  }
+  .lead .em { color: var(--fg); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    min-height: var(--btn-h);
+    padding: 0 30px;
+    border-radius: var(--radius-pill);
+    font-size: 16px;
+  }
+  .btn-solid { background: var(--fg); color: var(--bg); font-weight: 500; }
+  .btn-outline { border: 1px solid var(--line); }
+
+  .card {
+    flex: 1 1 520px;
+    min-width: 0;
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: background-color var(--dur-theme) ease, border-color var(--dur-theme) ease;
+    box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.45);
+  }
+  .card-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mono { font-family: var(--font-mono); font-size: 12px; }
+  .muted { color: var(--muted); }
+  .live { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .card-head { padding: 26px 22px 8px; display: flex; flex-direction: column; gap: 6px; }
+  .card-title { font-family: var(--font-serif); font-size: 40px; line-height: 1.05; letter-spacing: -0.01em; }
+  .sm { font-size: 14px; }
+  .chat {
+    padding: 20px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 210px;
+    box-sizing: border-box;
+  }
+  .bubble { font-size: 15px; line-height: 1.45; }
+  .bubble-guest {
+    align-self: flex-end;
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px 18px 4px 18px;
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .reply-row { display: flex; gap: 10px; align-items: flex-start; max-width: 90%; }
+  .ai {
+    flex: 0 0 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bubble-ai {
+    padding: 12px 16px;
+    border-radius: 18px 18px 18px 4px;
+    border: 1px solid var(--line);
+    line-height: 1.5;
+  }
+  .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    vertical-align: -2px;
+    background: var(--accent);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; padding-left: 36px; }
+  .chip { font-size: 13px; padding: 7px 13px; border-radius: var(--radius-pill); border: 1px solid var(--line); }
+
+  @media (max-width: 720px) {
+    .card-title { font-size: 32px; }
+  }
+</style>

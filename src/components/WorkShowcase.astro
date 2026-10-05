@@ -1,0 +1,129 @@
+---
+import { PROJECTS, projectTagLine } from '@/lib/content';
+---
+
+<section id="work" class="work">
+  <div class="work-top vr-reveal">
+    <h2 class="h2">Selected <span class="it">work</span></h2>
+    <span class="mono count"><span id="work-num">01</span> / 0{PROJECTS.length}</span>
+  </div>
+
+  <div class="work-body">
+    <ol id="work-list" class="work-list">
+      {
+        PROJECTS.map((p, i) => (
+          <li class:list={['work-item', i === 0 && 'is-active']} data-i={i}>
+            <button type="button" class="work-btn vr-row" data-work-btn={i} aria-current={i === 0 ? 'true' : undefined}>
+              <span class="work-head">
+                <span class="n">0{i + 1}</span>
+                <span class="work-name">{p.name}</span>
+                <span class="arrow vr-row-arrow" aria-hidden="true">→</span>
+              </span>
+              <span class="work-detail">
+                <span class="blurb">{p.blurb}</span>
+                <span class="tag mono">{projectTagLine(p)}</span>
+              </span>
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+
+    <a id="work-frame" href={PROJECTS[0].url} target="_blank" rel="noopener" class="frame vr-lift">
+      <div class="frame-bar">
+        <span class="mono muted" id="work-domain">{PROJECTS[0].domain}</span>
+        <span class="visit">Visit site ↗</span>
+      </div>
+      <div class="frame-img">
+        {
+          PROJECTS.map((p, i) => (
+            <img
+              src={p.image}
+              alt={`${p.name} homepage`}
+              width="1200"
+              height="750"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              class:list={['shot', i === 0 && 'is-on']}
+              data-i={i}
+            />
+          ))
+        }
+      </div>
+    </a>
+  </div>
+</section>
+
+<style>
+  .work {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter) var(--section-y);
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .work-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; }
+  .h2 { margin: 0; font-weight: 500; font-size: var(--text-h2); line-height: 0.95; letter-spacing: var(--tracking-heading); }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .mono { font-family: var(--font-mono); }
+  .count { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
+
+  .work-body { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .work-list { flex: 1 1 340px; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .work-item { border-bottom: 1px solid var(--line); }
+  .work-btn {
+    font: inherit;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 22px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 44px;
+  }
+  .work-head { display: flex; align-items: baseline; gap: 18px; }
+  .n { font-family: var(--font-mono); font-size: 12px; }
+  .work-name { font-size: 30px; font-weight: 400; letter-spacing: -0.03em; }
+  .arrow { margin-left: auto; }
+  .work-detail { display: none; flex-direction: column; gap: 10px; padding-left: 38px; }
+  .blurb { font-size: 15px; line-height: 1.6; color: var(--muted); }
+  .tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  .work-item.is-active .work-btn { color: var(--fg); cursor: default; }
+  .work-item.is-active .n { color: var(--accent); }
+  .work-item.is-active .work-name { font-weight: 500; }
+  .work-item.is-active .work-detail { display: flex; }
+  .work-item.is-active .arrow { display: none; }
+
+  .frame {
+    flex: 1.6 1 560px;
+    min-width: 0;
+    display: block;
+    text-decoration: none;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--card);
+    box-shadow: 0 60px 120px -60px rgba(0, 0, 0, 0.55);
+  }
+  .frame-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+  .visit { font-size: 13px; }
+  .frame-img { position: relative; aspect-ratio: 16 / 10; }
+  .shot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 0.9s ease, transform 1.6s var(--ease-out);
+  }
+  .shot.is-on { opacity: 1; transform: scale(1); }
+</style>

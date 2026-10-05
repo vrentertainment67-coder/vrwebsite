@@ -1,0 +1,40 @@
+---
+const stats = [
+  { to: 19, suffix: '', label: 'years inside the night economy' },
+  { to: 18, suffix: '', label: 'countries played and built for' },
+  { to: 92, suffix: '', label: 'SEO score, djvicofficial.com (from 38)' },
+  { to: 68, prefix: '+', suffix: '%', label: 'episode-view growth, The Vic Fix' },
+];
+---
+
+<section class="stats">
+  {
+    stats.map((s) => (
+      <div class="stat vr-reveal">
+        <span
+          class="num"
+          data-countup={s.to}
+          data-prefix={s.prefix ?? ''}
+          data-suffix={s.suffix ?? ''}
+        >
+          {(s.prefix ?? '') + s.to + (s.suffix ?? '')}
+        </span>
+        <span class="label">{s.label}</span>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .stats {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--section-y) var(--gutter);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 48px 32px;
+  }
+  .stat { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 22px; }
+  .num { font-size: var(--text-stat); font-weight: 300; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .label { font-size: 15px; color: var(--muted); }
+</style>

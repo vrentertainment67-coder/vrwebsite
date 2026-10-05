@@ -1,0 +1,27 @@
+{
+  "day": {
+    "kicker": "Sunday · 12–4 PM",
+    "title": "Long table brunch",
+    "sub": "Live acoustic set from 1 PM",
+    "guest": "Do you have vegan options at brunch? We’re 4.",
+    "reply": "Yes, vegan dishes are marked (V) on the brunch menu. I can hold a table for 4 at 1 PM, close to the music. Shall I?",
+    "chips": ["Hold for 1 PM", "View menu", "Directions"]
+  },
+  "evening": {
+    "kicker": "Tonight · from 7 PM",
+    "title": "Dinner & the golden hour",
+    "sub": "Terrace open · last seating 10:30",
+    "guest": "Can we book a terrace table for 6 at 8?",
+    "reply": "The terrace has one table for 6 left at 8:15. I can hold it for 15 minutes and send the confirmation on WhatsApp.",
+    "chips": ["Hold 8:15", "See the menu", "Private dining"]
+  },
+  "night": {
+    "kicker": "Tonight · doors 10 PM",
+    "title": "[Headliner] all night long",
+    "sub": "Guestlist closes 10:30 PM",
+    "guest": "Is there a guestlist tonight? We’re 6.",
+    "reply": "Yes, the guestlist is open until 10:30. For 6 people a table has a minimum spend. Want me to add you and send details on WhatsApp?",
+    "chips": ["Join guestlist", "Book a table", "Lineup"]
+  },
+  "_note": "Demo content for a fictional venue shown as [yourvenue].in. Keep it clearly a demo; never present it as a real client."
+}

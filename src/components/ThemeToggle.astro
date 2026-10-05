@@ -1,0 +1,52 @@
+---
+/** Segmented time-of-day toggle. Wired by src/scripts/theme.ts. */
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+const modes = [
+  { key: 'day', label: 'Day', short: 'Day' },
+  { key: 'evening', label: 'Evening', short: 'Eve' },
+  { key: 'night', label: 'Late-night', short: 'Night' },
+] as const;
+---
+
+<div class="toggle" role="group" aria-label="Preview time of day">
+  {
+    modes.map((m) => (
+      <button
+        type="button"
+        data-theme-btn={m.key}
+        aria-pressed={m.key === 'night' ? 'true' : 'false'}
+        aria-label={`${m.label} mode`}
+      >
+        {compact ? m.short : m.label}
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .toggle {
+    display: inline-flex;
+    gap: 3px;
+    padding: 4px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+  }
+  .toggle button {
+    font: inherit;
+    font-size: 13px;
+    min-height: 36px;
+    min-width: 44px;
+    padding: 0 16px;
+    border-radius: var(--radius-pill);
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+    transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+  }
+  .toggle button[aria-pressed='true'] {
+    background: var(--fg);
+    color: var(--bg);
+  }
+</style>

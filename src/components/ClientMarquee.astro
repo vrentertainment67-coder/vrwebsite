@@ -1,0 +1,36 @@
+---
+const names = ['DJ Vic', 'Lloyd’s Pro Sound', 'DJ Gags', 'SNLA', 'Supriya Bopanna', 'Flingit', 'The Vic Fix'];
+---
+
+<section aria-label="Clients" class="wrap vr-marquee-wrap">
+  <div class="vr-marquee track">
+    {[0, 1].map(() => (
+      <>
+        {names.map((n) => (
+          <>
+            <span>{n}</span>
+            <span class="star" aria-hidden="true">✦</span>
+          </>
+        ))}
+      </>
+    ))}
+  </div>
+</section>
+
+<style>
+  .wrap {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 26px 0;
+    overflow: hidden;
+  }
+  .track {
+    gap: 72px;
+    font-family: var(--font-serif);
+    font-size: 34px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  .star { color: var(--accent); }
+</style>

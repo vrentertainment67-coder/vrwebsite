@@ -1,0 +1,57 @@
+---
+import { SITE } from '@/data/site';
+import { jsonLd } from '@/lib/jsonld';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  schema?: object[];
+}
+const { title, description, path, ogImage, schema = [] } = Astro.props;
+const canonical = new URL(path ?? Astro.url.pathname, SITE.url).toString();
+const og = ogImage ? new URL(ogImage, SITE.url).toString() : undefined;
+const ld = jsonLd(schema);
+
+const umamiUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL;
+const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const hasUmami = umamiUrl && umamiId && umamiUrl !== '__set_in_env__';
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{og && <meta property="og:image" content={og} />}
+
+<meta name="twitter:card" content={og ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{og && <meta name="twitter:image" content={og} />}
+
+<script type="application/ld+json" set:html={ld} is:inline />
+
+{/* Set the time-of-day theme BEFORE first paint (no flash). Overridable per session. */}
+<script is:inline>
+  (function () {
+    try {
+      var h = +new Date().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', hour12: false });
+      var auto = h >= 6 && h < 17 ? 'day' : h >= 17 && h < 21 ? 'evening' : 'night';
+      document.documentElement.dataset.theme = sessionStorage.getItem('vr-theme') || auto;
+    } catch (e) {
+      document.documentElement.dataset.theme = 'night';
+    }
+  })();
+</script>
+
+{hasUmami && <script is:inline defer src={umamiUrl} data-website-id={umamiId}></script>}

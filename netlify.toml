@@ -8,3 +8,57 @@
 # The @astrojs/netlify adapter wires SSR endpoints (the /api/* routes) as
 # Netlify Functions automatically. Set SUPABASE_SERVICE_ROLE_KEY and the other
 # secrets in Site settings → Environment variables (NOT in this file).
+
+# ── 301s from the old sitemap to the nearest new page ──
+[[redirects]]
+  from = "/who-we-help"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/who-we-help/*"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/resources"
+  to = "/contact"
+  status = 301
+[[redirects]]
+  from = "/the-vic-fix"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/services"
+  to = "/intelligent-websites"
+  status = 301
+[[redirects]]
+  from = "/services/*"
+  to = "/intelligent-websites"
+  status = 301
+[[redirects]]
+  from = "/dj-website-in-a-box"
+  to = "/intelligent-websites"
+  status = 301
+[[redirects]]
+  from = "/venue-launch-kit"
+  to = "/intelligent-websites"
+  status = 301
+[[redirects]]
+  from = "/work"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/work/*"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blog"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/blog/*"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/about"
+  to = "/"
+  status = 301

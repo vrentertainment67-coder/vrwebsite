@@ -1,0 +1,42 @@
+---
+const steps = [
+  { n: '01 · Score', body: 'We measure your current site on speed, search, AI readiness, booking and content.' },
+  { n: '02 · Blueprint', body: 'We map your pages, modules and every question your guests ask.' },
+  { n: '03 · Build & train', body: 'We design and build on Astro, then load your menus, policies and events into the concierge.' },
+  { n: '04 · Grow', body: 'The Monday brief decides what we improve next. Growth Ops starts from ₹1L/month.' },
+];
+---
+
+<section class="proc">
+  <div class="head vr-reveal">
+    <h2 class="h2">Six weeks, <span class="it">give or take.</span></h2>
+    <span class="mono note">[confirm typical timeline]</span>
+  </div>
+  {
+    steps.map((s) => (
+      <div class="step vr-reveal">
+        <span class="mono n">{s.n}</span>
+        <span class="body">{s.body}</span>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .proc {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--section-y) var(--gutter);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 40px 32px;
+  }
+  .head { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; }
+  .h2 { margin: 0; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 0.98; letter-spacing: var(--tracking-heading); }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .mono { font-family: var(--font-mono); }
+  .note { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
+  .step { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--line); padding-top: 22px; }
+  .n { font-size: 12px; color: var(--accent); }
+  .body { font-size: 16px; line-height: 1.55; color: var(--muted); }
+</style>

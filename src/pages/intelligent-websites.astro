@@ -1,0 +1,301 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { MODULES } from '@/data/modules';
+import { SITE } from '@/data/site';
+
+const title = 'Intelligent Websites: AI concierge, smart bookings, AI search | VR Entertainment';
+const description =
+  'Fast, beautiful sites with an intelligence layer built in: an AI concierge, smart enquiries, an events engine, AI-ready search and a Monday brief. For venues, hospitality brands and artists.';
+
+const faqs = [
+  { q: 'Will the concierge make things up?', a: 'It answers only from the information you give it. If it doesn’t know, it says so and hands the guest to your team.' },
+  { q: 'Can my team update it without you?', a: 'Yes. Events, menus and FAQs live in a simple admin, and the concierge picks up changes automatically.' },
+  { q: 'What does it cost to run each month?', a: '[Hosting and AI usage, from ₹ x/month. Fill in once costs are set.]' },
+  { q: 'Can you upgrade my existing site?', a: 'Often, yes. Start with a Site Intelligence Score and we’ll tell you whether to add modules or rebuild.' },
+];
+
+const tiers = [
+  { kicker: 'Artists & DJs', name: 'Launch', price: 'from [₹ price]', desc: 'EPK and mixes · booking assistant · smart enquiries · AI-ready search · Monday brief', note: '[x] weeks · fixed scope', featured: false },
+  { kicker: 'Most chosen · Venues & brands', name: 'Venue & Brand', price: 'from [₹ price]', desc: 'Everything in Launch · concierge · events engine · reservations integration · time-of-day homepage', note: '[x] weeks · fixed scope', featured: true },
+  { kicker: 'Products', name: 'Platform', price: 'scoped per project', desc: 'Accounts, data and admin dashboards. Built and run end to end, like Flingit.', note: 'Discovery sprint first', featured: false },
+];
+
+const schema = [
+  ...tiers
+    .filter((t) => t.name !== 'Platform')
+    .map((t) => ({
+      '@type': 'Service',
+      name: `Intelligent Websites — ${t.name}`,
+      serviceType: 'Website design & development',
+      provider: { '@id': `${SITE.url}/#organization` },
+      areaServed: 'IN',
+      url: `${SITE.url}/intelligent-websites`,
+    })),
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout title={title} description={description} path="/intelligent-websites" schema={schema}>
+  <Header variant="inner" active="/intelligent-websites" />
+  <main id="main">
+    <!-- HERO -->
+    <section class="iw-hero">
+      <div class="eyebrow vr-rise">
+        <span class="vr-pulse dot" aria-hidden="true"></span>Flagship service · Intelligent Websites
+      </div>
+      <h1 class="h1 vr-rise-2">A website that runs the <span class="it accent">front desk.</span></h1>
+      <div class="hero-foot vr-rise-2">
+        <p class="lead">
+          Fast, beautiful sites with an intelligence layer built in. They answer guests, qualify
+          bookings, keep themselves current and tell you every Monday <span class="fg">what’s working.</span>
+        </p>
+        <div class="cta-row">
+          <a href="#tiers" class="btn btn-solid">See packages <span aria-hidden="true">→</span></a>
+          <a href="#modules" class="btn btn-outline">Explore the modules</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULES EXPLORER -->
+    <section id="modules" class="iw-modules">
+      <div class="inner">
+        <div class="head vr-reveal">
+          <h2 class="h2">The intelligence <span class="it">layer</span></h2>
+          <span class="mono tag">Six modules · switch on what you need</span>
+        </div>
+        <div class="explorer">
+          <div role="tablist" aria-label="Modules" class="tabs" id="mod-tabs">
+            {
+              MODULES.map((m, i) => (
+                <button
+                  type="button"
+                  role="tab"
+                  id={`mtab-${i}`}
+                  aria-selected={i === 0 ? 'true' : 'false'}
+                  aria-controls="mod-panel"
+                  tabindex={i === 0 ? '0' : '-1'}
+                  data-mod={i}
+                  class:list={['tab', i === 0 && 'is-on']}
+                >
+                  <span class="mono n">{m.n}</span>
+                  <span class="name">{m.name}</span>
+                  <span class="mono verb">{m.verb}</span>
+                </button>
+              ))
+            }
+          </div>
+
+          <div role="tabpanel" id="mod-panel" aria-labelledby="mtab-0" class="panel" tabindex="0">
+            <div class="vr-fade panel-inner" id="mod-panel-inner">
+              <div class="panel-head">
+                <span class="mono kv">{MODULES[0].n} · {MODULES[0].verb}</span>
+                <span class="panel-h">{MODULES[0].headline}</span>
+                <span class="panel-body">{MODULES[0].body}</span>
+              </div>
+              <div class="rows">
+                {MODULES[0].rows.map((r) => (
+                  <div class="r"><span class="muted">{r.k}</span><span class="rv">{r.v}</span></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="iw-compare">
+      <div class="inner">
+        <h2 class="h2 vr-reveal">Brochure site <span class="it dim">vs.</span> intelligent site</h2>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="when">When…</th>
+                <th>A brochure site</th>
+                <th class="good">An intelligent site</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="vr-reveal"><td class="q">A guest asks at 1am</td><td class="dim">Nobody answers until morning</td><td>The concierge answers from your real info</td></tr>
+              <tr class="vr-reveal"><td class="q">A private event enquiry lands</td><td class="dim">It sits in a shared inbox</td><td>Date, size and budget are captured and routed to the right person</td></tr>
+              <tr class="vr-reveal"><td class="q">The weekend lineup changes</td><td class="dim">Someone updates the site, or doesn’t</td><td>The event page updates from your listings</td></tr>
+              <tr class="vr-reveal"><td class="q">Someone asks ChatGPT where to go</td><td class="dim">You’re not in the answer</td><td>Structured data makes you easy to cite</td></tr>
+              <tr class="vr-reveal"><td class="q">You want to know what’s working</td><td class="dim">An analytics login you never open</td><td>A one-page brief every Monday</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIERS -->
+    <section id="tiers" class="iw-tiers">
+      <h2 class="h2 vr-reveal">Three ways <span class="it">in.</span></h2>
+      <div class="grid">
+        {
+          tiers.map((t) => (
+            <article class:list={['tier vr-lift-6 vr-reveal', t.featured && 'is-featured']}>
+              <span class:list={['mono kicker', t.featured && 'kicker-on']}>{t.kicker}</span>
+              <span class="tname">{t.name}</span>
+              <span class="price">{t.price}</span>
+              <span class="desc">{t.desc}</span>
+              <span class="mono note">{t.note}</span>
+            </article>
+          ))
+        }
+      </div>
+      <p class="addon vr-reveal">Any tier can add Growth Ops from ₹1L/month after launch.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="iw-faq">
+      <div class="inner">
+        <div class="faq-left vr-reveal">
+          <h2 class="h2">Questions<span class="it accent">.</span></h2>
+          <p class="muted sm">Built with Astro, Supabase, AI models and cookieless Umami analytics. It connects to the tools you already use: WhatsApp, Google Calendar and your reservations system.</p>
+        </div>
+        <div class="faq-list">
+          {
+            faqs.map((f, i) => (
+              <details class="vr-faq" open={i === 0}>
+                <summary>
+                  {f.q}
+                  <span class="vr-plus" aria-hidden="true">+</span>
+                </summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="iw-cta">
+      <div class="panel vr-reveal">
+        <h2 class="h2">See it answer <span class="it accent">your</span> guests.</h2>
+        <div class="cta-row">
+          <a href="/contact" class="btn btn-accent">Book a 20-min demo <span aria-hidden="true">→</span></a>
+          <a href="/#score" class="btn btn-outline">Get your score</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer variant="inner" />
+
+  <script>
+    import '@/scripts/modules-explorer.ts';
+  </script>
+</Layout>
+
+<style>
+  .mono { font-family: var(--font-mono); }
+  .muted { color: var(--muted); }
+  .sm { font-size: 15px; line-height: 1.6; }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .accent { color: var(--accent); }
+  .fg { color: var(--fg); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .h2 { margin: 0; font-weight: 500; font-size: var(--text-h2); line-height: 0.95; letter-spacing: var(--tracking-heading); }
+
+  .btn { text-decoration: none; display: inline-flex; align-items: center; gap: 14px; min-height: var(--btn-h); padding: 0 30px; border-radius: var(--radius-pill); font-size: 16px; }
+  .btn-solid { background: var(--fg); color: var(--bg); font-weight: 500; }
+  .btn-accent { background: var(--accent); color: #fff; font-weight: 500; }
+  .btn-outline { border: 1px solid var(--line); }
+
+  /* Hero */
+  .iw-hero { max-width: var(--container); margin: 0 auto; padding: 72px var(--gutter) 120px; display: flex; flex-direction: column; gap: 48px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .h1 { margin: 0; font-weight: 500; font-size: var(--text-h1-service); line-height: 0.92; letter-spacing: var(--tracking-display); max-width: 1200px; }
+  .hero-foot { display: flex; flex-wrap: wrap; gap: 32px 80px; align-items: flex-end; }
+  .lead { flex: 1 1 480px; margin: 0; font-size: var(--text-lead); line-height: 1.5; font-weight: 300; color: var(--muted); max-width: 620px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Modules explorer */
+  .iw-modules { border-top: 1px solid var(--line); }
+  .iw-modules .inner { max-width: var(--container); margin: 0 auto; padding: var(--section-y) var(--gutter); display: flex; flex-direction: column; gap: 56px; }
+  .iw-modules .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
+  .tag { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
+  .explorer { display: flex; flex-wrap: wrap; gap: 40px; align-items: stretch; }
+  .tabs { flex: 1 1 340px; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .tab { font: inherit; text-align: left; background: transparent; color: var(--muted); border: 0; border-bottom: 1px solid var(--line); padding: 22px 0; cursor: pointer; display: flex; align-items: baseline; gap: 18px; min-height: 44px; }
+  .tab .n { font-size: 12px; }
+  .tab .name { font-size: 30px; font-weight: 400; letter-spacing: -0.03em; }
+  .tab .verb { margin-left: auto; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); opacity: 0; }
+  .tab.is-on { color: var(--fg); }
+  .tab.is-on .n { color: var(--accent); }
+  .tab.is-on .name { font-weight: 500; }
+  .tab.is-on .verb { opacity: 1; }
+
+  .panel { flex: 1.5 1 520px; min-width: 0; border-radius: var(--radius-card); border: 1px solid var(--line); background: var(--card); padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; gap: 28px; transition: background-color var(--dur-theme) ease, border-color var(--dur-theme) ease; box-shadow: 0 60px 120px -60px rgba(0, 0, 0, 0.5); }
+  .panel-inner { display: flex; flex-direction: column; gap: 28px; }
+  .panel-head { display: flex; flex-direction: column; gap: 12px; }
+  .kv { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--accent); }
+  .panel-h { font-family: var(--font-serif); font-size: clamp(36px, 3.6vw, 56px); line-height: 1.02; letter-spacing: -0.01em; }
+  .panel-body { font-size: 17px; line-height: 1.6; color: var(--muted); max-width: 560px; }
+  .rows { border-top: 1px solid var(--line); display: flex; flex-direction: column; }
+  .r { display: flex; justify-content: space-between; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .rv { text-align: right; }
+
+  /* Comparison */
+  .iw-compare { background: var(--inverse-bg); color: var(--inverse-fg); transition: background-color var(--dur-theme) ease, color var(--dur-theme) ease; }
+  .iw-compare .inner { max-width: var(--container); margin: 0 auto; padding: var(--section-y) var(--gutter); display: flex; flex-direction: column; gap: 56px; }
+  .iw-compare .h2 { max-width: 1000px; font-size: var(--text-h2-sm); line-height: 0.98; }
+  .iw-compare .dim { opacity: 0.6; }
+  .scroll { overflow-x: auto; }
+  .iw-compare table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 17px; line-height: 1.5; }
+  .iw-compare th { text-align: left; font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; font-weight: 400; opacity: 0.6; padding: 0 24px 18px; border-bottom: 1px solid var(--inverse-line); }
+  .iw-compare th.when { padding-left: 0; width: 28%; }
+  .iw-compare th.good { opacity: 1; padding-right: 0; }
+  .iw-compare td { padding: 26px 24px; border-bottom: 1px solid var(--inverse-line); }
+  .iw-compare td.q { padding-left: 0; font-size: 22px; letter-spacing: -0.02em; }
+  .iw-compare td.dim { opacity: 0.55; }
+  .iw-compare tr td:last-child { padding-right: 0; }
+  .iw-compare tbody tr:last-child td { border-bottom: 0; }
+
+  /* Tiers */
+  .iw-tiers { max-width: var(--container); margin: 0 auto; padding: var(--section-y) var(--gutter); display: flex; flex-direction: column; gap: 56px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .tier { border-radius: var(--radius-card); border: 1px solid var(--line); padding: 36px; display: flex; flex-direction: column; gap: 22px; min-height: 460px; box-sizing: border-box; }
+  .tier.is-featured { background: var(--fg); color: var(--bg); border-color: transparent; transition: background-color var(--dur-theme) ease; }
+  .kicker { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
+  .kicker-on { color: var(--accent-on-fg); }
+  .tname { font-size: 44px; font-weight: 500; letter-spacing: -0.04em; }
+  .price { font-family: var(--font-serif); font-size: 30px; }
+  .desc { font-size: 16px; line-height: 1.7; color: var(--muted); }
+  .is-featured .desc { color: inherit; opacity: 0.72; }
+  .note { margin-top: auto; font-size: 12px; color: var(--muted); }
+  .is-featured .note { opacity: 0.72; color: inherit; }
+  .addon { margin: 0; font-size: 16px; color: var(--muted); }
+
+  /* FAQ */
+  .iw-faq { border-top: 1px solid var(--line); }
+  .iw-faq .inner { max-width: var(--container); margin: 0 auto; padding: var(--section-y) var(--gutter); display: flex; flex-wrap: wrap; gap: 48px 96px; }
+  .faq-left { flex: 1 1 340px; display: flex; flex-direction: column; gap: 20px; }
+  .faq-left .h2 { font-size: clamp(40px, 5vw, 72px); line-height: 0.98; }
+  .faq-list { flex: 2 1 560px; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .vr-faq { border-bottom: 1px solid var(--line); padding: 26px 0; }
+  .vr-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 24px; font-size: 22px; letter-spacing: -0.02em; min-height: 44px; align-items: center; }
+  .vr-faq summary::-webkit-details-marker { display: none; }
+  .vr-plus { font-size: 28px; font-weight: 300; color: var(--accent); transition: transform 0.4s var(--ease-out); }
+  .vr-faq[open] .vr-plus { transform: rotate(45deg); }
+  .vr-faq p { margin: 14px 0 0; font-size: 16px; line-height: 1.65; color: var(--muted); max-width: 640px; }
+
+  /* CTA */
+  .iw-cta { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter) var(--section-y); }
+  .iw-cta .panel { border-radius: var(--radius-panel); background: var(--card); border: 1px solid var(--line); padding: clamp(36px, 6vw, 88px); display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between; transition: background-color var(--dur-theme) ease; }
+  .iw-cta .h2 { flex: 1 1 600px; font-size: clamp(44px, 6vw, 96px); line-height: 0.94; letter-spacing: var(--tracking-display); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vr-faq[open] .vr-plus { transition: none; }
+  }
+</style>

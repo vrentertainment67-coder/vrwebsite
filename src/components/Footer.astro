@@ -1,104 +1,79 @@
 ---
-import { SITE, NAV, SERVICES } from '@/lib/site';
-const year = new Date().getFullYear();
+import { SITE } from '@/data/site';
+interface Props { variant?: 'home' | 'inner'; }
+const { variant = 'home' } = Astro.props;
 ---
 
-<footer class="rule bg-paper">
-  <div class="mx-auto max-w-[1400px] px-5 py-16 lg:px-10">
-    <!-- Top: big wordmark + newsletter -->
-    <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <p class="mono-label">// {SITE.tagline}</p>
-        <a href="/" class="mt-3 block font-display text-[clamp(2.5rem,7vw,5rem)] font-light leading-[0.9] tracking-normal text-ink">
-          VR Entertainment
-        </a>
-      </div>
-
-      <!-- Newsletter -->
-      <form data-newsletter class="w-full max-w-sm">
-        <label for="footer-email" class="mono-label">Get the night brief</label>
-        <div class="mt-3 flex gap-2">
-          <input id="footer-email" name="email" type="email" required placeholder="you@email.com" class="field" />
-          <button type="submit" class="btn shrink-0">Join</button>
+{
+  variant === 'home' ? (
+    <footer class="ft">
+      <div class="ft-inner">
+        <div class="wordmark">
+          VR <span class="it">Entertainment</span>
         </div>
-        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-        <p data-newsletter-msg class="mono-label mt-2" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <!-- Columns -->
-    <div class="rule mt-14 grid gap-10 pt-12 md:grid-cols-4">
-      <div>
-        <p class="mono-label mb-4">Explore</p>
-        <ul class="space-y-2 text-sm">
-          {NAV.map((i) => <li><a href={i.href} class="text-grey transition-colors hover:text-ink">{i.label}</a></li>)}
-          <li><a href="/blog" class="text-grey transition-colors hover:text-ink">Blog</a></li>
-          <li><a href="/contact" class="text-grey transition-colors hover:text-ink">Contact</a></li>
-        </ul>
+        <div class="row">
+          <span class="addr">{SITE.address.line}</span>
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          <a href={`tel:${SITE.phoneE164}`}>{SITE.phoneDisplay}</a>
+          <a href={SITE.instagram} target="_blank" rel="noopener">Instagram</a>
+          <a href={SITE.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+        </div>
       </div>
+    </footer>
+  ) : (
+    <footer class="ft-c">
+      <span class="mark">VR <span class="it">Entertainment</span></span>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      <a href={`tel:${SITE.phoneE164}`}>{SITE.phoneDisplay}</a>
+      <a href={SITE.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+    </footer>
+  )
+}
 
-      <div>
-        <p class="mono-label mb-4">Services</p>
-        <ul class="space-y-2 text-sm">
-          {SERVICES.slice(0, 6).map((s) => <li><a href={`/services/${s.slug}`} class="text-grey transition-colors hover:text-ink">{s.title}</a></li>)}
-          <li><a href="/services" class="text-accent transition-colors hover:text-ink">All services →</a></li>
-        </ul>
-      </div>
+<style>
+  .ft { border-top: 1px solid var(--line); }
+  .ft-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 56px var(--gutter) 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .wordmark {
+    font-family: var(--font-serif);
+    font-size: clamp(64px, 14vw, 220px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+  }
+  .wordmark .it { font-style: italic; color: var(--accent); }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 64px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .row a { text-decoration: none; }
+  .row .addr { margin-right: auto; }
 
-      <div>
-        <p class="mono-label mb-4">Connect</p>
-        <ul class="space-y-2 text-sm">
-          <li><a href={SITE.socials.instagramAgency} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">Instagram · @vr_entt</a></li>
-          <li><a href={SITE.socials.instagramDjVic} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">Instagram · @djvicofficial</a></li>
-          <li><a href={SITE.socials.instagramVicFix} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">Instagram · @thevicfix</a></li>
-          <li><a href={SITE.socials.youtube} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">YouTube · VREntertainment67</a></li>
-          <li><a href={SITE.whatsapp} class="text-grey transition-colors hover:text-ink" rel="noopener" target="_blank">WhatsApp chat →</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="mono-label mb-4">Studio</p>
-        <address class="space-y-1 text-sm not-italic text-grey">
-          <p>{SITE.nap.business}</p>
-          <p>{SITE.nap.street}</p>
-          <p>{SITE.nap.locality} {SITE.nap.postalCode}</p>
-          <p><a href={`tel:${SITE.nap.phoneE164}`} class="transition-colors hover:text-ink">{SITE.nap.phoneDisplay}</a></p>
-          <p><a href={`mailto:${SITE.email}`} class="transition-colors hover:text-ink">{SITE.email}</a></p>
-        </address>
-      </div>
-    </div>
-
-    <!-- Baseline -->
-    <div class="rule mt-12 flex flex-col gap-2 pt-6 md:flex-row md:items-center md:justify-between">
-      <p class="mono-label">©{year} {SITE.nap.business} — All rights reserved</p>
-      <p class="mono-label">Bengaluru · IN</p>
-    </div>
-  </div>
-</footer>
-
-<script>
-  const form = document.querySelector('form[data-newsletter]') as HTMLFormElement | null;
-  const msg = document.querySelector('[data-newsletter-msg]') as HTMLElement | null;
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!msg) return;
-    msg.textContent = 'Subscribing…';
-    const data = Object.fromEntries(new FormData(form).entries());
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const out = await res.json();
-      if (out.ok) {
-        form.reset();
-        msg.textContent = 'You’re in. Watch your inbox.';
-      } else {
-        msg.textContent = out.error || 'Something went wrong.';
-      }
-    } catch {
-      msg.textContent = 'Network error — try again.';
-    }
-  });
-</script>
+  .ft-c {
+    border-top: 1px solid var(--line);
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 40px var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 48px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .ft-c a { text-decoration: none; }
+  .ft-c .mark {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--fg);
+    margin-right: auto;
+  }
+  .ft-c .it { font-style: italic; color: var(--accent); }
+</style>

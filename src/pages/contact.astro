@@ -1,59 +1,145 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import PageHero from '@/components/PageHero.astro';
-import LeadForm from '@/components/LeadForm.astro';
-import { SITE } from '@/lib/site';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE } from '@/data/site';
+
+const title = 'Start a project | VR Entertainment';
+const description =
+  'Book a 20-minute call with VR Entertainment. Tell us about your venue, brand or artist project and we’ll show you what an intelligent website would do for it.';
 ---
 
-<Layout
-  title="Contact — Book a Strategy Call — VR Entertainment"
-  description="Book a strategy call, request a free audit, or message us on WhatsApp. Let’s build the brand that owns your night."
-  path="/contact"
->
-  <PageHero
-    eyebrow="Let’s talk"
-    title="Book a strategy call."
-    subtitle="Send a message or WhatsApp us. We take three new clients a quarter — make it count."
-  />
-
-  <section class="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 lg:grid-cols-2 lg:px-10">
-    <!-- Talk to us — WhatsApp-first -->
-    <div data-reveal>
-      <p class="mono-label">// Talk to us</p>
-      <p class="mt-4 max-w-md text-lg text-grey">
-        Fastest way to reach us is WhatsApp — we usually reply same day. Prefer email or a call? Those work too.
-      </p>
-
-      <a
-        href={SITE.whatsapp}
-        target="_blank"
-        rel="noopener"
-        class="mt-6 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-6 py-4 font-mono text-sm uppercase tracking-wider text-ink transition-transform hover:scale-[1.02]"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0a0a0a" aria-hidden="true">
-          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.01c-.24.68-1.42 1.32-1.95 1.36-.5.04-1.13.21-3.66-.76-3.07-1.21-5.04-4.36-5.19-4.56-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.39.81-.39.2 0 .41 0 .58.01.19.01.44-.07.69.53.24.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.18-.31.4-.45.53-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.3 2.35 1.45.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.66.78 1.95.93.29.15.48.22.55.34.07.12.07.7-.17 1.38z"/>
-        </svg>
-        WhatsApp us
-      </a>
-
-      <div class="rule mt-8 pt-6 text-sm text-grey">
-        <p><a href={`tel:${SITE.nap.phoneE164}`} class="transition-colors hover:text-ink">{SITE.nap.phoneDisplay}</a></p>
-        <p><a href={`mailto:${SITE.email}`} class="transition-colors hover:text-ink">{SITE.email}</a></p>
-        <address class="mt-3 not-italic">
-          {SITE.nap.business}, {SITE.nap.street}, {SITE.nap.locality} {SITE.nap.postalCode}
-        </address>
-      </div>
+<Layout title={title} description={description} path="/contact">
+  <Header variant="inner" active="/contact" />
+  <main id="main" class="contact">
+    <div class="eyebrow vr-rise">
+      <span class="vr-pulse dot" aria-hidden="true"></span>Start a project
     </div>
+    <h1 class="h1 vr-rise-2">Let’s build something that <span class="it accent">answers.</span></h1>
+    <p class="lead vr-rise-2">
+      Tell us about your venue, brand or artist project. We reply within one business day — or message
+      us on WhatsApp for the fastest route.
+    </p>
 
-    <!-- Message form → /api/lead -->
-    <div data-reveal data-reveal-delay="0.15">
-      <p class="mono-label">// Send a message</p>
-      <p class="mt-4 text-grey">Tell us what you want to grow. We’ll be in touch within one business day.</p>
-      <div class="mt-6"><LeadForm source="contact" /></div>
+    <div class="grid vr-rise-3">
+      <form id="enq-form" class="form">
+        <div class="field">
+          <label for="e-name">Name</label>
+          <input id="e-name" name="name" required autocomplete="name" />
+        </div>
+        <div class="two">
+          <div class="field">
+            <label for="e-email">Email</label>
+            <input id="e-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="e-phone">Phone / WhatsApp</label>
+            <input id="e-phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="e-type">What are you?</label>
+          <select id="e-type" name="business_type">
+            <option value="venue">Venue</option>
+            <option value="hospitality">Hospitality group</option>
+            <option value="artist">Artist / DJ</option>
+            <option value="events">Events brand</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="e-msg">What do you want it to do?</label>
+          <textarea id="e-msg" name="message" rows="4"></textarea>
+        </div>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-solid">Send →</button>
+        <p class="msg" id="enq-msg" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="direct">
+        <p class="mono label">Direct</p>
+        <a href={SITE.whatsapp} target="_blank" rel="noopener" class="d-link">WhatsApp →</a>
+        <a href={`mailto:${SITE.email}`} class="d-link">{SITE.email}</a>
+        <a href={`tel:${SITE.phoneE164}`} class="d-link">{SITE.phoneDisplay}</a>
+        <p class="addr muted">{SITE.address.line}</p>
+      </aside>
     </div>
-  </section>
+  </main>
+  <Footer variant="inner" />
+
+  <script>
+    const form = document.getElementById('enq-form') as HTMLFormElement | null;
+    const msg = document.getElementById('enq-msg');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!msg) return;
+      const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+      btn.disabled = true;
+      msg.style.color = 'var(--muted)';
+      msg.textContent = 'Sending…';
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const res = await fetch('/api/enquiry', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ ...data, source: 'contact' }),
+        });
+        const out = await res.json();
+        if (out.ok) {
+          (window as any).umami?.track?.('enquiry');
+          form.reset();
+          msg.style.color = 'var(--accent)';
+          msg.textContent = 'Got it — we’ll be in touch within one business day.';
+        } else {
+          msg.style.color = 'var(--accent)';
+          msg.textContent = out.error || 'Something went wrong — please WhatsApp us instead.';
+        }
+      } catch {
+        msg.textContent = 'Network error — please WhatsApp us instead.';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
 </Layout>
 
-<script>
-  import '@/scripts/reveal.ts';
-</script>
+<style>
+  .contact { max-width: var(--container); margin: 0 auto; padding: 72px var(--gutter) var(--section-y); display: flex; flex-direction: column; gap: 28px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .h1 { margin: 0; font-weight: 500; font-size: clamp(48px, 8vw, 128px); line-height: 0.92; letter-spacing: var(--tracking-display); max-width: 1100px; }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .accent { color: var(--accent); }
+  .lead { margin: 0; max-width: 560px; font-size: var(--text-lead); line-height: 1.5; font-weight: 300; color: var(--muted); }
+
+  .grid { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 48px 80px; }
+  .form { flex: 1 1 480px; display: flex; flex-direction: column; gap: 16px; max-width: 620px; }
+  .two { display: flex; flex-wrap: wrap; gap: 16px; }
+  .two .field { flex: 1 1 200px; }
+  .field { display: flex; flex-direction: column; gap: 7px; }
+  .field label { font-size: 14px; color: var(--muted); }
+  .form input, .form select, .form textarea {
+    font: inherit;
+    font-size: 17px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: inherit;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form input:focus-visible, .form select:focus-visible, .form textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .form textarea { resize: vertical; }
+  .hp { position: absolute; left: -9999px; }
+  .btn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: var(--btn-h); padding: 0 30px; border-radius: var(--radius-pill); font-size: 16px; border: 0; cursor: pointer; width: fit-content; }
+  .btn-solid { background: var(--fg); color: var(--bg); font-weight: 500; }
+  .msg { margin: 4px 0 0; font-size: 14px; min-height: 1.2em; color: var(--muted); }
+
+  .direct { flex: 1 1 240px; display: flex; flex-direction: column; gap: 14px; align-content: start; }
+  .mono { font-family: var(--font-mono); }
+  .label { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+  .d-link { font-size: 22px; letter-spacing: -0.02em; text-decoration: none; width: fit-content; }
+  .muted { color: var(--muted); }
+  .addr { font-size: 14px; margin: 12px 0 0; }
+</style>

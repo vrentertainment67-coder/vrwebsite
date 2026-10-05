@@ -1,0 +1,35 @@
+# VR Entertainment
+
+> An intelligent website studio in Bengaluru, India, for venues, hospitality groups, artists and event brands. We design websites that answer guests, take bookings, rank in AI search and report back every week — then run the content and growth systems around them. 19 years inside the night economy.
+
+## Services
+
+- **Intelligent Websites (flagship):** fast, premium sites with an intelligence layer. Three tiers — Launch (artists/DJs), Venue & Brand (venues/hospitality), and Platform (custom products like Flingit).
+- **Content Engine:** reels, shoots, video and podcast production.
+- **Search & AI Visibility:** local SEO plus getting named in ChatGPT, Perplexity and Google AI answers.
+- **Growth Ops:** a monthly retainer for campaigns, conversion tuning and the Monday brief. From ₹1,00,000/month.
+
+## The six intelligence modules
+
+1. Concierge (Answers) — an AI assistant trained only on a client's menus, policies, timings and events; hands off to WhatsApp and says "I don't know" rather than guessing.
+2. Smart enquiries (Books) — captures date, party size, budget and occasion, routes to calendar/WhatsApp/CRM, sends an automatic confirmation.
+3. Events engine (Adapts) — builds SEO event pages from the admin, listings or Instagram; day/evening/late-night homepage states.
+4. AI-ready search (Ranks) — schema, entity pages, llms.txt, Google Business Profile alignment; tracks AI-answer mentions.
+5. Monday brief (Reports) — one page by email or WhatsApp on traffic, enquiries, top questions and one recommendation. Cookieless Umami analytics.
+6. Feedback loop (Learns) — unanswered concierge questions become new FAQ entries and pages, reviewed monthly.
+
+## Proof
+
+- 19 years in the night economy, 18 countries, Universal Music partner.
+- djvicofficial.com: SEO score 38 → 92 after the rebuild.
+- The Vic Fix: +68% episode-view growth.
+- Live client sites: DJ Vic (djvicofficial.com), Lloyd's Pro Sound & Lighting (lloydsprosound.com), DJ Gags (djgags.com), SNLA (snla.in), Supriya Bopanna (supriyabopanna.com).
+- Flingit: a nightlife rewards platform, built and run end to end.
+
+## Contact
+
+- Web: https://vrentertainment.digital
+- Email: hello@vrentertainment.digital
+- Phone / WhatsApp: +91 81053 63636
+- Studio: Mantri Webcity, Hennur, Bengaluru 560077, India
+- Instagram: @vr_entt
