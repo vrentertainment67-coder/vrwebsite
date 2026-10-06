@@ -1,5 +1,6 @@
 import { SITE } from '@/data/site';
 import { PROJECTS } from '@/lib/content';
+import { SERVICES } from '@/data/services';
 
 /** Organization + ProfessionalService + CreativeWork graph, shared across pages. */
 export function baseGraph(): object[] {
@@ -30,7 +31,25 @@ export function baseGraph(): object[] {
       url: SITE.url,
       areaServed: { '@type': 'City', name: 'Bengaluru', containedInPlace: { '@type': 'Country', name: 'India' } },
       provider: { '@id': `${SITE.url}/#organization` },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'VR Entertainment services',
+        itemListElement: SERVICES.map((s) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: s.name, description: s.body },
+        })),
+      },
     },
+    ...SERVICES.map((s) => ({
+      '@type': 'Service',
+      '@id': `${SITE.url}/#svc-${s.n}`,
+      name: s.name,
+      description: s.body,
+      serviceType: s.name,
+      provider: { '@id': `${SITE.url}/#organization` },
+      areaServed: { '@type': 'City', name: 'Bengaluru' },
+      ...(s.href ? { url: `${SITE.url}${s.href}` } : {}),
+    })),
     ...PROJECTS.map((p) => ({
       '@type': 'CreativeWork',
       '@id': `${SITE.url}/#work-${p.slug}`,

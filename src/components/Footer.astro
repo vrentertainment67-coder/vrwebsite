@@ -1,5 +1,6 @@
 ---
 import { SITE } from '@/data/site';
+import { SERVICES } from '@/data/services';
 interface Props { variant?: 'home' | 'inner'; }
 const { variant = 'home' } = Astro.props;
 ---
@@ -11,6 +12,17 @@ const { variant = 'home' } = Astro.props;
         <div class="wordmark">
           VR <span class="it">Entertainment</span>
         </div>
+        <nav class="services" aria-label="What we do">
+          {
+            SERVICES.map((s) =>
+              s.href ? (
+                <a href={s.href}>{s.name}</a>
+              ) : (
+                <span>{s.name}</span>
+              ),
+            )
+          }
+        </nav>
         <div class="row">
           <span class="addr">{SITE.address.line}</span>
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
@@ -47,6 +59,18 @@ const { variant = 'home' } = Astro.props;
     letter-spacing: -0.04em;
   }
   .wordmark .it { font-style: italic; color: var(--accent); }
+  .services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .services a { color: var(--fg); text-decoration: none; }
+  .services a:hover { color: var(--accent); }
   .row {
     display: flex;
     flex-wrap: wrap;
