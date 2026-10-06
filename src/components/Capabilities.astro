@@ -30,7 +30,7 @@ const rest = SERVICES.filter((s) => !s.flagship);
 
     {
       rest.map((s) => (
-        <div class="pillar vr-reveal">
+        <a href={`/studio#${s.anchor}`} class="pillar is-link vr-lift vr-reveal">
           <div class="p-top">
             <span class="n mono">{s.n}</span>
             <span class="tag mono">{s.tag}</span>
@@ -40,13 +40,14 @@ const rest = SERVICES.filter((s) => !s.flagship);
           <ul class="points">
             {s.points.map((pt) => <li class="mono">{pt}</li>)}
           </ul>
-        </div>
+          <span class="go">Learn more <span aria-hidden="true">→</span></span>
+        </a>
       ))
     }
   </div>
 
   <p class="foot vr-reveal">
-    One studio, four ways in. Tell us what the night needs — <a href="/contact">start a conversation →</a>
+    One studio, four ways in. <a href="/studio">See the full studio →</a>
   </p>
 </section>
 
@@ -134,10 +135,11 @@ const rest = SERVICES.filter((s) => !s.flagship);
     font-weight: 500;
     color: var(--fg);
   }
-  .is-flagship:hover .go { color: var(--accent); }
+  .is-flagship:hover .go,
+  .is-link:hover .go { color: var(--accent); }
 
   .foot { margin: 0; font-size: 15px; color: var(--muted); }
-  .foot a { color: var(--fg); text-decoration: none; }
+  .foot a { color: var(--fg); text-decoration: underline; text-underline-offset: 4px; }
   .foot a:hover { color: var(--accent); }
 
   @media (min-width: 900px) {

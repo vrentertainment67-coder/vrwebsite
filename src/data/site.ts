@@ -20,6 +20,7 @@ export const SITE = {
 /** Phase-1 nav: only routes that exist. Services / Lab / Studio arrive in later phases. */
 export const NAV = [
   { label: 'Intelligent Websites', href: '/intelligent-websites' },
+  { label: 'Studio', href: '/studio' },
   { label: 'Work', href: '/#work' },
   { label: 'Contact', href: '/contact' },
 ] as const;

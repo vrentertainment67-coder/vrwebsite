@@ -109,6 +109,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* No theme transition until the initial theme is applied — prevents a load flash
+   and the mid-transition contrast it causes. .theme-ready is added after first
+   paint by theme.ts; user toggles then animate normally. Keyframe animations are
+   unaffected. */
+html:not(.theme-ready),
+html:not(.theme-ready) *,
+html:not(.theme-ready) *::before,
+html:not(.theme-ready) *::after {
+  transition: none !important;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -152,9 +163,12 @@ a:hover { opacity: 0.75; }
 .vr-lift:hover { transform: translateY(-4px); }
 .vr-lift-6:hover { transform: translateY(-6px); }
 
-/* Scroll reveals via CSS scroll-driven animations (no JS, GPU-cheap). */
+/* Scroll reveals via CSS scroll-driven animations (no JS, GPU-cheap).
+   Transform-only (no opacity) so below-the-fold text keeps full contrast —
+   a fade-in would read as low-contrast to accessibility tooling. */
+@keyframes vrReveal { from { transform: translateY(26px); } to { transform: none; } }
 @supports (animation-timeline: view()) {
-  .vr-reveal { animation: vrRise linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+  .vr-reveal { animation: vrReveal linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
 }
 
 /* ───────────────  accessibility / reduced motion  ────────── */

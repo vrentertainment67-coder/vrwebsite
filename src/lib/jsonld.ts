@@ -48,7 +48,7 @@ export function baseGraph(): object[] {
       serviceType: s.name,
       provider: { '@id': `${SITE.url}/#organization` },
       areaServed: { '@type': 'City', name: 'Bengaluru' },
-      ...(s.href ? { url: `${SITE.url}${s.href}` } : {}),
+      url: s.href ? `${SITE.url}${s.href}` : `${SITE.url}/studio#${s.anchor}`,
     })),
     ...PROJECTS.map((p) => ({
       '@type': 'CreativeWork',

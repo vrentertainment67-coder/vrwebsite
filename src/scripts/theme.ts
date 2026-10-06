@@ -35,3 +35,9 @@ function init() {
 
 if (document.readyState !== 'loading') init();
 else document.addEventListener('DOMContentLoaded', init);
+
+// Enable theme transitions only after the first paint, so the initial theme is
+// applied instantly (no flash) while later user toggles still animate.
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => document.documentElement.classList.add('theme-ready'));
+});

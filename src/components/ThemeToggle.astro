@@ -16,7 +16,7 @@ const modes = [
         type="button"
         data-theme-btn={m.key}
         aria-pressed={m.key === 'night' ? 'true' : 'false'}
-        aria-label={`${m.label} mode`}
+        aria-label={`${compact ? m.short : m.label} mode`}
       >
         {compact ? m.short : m.label}
       </button>

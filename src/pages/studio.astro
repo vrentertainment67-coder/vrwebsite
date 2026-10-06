@@ -1,0 +1,107 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SERVICES } from '@/data/services';
+
+const title = 'The studio — events, content, artists & intelligent websites | VR Entertainment';
+const description =
+  'VR Entertainment is a night-economy studio in Bengaluru. We programme the events, make the content, manage the talent and build the intelligent websites that sell them.';
+---
+
+<Layout title={title} description={description} path="/studio">
+  <Header variant="inner" active="/studio" />
+  <main id="main" class="studio">
+    <section class="intro">
+      <div class="eyebrow vr-rise">
+        <span class="vr-pulse dot" aria-hidden="true"></span>The studio
+      </div>
+      <h1 class="h1 vr-rise-2">We run the nights, and build the sites that <span class="it accent">sell them.</span></h1>
+      <p class="lead vr-rise-2">
+        VR Entertainment has spent nineteen years inside the night economy — programming the events,
+        making the content and managing the talent. The intelligent website is simply the sharpest
+        tool we’ve built for it. Four ways in, one studio.
+      </p>
+      <nav class="jump vr-rise-3" aria-label="Services">
+        {SERVICES.map((s) => <a href={`#${s.anchor}`} class="mono">{s.name}</a>)}
+      </nav>
+    </section>
+
+    {
+      SERVICES.map((s) => (
+        <section id={s.anchor} class="svc vr-reveal">
+          <div class="svc-head">
+            <span class="n mono">{s.n}</span>
+            <span class="tag mono">{s.tag}</span>
+          </div>
+          <div class="svc-body">
+            <div class="svc-lead">
+              <h2 class="h2">{s.name}</h2>
+              <p class="lede">{s.lead}</p>
+              {s.href && (
+                <a href={s.href} class="go">
+                  See how intelligent websites work <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+            <div class="svc-inc">
+              <p class="mono inc-label">What it includes</p>
+              <ul class="inc">
+                {s.includes.map((pt) => <li>{pt}</li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="cta vr-reveal">
+      <h2 class="h2">Tell us what the night needs.</h2>
+      <p class="lede">One brief, whichever door you came in through. We reply within one business day.</p>
+      <a href="/contact" class="btn btn-solid">Start a project <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+  <Footer variant="inner" />
+</Layout>
+
+<style>
+  .studio { max-width: var(--container); margin: 0 auto; padding: 72px var(--gutter) var(--section-y); display: flex; flex-direction: column; gap: 0; }
+  .mono { font-family: var(--font-mono); }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .accent { color: var(--accent); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  .intro { display: flex; flex-direction: column; gap: 26px; padding-bottom: 72px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .h1 { margin: 0; font-weight: 500; font-size: clamp(44px, 7vw, 104px); line-height: 0.94; letter-spacing: var(--tracking-display); max-width: 1100px; }
+  .lead { margin: 0; max-width: 620px; font-size: var(--text-lead); line-height: 1.55; font-weight: 300; color: var(--muted); }
+  .jump { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 6px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .jump a { color: var(--muted); text-decoration: none; }
+  .jump a:hover { color: var(--accent); }
+
+  .svc { display: flex; flex-wrap: wrap; gap: 24px 48px; padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+  .svc-head { flex: 0 0 120px; display: flex; flex-direction: column; gap: 12px; }
+  .n { font-size: 13px; color: var(--accent); }
+  .tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 5px 12px; width: fit-content; }
+
+  .svc-body { flex: 1 1 560px; display: flex; flex-wrap: wrap; gap: 36px 56px; align-items: start; }
+  .svc-lead { flex: 1 1 360px; display: flex; flex-direction: column; gap: 22px; }
+  .h2 { margin: 0; font-weight: 500; font-size: clamp(32px, 4vw, 56px); line-height: 1; letter-spacing: -0.03em; }
+  .lede { margin: 0; font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 46ch; font-weight: 300; }
+  .go { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: var(--fg); text-decoration: none; width: fit-content; }
+  .go:hover { color: var(--accent); }
+
+  .svc-inc { flex: 1 1 280px; display: flex; flex-direction: column; gap: 14px; }
+  .inc-label { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); margin: 0; }
+  .inc { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .inc li { font-size: 16px; line-height: 1.5; padding: 13px 0; border-top: 1px solid var(--line); color: var(--fg); }
+  .inc li:first-child { border-top: 0; }
+
+  .cta { display: flex; flex-direction: column; gap: 20px; align-items: start; padding: 72px 0 0; border-top: 1px solid var(--line); margin-top: 56px; }
+  .btn { text-decoration: none; display: inline-flex; align-items: center; gap: 14px; min-height: var(--btn-h); padding: 0 30px; border-radius: var(--radius-pill); font-size: 16px; }
+  .btn-solid { background: var(--fg); color: var(--bg); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .svc-head { flex-basis: 100%; flex-direction: row; align-items: center; gap: 16px; }
+  }
+</style>
