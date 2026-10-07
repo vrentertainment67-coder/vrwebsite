@@ -12,6 +12,18 @@
     "quote": null
   },
   {
+    "slug": "dj-rhea",
+    "name": "DJ Rhea",
+    "domain": "djrhea.com",
+    "url": "https://djrhea.com",
+    "image": "/assets/work/djrhea.jpg",
+    "vertical": "artist",
+    "tags": ["Artist & DJ", "Astro"],
+    "metric": null,
+    "blurb": "An ultra-luxury site for a DJ and live-percussion artist. Gold-on-black with serif display type and a live showreel, it routes enquiries across clubs, weddings, festivals and private events, with booking a tap away.",
+    "quote": null
+  },
+  {
     "slug": "lloyds-pro-sound",
     "name": "Lloyd’s Pro Sound & Lighting",
     "domain": "lloydsprosound.com",
