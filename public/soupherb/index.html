@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/soupherb/">
+<meta property="og:title" content="Soupherb Records">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vrentertainment.digital/soupherb/">
+<meta name="robots" content="noindex">
+<title>Soupherb Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#121110;--ink:#E9E4DA;--mute:#9A948A;--rule:#2E2B28;--card:#1A1917;--rust:#C9592F;--tape:rgba(214,205,186,.55);--scope:#E9E4DA;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121110;--ink:#E9E4DA;--mute:#9A948A;--rule:#2E2B28;--card:#1A1917;--rust:#C9592F;--tape:rgba(214,205,186,.55);--scope:#E9E4DA}}
+:root[data-theme="dark"]{--bg:#121110;--ink:#E9E4DA;--mute:#9A948A;--rule:#2E2B28;--card:#1A1917;--rust:#C9592F;--tape:rgba(214,205,186,.55);--scope:#E9E4DA}
+:root[data-theme="light"]{--bg:#D9D4C9;--ink:#151413;--mute:#55514B;--rule:#B3AEA3;--card:#CEC8BC;--rust:#9A3A1C;--tape:rgba(250,246,236,.7);--scope:#151413;color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Instrument Sans','Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:110px;transition:background .4s,color .4s}
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:-1;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--rust)}
+:focus-visible{outline:2px solid var(--rust);outline-offset:3px}
+img{display:block;max-width:100%}
+.wrap{max-width:1400px;margin:0 auto;padding-left:clamp(18px,4vw,48px);padding-right:clamp(18px,4vw,48px)}
+.disp{font-family:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.01em;margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.xerox{filter:grayscale(1) contrast(1.45) brightness(.92);transition:filter .8s ease}
+:root[data-theme="light"] .xerox{filter:grayscale(1) contrast(1.6) brightness(1.05)}
+.live .xerox,.xerox.live{filter:none}
+.tape{position:relative}
+.tape::before,.tape::after{content:"";position:absolute;width:110px;height:30px;background:var(--tape);z-index:2;mix-blend-mode:normal}
+.tape::before{top:-12px;left:18px;transform:rotate(-6deg)}
+.tape::after{bottom:-12px;right:22px;transform:rotate(4deg)}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:600 15px/1 'Instrument Sans',sans-serif;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.fill{background:var(--ink);color:var(--bg)}
+.btn.fill:hover{background:var(--rust);border-color:var(--rust);color:#fff}
+/* header */
+header.top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;justify-content:space-between;padding-top:22px;padding-bottom:22px;border-bottom:1.5px solid var(--ink)}
+.brand{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:34px;letter-spacing:.02em;text-transform:uppercase}
+nav.main{display:flex;flex-wrap:wrap;gap:6px 26px;font-weight:500}
+.hright{display:flex;gap:10px;align-items:center}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:end;padding-top:56px;padding-bottom:40px}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.hcover{transform:rotate(-1.6deg)}
+.hcover .img{aspect-ratio:1/1;overflow:hidden;background:#000;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.hcover img{width:100%;height:100%;object-fit:cover}
+.stamp{display:inline-block;border:2px solid var(--rust);color:var(--rust);padding:6px 12px;font:500 15px/1 'IBM Plex Mono',monospace;transform:rotate(-3deg);letter-spacing:.04em}
+.htitle{font-size:clamp(76px,12vw,210px);margin:18px 0 10px}
+.hartist{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:500;font-size:clamp(28px,3vw,44px);text-transform:uppercase;letter-spacing:.04em;margin:0 0 26px}
+.bigplay{display:flex;align-items:center;gap:22px}
+.pbtn{width:96px;height:96px;border-radius:50%;border:none;background:var(--rust);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:transform .2s}
+.pbtn:hover{transform:scale(1.05)}
+.pbtn svg{width:34px;height:34px}
+.scope{width:100%;height:120px;display:block;margin-top:34px;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+/* sections */
+section.block{padding-top:110px}
+.shead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 32px;margin-bottom:28px}
+.shead h2{font-size:clamp(64px,9vw,140px)}
+.shead p{margin:0;color:var(--mute);max-width:420px}
+/* crate */
+.crate{border-top:1.5px solid var(--ink)}
+.row{display:grid;grid-template-columns:70px 64px minmax(0,1.2fr) minmax(0,1.4fr) 110px 52px;gap:18px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule);cursor:pointer;transition:background .2s,padding .2s}
+.row:hover{background:var(--card);padding-left:10px;padding-right:10px}
+.row .th{width:64px;height:64px;overflow:hidden;background:#000}
+.row .th img{width:100%;height:100%;object-fit:cover}
+.row .cat{font:500 14px/1 'IBM Plex Mono',monospace;color:var(--mute)}
+.row .ar{font-weight:600}
+.row .ti{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;line-height:1}
+.row .ty{color:var(--mute);font-size:15px}
+.row .go{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.row.live{background:var(--card)}
+.row.live .cat,.row.live .ti{color:var(--rust)}
+.row.live .go{background:var(--rust);border-color:var(--rust);color:#fff}
+@media (max-width:760px){.row{grid-template-columns:56px minmax(0,1fr) 44px;gap:12px}.row .cat,.row .ty{display:none}.row .th{width:56px;height:56px}.row .meta{display:flex;flex-direction:column}}
+@media (min-width:761px){.row .meta{display:contents}}
+/* radio */
+.radio{background:var(--ink);color:var(--bg);margin-top:110px}
+.radio .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);padding-top:90px;padding-bottom:90px;align-items:center}
+@media (max-width:860px){.radio .wrap{grid-template-columns:1fr}}
+.radio .disp{font-size:clamp(70px,10vw,170px)}
+.radio p{color:inherit;opacity:.75;max-width:460px}
+.ep{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(127,120,110,.5);cursor:pointer}
+.ep:first-child{border-top:1px solid rgba(127,120,110,.5)}
+.ep .n{font:500 15px/1 'IBM Plex Mono',monospace;opacity:.7}
+.ep .t{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;font-size:30px;text-transform:uppercase;line-height:1}
+.ep .s{font-size:14px;opacity:.7}
+.ep:hover .t,.ep.live .t{color:var(--rust)}
+/* lineup */
+.lineup{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(40px,6vw,92px);line-height:.95;margin:0}
+.lineup span{white-space:nowrap}
+.lineup i{font-style:normal;color:var(--rust);padding:0 .18em}
+.lineup a:hover{color:var(--rust)}
+/* flyers */
+.flyers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.flyer{border:1.5px solid var(--ink);padding:28px;display:flex;flex-direction:column;gap:14px;min-height:300px;justify-content:space-between;position:relative}
+.flyer:nth-child(2){transform:rotate(.8deg)}.flyer:nth-child(3){transform:rotate(-.6deg)}
+.flyer .disp{font-size:56px}
+.flyer .when{font:500 14px/1.4 'IBM Plex Mono',monospace;color:var(--mute)}
+.flyer.next{background:var(--rust);border-color:var(--rust);color:#fff}
+.flyer.next .when{color:rgba(255,255,255,.85)}
+/* demos */
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;padding-top:110px;padding-bottom:110px}
+.split p{margin:0 0 14px;max-width:560px;font-size:19px}
+.split .note{color:var(--mute);font-size:16px}
+.mail{display:inline-block;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;font-size:clamp(34px,4vw,56px);text-transform:uppercase;border-bottom:3px solid var(--rust);line-height:1.1;word-break:break-all}
+footer{border-top:1.5px solid var(--ink);padding-top:40px;padding-bottom:40px}
+.foot{display:flex;flex-wrap:wrap;gap:24px 40px;justify-content:space-between;align-items:flex-end}
+.foot .big{font-size:clamp(90px,19vw,300px);line-height:.78;width:100%}
+.nl{display:flex;gap:0;max-width:440px;flex:1 1 300px}
+.nl input{flex:1;min-width:0;min-height:48px;padding:0 16px;border:1.5px solid var(--ink);border-right:none;background:transparent;color:var(--ink);font:inherit;border-radius:0}
+.fine{display:flex;flex-wrap:wrap;gap:10px 28px;color:var(--mute);font-size:14px}
+/* dock */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--bg);border-top:1.5px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dock .in{max-width:1400px;margin:0 auto;padding:12px clamp(14px,4vw,48px);display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1.6fr) auto;gap:18px;align-items:center}
+.dock .th{width:58px;height:58px;overflow:hidden;background:#000}
+.dock .th img{width:100%;height:100%;object-fit:cover}
+.dock .now{min-width:0}
+.dock .now b{display:block;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock .now span{font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.ctrls{display:flex;gap:6px;align-items:center}
+.ic{width:44px;height:44px;border:none;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%}
+.ic:hover{color:var(--rust)}
+.ic.main{background:var(--ink);color:var(--bg);width:52px;height:52px}
+.ic.main:hover{background:var(--rust);color:#fff}
+.track{display:flex;align-items:center;gap:12px;min-width:0}
+.track .mono{font-size:13px;color:var(--mute);min-width:42px}
+.mini{flex:1;height:44px;min-width:60px;cursor:pointer}
+.vol{display:flex;align-items:center;gap:8px}
+.vol input{width:96px;accent-color:var(--rust)}
+@media (max-width:900px){.dock .in{grid-template-columns:auto minmax(0,1fr) auto}.dock .track,.dock .vol{display:none}}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}body::after{animation:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+
+<div class="wrap"><header class="top">
+<a class="brand" href="#top" id="top">Soupherb</a>
+<nav class="main" aria-label="Main"><a href="#catalogue">Catalogue</a><a href="#radio">Radio</a><a href="#artists">Artists</a><a href="#showcases">Showcases</a><a href="#demos">Demos</a></nav>
+<div class="hright">
+<button class="btn" id="theme" type="button" aria-label="Switch to light mode">Light</button>
+<a class="btn fill" href="https://soupherbrecords.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+</div>
+</header></div>
+
+<main>
+<section class="wrap hero" id="hero">
+<div class="hcover tape"><div class="img"><img id="hImg" class="xerox" src="img/c02.jpg" alt="Cover art"></div></div>
+<div>
+<span class="stamp" id="hCat">SH245 · out now</span>
+<h1 class="disp htitle" id="hTitle">Mr. Faceless</h1>
+<p class="hartist" id="hArtist">Amiinex</p>
+<div class="bigplay">
+<button class="pbtn" id="hPlay" type="button" aria-label="Play Mr. Faceless"><svg viewBox="0 0 24 24" fill="currentColor" id="hIco"><polygon points="7,4 20,12 7,20"/></svg></button>
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-weight:600">Listen to the latest release</span><span style="color:var(--mute);font-size:15px">Then keep going. The whole catalogue plays back to back.</span></div>
+</div>
+<canvas class="scope" id="scope" aria-hidden="true"></canvas>
+</div>
+</section>
+
+<section class="wrap block" id="catalogue">
+<div class="shead"><h2 class="disp">Catalogue</h2><p>245 releases of techno and minimal since 2013. Press any record to play it.</p></div>
+<div class="crate" id="crate"></div>
+<p style="margin-top:22px"><a class="btn" href="https://soupherbrecords.bandcamp.com" target="_blank" rel="noopener">Dig through all 245 on Bandcamp</a></p>
+</section>
+
+<section class="radio" id="radio"><div class="wrap">
+<div><h2 class="disp">We Are<br>Soupherb</h2><p style="margin-top:22px">The label's radio show on Proton Radio. Label artists and friends, long-form. Play any episode here.</p></div>
+<div id="eps"></div>
+</div></section>
+
+<section class="wrap block" id="artists">
+<div class="shead"><h2 class="disp">Artists</h2><p>The Soupherb family, from the founders to this year's signings.</p></div>
+<p class="lineup" id="lineup"></p>
+</section>
+
+<section class="wrap block" id="showcases">
+<div class="shead"><h2 class="disp">Showcases</h2><p>Label nights across India, Asia and Europe.</p></div>
+<div class="flyers">
+<div class="flyer next"><span class="when">[Date] · [City]</span><h3 class="disp">[Next showcase]</h3><a class="btn" href="#showcases" style="border-color:#fff;color:#fff;align-self:flex-start">Get tickets</a></div>
+<div class="flyer"><span class="when">January 2025 · Kochi</span><h3 class="disp">12 years of Soupherb</h3><span>Cultr Festival</span></div>
+<div class="flyer"><span class="when">January 2020 · Mumbai</span><h3 class="disp">The Lab Mumbai</h3><span>antiSOCIAL, with Mixmag</span></div>
+</div>
+</section>
+
+<section class="wrap split" id="demos">
+<div><h2 class="disp" style="font-size:72px;margin-bottom:22px">The label</h2>
+<p>Ash Roy and Calm Chor started Soupherb in 2013, when India's experimental techno and minimal producers had nowhere to put their records out. Thirteen years on it's an international home for forward-thinking artists, touring Asia and Europe.</p>
+<p class="note">The name came from a friend who always spelt "superb" as "soupherb".</p></div>
+<div><h2 class="disp" style="font-size:72px;margin-bottom:22px">Send demos</h2>
+<p>We listen to everything. Private streaming links only, and give us time.</p>
+<a class="mail" href="mailto:demos@soup-herb.com">demos@soup-herb.com</a></div>
+</section>
+</main>
+
+<footer class="wrap">
+<div class="foot">
+<form class="nl" id="nlf"><label for="nl" style="position:absolute;left:-9999px">Email for new releases</label><input id="nl" type="email" placeholder="Email for new releases" required><button class="btn fill" id="nlb" type="submit">Subscribe</button></form>
+<div class="fine"><a href="https://soupherbrecords.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a><a href="https://soundcloud.com/soupherb-records" target="_blank" rel="noopener">SoundCloud</a><a href="#top">Beatport</a><a href="#top">Instagram</a></div>
+<p class="disp big" aria-hidden="true">Soupherb</p>
+<div class="fine" style="width:100%;justify-content:space-between"><span>Soupherb Records. Goa and Berlin, since 2013.</span><span>Site by VR Entertainment</span></div>
+</div>
+</footer>
+
+<div class="dock" role="region" aria-label="Player"><div class="in">
+<div class="th"><img id="dImg" class="xerox" src="img/c02.jpg" alt=""></div>
+<div class="now"><b id="dTitle">Mr. Faceless</b><span id="dArtist">Amiinex · SH245</span></div>
+<div class="ctrls">
+<button class="ic" id="prev" type="button" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19,5 9,12 19,19" fill="currentColor"/><line x1="5" y1="5" x2="5" y2="19"/></svg></button>
+<button class="ic main" id="dPlay" type="button" aria-label="Play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="dIco"><polygon points="7,4 20,12 7,20"/></svg></button>
+<button class="ic" id="next" type="button" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5,5 15,12 5,19" fill="currentColor"/><line x1="19" y1="5" x2="19" y2="19"/></svg></button>
+</div>
+<div class="track"><span class="mono" id="tNow">0:00</span><canvas class="mini" id="mini" aria-label="Seek" role="slider" aria-valuemin="0" aria-valuemax="120" aria-valuenow="0" tabindex="0"></canvas><span class="mono" id="tEnd">2:00</span></div>
+<div class="vol"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="4,9 8,9 13,5 13,19 8,15 4,15" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg><input id="vol" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"></div>
+</div></div>
+
+<script>
+const IM=["img/c00.jpg", "img/c01.jpg", "img/c02.jpg", "img/c03.jpg", "img/c04.jpg", "img/c05.jpg", "img/c06.jpg", "img/c07.jpg", "img/c08.jpg", "img/c09.jpg", "img/c10.jpg", "img/c11.jpg"];
+const Q=[
+ {cat:'SH245',title:'Mr. Faceless',artist:'Amiinex',type:'EP',img:2},
+ {cat:'SH244',title:'Nocturne',artist:'L3UK',type:'EP',img:0},
+ {cat:'SH243',title:'Hungry Slug',artist:'RJ Banks',type:'EP',img:1},
+ {cat:'SH242',title:'4Some, Vol. 33',artist:'Various Artists',type:'Compilation',img:3},
+ {cat:'SH241',title:'Action',artist:'Lypse & Apoka',type:'EP',img:4},
+ {cat:'SH240',title:'3 Body System',artist:'B.A.D.',type:'EP',img:5},
+ {cat:'SH239',title:'Falling feat. Shrii',artist:'Carbon',type:'Single',img:6},
+ {cat:'SH238',title:'Neurophase',artist:'Olivier Francis',type:'EP',img:7},
+ {cat:'WAS073',title:'Decode Blue',artist:'We Are Soupherb, episode 73',type:'Radio',img:1,radio:1},
+ {cat:'WAS072',title:'[Guest]',artist:'We Are Soupherb, episode 72',type:'Radio',img:9,radio:1},
+ {cat:'WAS071',title:'[Guest]',artist:'We Are Soupherb, episode 71',type:'Radio',img:10,radio:1}];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const PLAY='<polygon points="7,4 20,12 7,20"/>',PAUSE='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+const playSvg='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">'+PLAY+'</svg>';
+// render crate
+$('crate').innerHTML=Q.map((r,i)=>r.radio?'':`<div class="row" data-i="${i}" role="button" tabindex="0" aria-label="Play ${esc(r.title)} by ${esc(r.artist)}"><span class="cat">${r.cat}</span><div class="th"><img class="xerox" src="${IM[r.img]}" alt="" loading="lazy"></div><span class="meta"><span class="ar">${esc(r.artist)}</span><span class="ti">${esc(r.title)}</span></span><span class="ty">${r.type}</span><span class="go">${playSvg}</span></div>`).join('');
+$('eps').innerHTML=Q.map((r,i)=>r.radio?`<div class="ep" data-i="${i}" role="button" tabindex="0" aria-label="Play ${esc(r.artist)}"><span class="n">${r.cat.slice(3)}</span><div><div class="t">${esc(r.title)}</div><div class="s">Proton Radio</div></div><span>${playSvg}</span></div>`:'').join('');
+const AR=['Ash Roy','Calm Chor','Folic State','Jitter','Breger','Arnold From Mumbai','Hans Dunkelkammer','Ayesha Pramanik','Vasvi','Aka Nina','Oryza','Sanderjammes','Vilas Monnappa','Dee (IN)'];
+$('lineup').innerHTML=AR.map(a=>`<span><a href="#artists">${esc(a)}</a></span>`).join('<i>/</i> ');
+// theme
+const root=document.documentElement;
+function setTheme(t){root.setAttribute('data-theme',t);$('theme').textContent=t==='dark'?'Light':'Dark';$('theme').setAttribute('aria-label','Switch to '+(t==='dark'?'light':'dark')+' mode');try{localStorage.setItem('sh-theme',t)}catch(e){}}
+let saved=null;try{saved=localStorage.getItem('sh-theme')}catch(e){}
+setTheme(saved||'dark');
+$('theme').addEventListener('click',()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'));
+// ---------- audio engine (synth previews) ----------
+let ctx,master,comp,an,noise,timer=null,step=0,nextT=0,pat,cur=0,playing=false,elapsed=0,lastT=0;const LEN=120;
+function rnd(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function mk(seed,radio){const r=rnd(seed*9973+7);const bpm=radio?118+Math.floor(r()*6):122+Math.floor(r()*8);const root=[33,36,38,41,43][Math.floor(r()*5)];const sc=[0,3,5,7,10,12];const bass=[],hat=[],perc=[],clap=[];
+for(let i=0;i<16;i++){bass.push(i%4!==0&&r()<.42?root+sc[Math.floor(r()*sc.length)]:null);hat.push(i%4===2?1:(r()<.3?.35:0));perc.push(r()<.16?500+Math.floor(r()*1400):0);clap.push((i===4||i===12)&&r()<.8?1:0)}
+if(bass.every(b=>b===null))bass[3]=root;return{bpm,bass,hat,perc,clap,cut:280+r()*520,lfo:.04+r()*.18,swing:r()*.04}}
+function init(){if(ctx)return;ctx=new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=+$('vol').value;comp=ctx.createDynamicsCompressor();comp.threshold.value=-14;comp.ratio.value=4;an=ctx.createAnalyser();an.fftSize=2048;master.connect(comp);comp.connect(an);an.connect(ctx.destination);
+const b=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;noise=b}
+function env(g,t,a,v,dcy){g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(0.0001,t+a+dcy)}
+function kick(t){const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(42,t+.12);env(g,t,.002,1,.42);o.connect(g);g.connect(master);o.start(t);o.stop(t+.5)}
+function nz(t,type,f,q,v,dcy){const s=ctx.createBufferSource(),fl=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=noise;fl.type=type;fl.frequency.value=f;fl.Q.value=q;env(g,t,.001,v,dcy);s.connect(fl);fl.connect(g);g.connect(master);s.start(t,Math.random()*.5);s.stop(t+dcy+.05)}
+function bass(t,n,cut){const o=ctx.createOscillator(),f=ctx.createBiquadFilter(),g=ctx.createGain();o.type='sawtooth';o.frequency.value=440*Math.pow(2,(n-69)/12);f.type='lowpass';f.Q.value=9;f.frequency.setValueAtTime(cut*2.2,t);f.frequency.exponentialRampToValueAtTime(cut*.6,t+.16);env(g,t,.004,.32,.2);o.connect(f);f.connect(g);g.connect(master);o.start(t);o.stop(t+.3)}
+function blip(t,fr){const o=ctx.createOscillator(),f=ctx.createBiquadFilter(),g=ctx.createGain();o.type='square';o.frequency.value=fr;f.type='bandpass';f.frequency.value=fr*1.5;f.Q.value=6;env(g,t,.002,.12,.08);o.connect(f);f.connect(g);g.connect(master);o.start(t);o.stop(t+.12)}
+function sched(){const sp=60/pat.bpm/4;while(nextT<ctx.currentTime+.12){const i=step%16,t=nextT+(i%2?pat.swing:0);const cut=pat.cut*(1+.6*Math.sin(nextT*pat.lfo*Math.PI*2));
+if(i%4===0)kick(t);if(pat.hat[i])nz(t,'highpass',8000,.7,.22*pat.hat[i],.045);if(i%4===2)nz(t,'highpass',6500,.6,.12,.2);if(pat.clap[i]){nz(t,'bandpass',1400,1.2,.35,.16);nz(t+.012,'bandpass',1400,1.2,.25,.12)}
+if(pat.bass[i]!==null)bass(t,pat.bass[i],cut);if(pat.perc[i])blip(t,pat.perc[i]);nextT+=sp;step++}}
+function start(){init();if(ctx.state==='suspended')ctx.resume();pat=mk(cur+1,Q[cur].radio);step=0;nextT=ctx.currentTime+.06;clearInterval(timer);timer=setInterval(sched,25);playing=true;lastT=performance.now();ui()}
+function stop(){clearInterval(timer);timer=null;playing=false;ui()}
+function load(i,auto){cur=(i+Q.length)%Q.length;elapsed=0;const r=Q[cur];
+$('hImg').src=IM[r.img];$('dImg').src=IM[r.img];$('hTitle').textContent=r.title;$('hArtist').textContent=r.artist;$('hCat').textContent=r.cat+(r.radio?' · on air':' · '+r.type);
+$('dTitle').textContent=r.title;$('dArtist').textContent=r.artist+' · '+r.cat;$('hPlay').setAttribute('aria-label','Play '+r.title);
+if(auto)start();else ui()}
+function ui(){const ico=playing?PAUSE:PLAY;$('hIco').innerHTML=ico;$('dIco').innerHTML=ico;$('dPlay').setAttribute('aria-label',playing?'Pause':'Play');$('hPlay').setAttribute('aria-label',(playing?'Pause ':'Play ')+Q[cur].title);
+document.querySelectorAll('[data-i]').forEach(el=>{const on=+el.dataset.i===cur;el.classList.toggle('live',on&&playing);const s=el.querySelector(':scope > span:last-child');if(s&&on)s.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">'+(playing?PAUSE:PLAY)+'</svg>';else if(s&&!on)s.innerHTML=playSvg});
+$('hImg').classList.toggle('live',playing);$('dImg').classList.toggle('live',playing)}
+function toggle(){playing?stop():start()}
+$('hPlay').addEventListener('click',toggle);$('dPlay').addEventListener('click',toggle);
+$('next').addEventListener('click',()=>load(cur+1,playing||true));$('prev').addEventListener('click',()=>load(cur-1,true));
+function pick(e){const el=e.target.closest('[data-i]');if(!el)return;const i=+el.dataset.i;if(i===cur){toggle();return}load(i,true);if(window.innerWidth<900)return}
+document.addEventListener('click',e=>{if(e.target.closest('#crate,#eps'))pick(e)});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-i]')){e.preventDefault();pick(e)}});
+$('vol').addEventListener('input',e=>{if(master)master.gain.value=+e.target.value});
+const mini=$('mini');
+function seek(x){const r=mini.getBoundingClientRect();elapsed=Math.max(0,Math.min(1,(x-r.left)/r.width))*LEN}
+mini.addEventListener('click',e=>seek(e.clientX));
+mini.addEventListener('keydown',e=>{if(e.key==='ArrowRight')elapsed=Math.min(LEN,elapsed+5);if(e.key==='ArrowLeft')elapsed=Math.max(0,elapsed-5)});
+// ---------- drawing ----------
+const sc=$('scope'),sx=sc.getContext('2d'),mx=mini.getContext('2d');let buf;
+function fit(c){const d=window.devicePixelRatio||1,r=c.getBoundingClientRect();c.width=Math.max(1,r.width*d);c.height=Math.max(1,r.height*d)}
+function fitAll(){fit(sc);fit(mini)}addEventListener('resize',fitAll);fitAll();
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+const bars=Array.from({length:90},(_,i)=>.25+.75*Math.abs(Math.sin(i*.37)*Math.cos(i*.11)));
+function draw(now){const css=getComputedStyle(root),ink=css.getPropertyValue('--scope').trim(),rust=css.getPropertyValue('--rust').trim(),mute=css.getPropertyValue('--rule').trim();
+if(playing){elapsed+=(now-lastT)/1000;if(elapsed>=LEN){load(cur+1,true)}}lastT=now;
+// scope
+const W=sc.width,H=sc.height;sx.clearRect(0,0,W,H);sx.lineWidth=2*(window.devicePixelRatio||1);sx.strokeStyle=playing?rust:ink;sx.globalAlpha=playing?1:.5;sx.beginPath();
+if(an&&playing){buf=buf||new Uint8Array(an.fftSize);an.getByteTimeDomainData(buf);for(let i=0;i<buf.length;i++){const x=i/buf.length*W,y=(buf[i]/255)*H;i?sx.lineTo(x,y):sx.moveTo(x,y)}}
+else{for(let x=0;x<=W;x+=4){const y=H/2+Math.sin(x*.02+now*.002)*2+(Math.random()-.5)*1.5;x?sx.lineTo(x,y):sx.moveTo(x,y)}}sx.stroke();sx.globalAlpha=1;
+// mini waveform progress
+const w=mini.width,h=mini.height,n=bars.length,bw=w/n,p=elapsed/LEN;mx.clearRect(0,0,w,h);
+for(let i=0;i<n;i++){const bh=bars[(i+cur*7)%n]*h*.9;mx.fillStyle=i/n<p?rust:mute;mx.fillRect(i*bw+1,(h-bh)/2,Math.max(1,bw-2),bh)}
+$('tNow').textContent=fmt(elapsed);mini.setAttribute('aria-valuenow',Math.floor(elapsed));requestAnimationFrame(draw)}
+requestAnimationFrame(draw);
+load(0,false);
+$('nlf').addEventListener('submit',e=>{e.preventDefault();$('nlb').textContent='Subscribed'});
+</script>
+</body>
+</html>
