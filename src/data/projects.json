@@ -8,7 +8,7 @@
     "vertical": "artist",
     "tags": ["Artist & DJ", "Astro"],
     "metric": { "value": "38 → 92", "label": "SEO score after the rebuild" },
-    "blurb": "A cinematic booking site for an international DJ. Visitors are routed by event type (weddings, corporate, club), with remixes and The Vic Fix alongside and a 24-hour reply promise.",
+    "blurb": "The flagship booking site for an international DJ. Guests self-route by event — weddings, corporate, clubs — with his remixes and The Vic Fix series a scroll away. The rebuild took its search score from 38 to 92.",
     "quote": null
   },
   {
@@ -20,7 +20,7 @@
     "vertical": "artist",
     "tags": ["Artist & DJ", "Astro"],
     "metric": null,
-    "blurb": "An ultra-luxury site for a DJ and live-percussion artist. Gold-on-black with serif display type and a live showreel, it routes enquiries across clubs, weddings, festivals and private events, with booking a tap away.",
+    "blurb": "Ultra-luxury for a DJ who plays live darbuka over her sets. Towering serif display on gold and black, a live showreel, and a booking flow that captures the date, the room and the brief before it ever reaches her inbox.",
     "quote": null
   },
   {
@@ -32,7 +32,7 @@
     "vertical": "events",
     "tags": ["Event production", "Astro"],
     "metric": null,
-    "blurb": "Sound, light and music, run by one team. Since 2008, 1,000+ events and a 4.7★ Google rating are up front, with event-type pages and direct WhatsApp booking.",
+    "blurb": "Sound, light and music run by one team since 2008. The proof leads — 1,000+ events and a 4.7★ rating — with a dedicated page for every event type and booking a WhatsApp message away.",
     "quote": "[Ask Lloyd for a one-line quote]"
   },
   {
@@ -44,7 +44,7 @@
     "vertical": "artist",
     "tags": ["Artist & DJ", "New Delhi"],
     "metric": null,
-    "blurb": "“The Room Never Lies.” A photography-led site for a DJ, producer and remixer. 26 years and six residencies serve as proof, with availability checks and WhatsApp booking above the fold.",
+    "blurb": "“The room never lies.” A photography-led site for a Delhi DJ, producer and remixer, where 26 years and six residencies carry the pitch and an availability check sits above the fold.",
     "quote": null
   },
   {
@@ -56,7 +56,7 @@
     "vertical": "other",
     "tags": ["Landscape architecture"],
     "metric": null,
-    "blurb": "A full-bleed, image-first portfolio where the projects do the talking. Minimal navigation keeps attention on the work, with project pages, careers and contact one click away.",
+    "blurb": "Image-first to the edges, so the gardens speak before the words do. A near-navless portfolio for a landscape-architecture studio, with project stories, careers and contact always one click away.",
     "quote": null
   },
   {
@@ -68,7 +68,31 @@
     "vertical": "other",
     "tags": ["Private practice", "Bengaluru"],
     "metric": null,
-    "blurb": "A quiet, editorial site for a psychologist: a custom “perspective” wordmark, serif type and generous whitespace. It explains plainly how sessions work and who the practice is for.",
+    "blurb": "A calm, editorial home for a psychologist, built around a custom “Perspective” wordmark. Serif type and wide margins set the tone; the writing explains plainly how therapy works and who it’s for.",
+    "quote": null
+  },
+  {
+    "slug": "bengaluru-djs-collective",
+    "name": "Bengaluru DJs Collective",
+    "domain": "bengalurudjscollective.com",
+    "url": "https://bengalurudjscollective.com",
+    "image": "/assets/work/bdc.jpg",
+    "vertical": "other",
+    "tags": ["DJ community", "Bengaluru"],
+    "metric": null,
+    "blurb": "A no-agenda room for the city’s DJs — the people behind the flyers, finally in one place. Bold gold-on-black type, recaps of past editions and a simple way in, built to grow a scene rather than sell a booking.",
+    "quote": null
+  },
+  {
+    "slug": "flingit",
+    "name": "Flingit",
+    "domain": "flingit.in",
+    "url": "https://flingit.in",
+    "image": "/assets/work/flingit.jpg",
+    "vertical": "hospitality",
+    "tags": ["Nightlife brand", "Bengaluru"],
+    "metric": null,
+    "blurb": "Every city has its drink; Bangalore has Flingit. A moody, bilingual site for the beverage and its culture of play — a spot-finder across 230+ outlets, events, rewards and a weekly leaderboard, all behind a proper age gate.",
     "quote": null
   }
 ]
