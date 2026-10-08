@@ -223,6 +223,31 @@ footer{border-top:1.5px solid var(--ink);padding-top:40px;padding-bottom:40px}
 .vol{display:flex;align-items:center;gap:8px}
 .vol input{width:96px;accent-color:var(--rust)}
 @media (max-width:900px){.dock .in{grid-template-columns:auto minmax(0,1fr) auto}.dock .track,.dock .vol{display:none}}
+/* artist view */
+.av-loc{color:var(--rust);letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin:0}
+.av-name{font-size:clamp(50px,9vw,150px);margin:8px 0 22px}
+.av-bio{max-width:640px;font-size:clamp(18px,2.4vw,22px);line-height:1.5;margin:0}
+.ph{color:var(--mute)}
+.av-stats{display:flex;flex-wrap:wrap;gap:10px 24px;margin:24px 0 6px;color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.av-social{display:flex;flex-wrap:wrap;gap:18px 28px}
+.av-social a{border-bottom:2px solid var(--rust);font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;text-transform:uppercase;font-size:22px;padding-bottom:2px}
+.ep2{padding:14px 0;border-bottom:1px solid var(--rule);cursor:pointer;font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:800;text-transform:uppercase;font-size:24px}
+.ep2:first-child{border-top:1px solid var(--rule)}
+.ep2:hover{color:var(--rust)}
+.ep2 .n{color:var(--mute);font-size:14px;margin-right:12px}
+/* archive timeline */
+.arch-head{padding-top:30px;max-width:760px}
+.arch-head h1{font-size:clamp(46px,8vw,120px)}
+.arch-head p{color:var(--mute);margin:14px 0 0;font-size:clamp(17px,2.2vw,20px)}
+.timeline{margin-top:48px;border-left:2px solid var(--rust);padding-left:clamp(16px,3vw,40px)}
+.tl-year{display:grid;grid-template-columns:130px 1fr;gap:16px 28px;align-items:start;padding:26px 0;border-bottom:1px solid var(--rule)}
+@media (max-width:620px){.tl-year{grid-template-columns:1fr;gap:12px}}
+.tl-year .yr{font-size:clamp(34px,5vw,58px);line-height:.9}
+.tl-year .ct{display:block;color:var(--mute);font:500 12px/1 'IBM Plex Mono',monospace;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.tl-covers{display:flex;flex-wrap:wrap;gap:8px}
+.tlc{width:54px;height:54px;padding:0;border:none;background:#000;cursor:pointer;overflow:hidden}
+.tlc img{width:100%;height:100%;object-fit:cover}
+.tlc:hover,.tlc:focus-visible{outline:2px solid var(--rust);outline-offset:-2px}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}body::after{animation:none}*{transition:none!important}}
 </style>
@@ -232,10 +257,10 @@ footer{border-top:1.5px solid var(--ink);padding-top:40px;padding-bottom:40px}
 
 <div class="wrap"><header class="top">
 <a class="brand" href="#top" id="top">Soupherb</a>
-<nav class="main" aria-label="Main"><a href="#wall">Releases</a><a href="#artists">Artists</a><a href="#radio">Radio</a><a href="#events">Events</a><a href="#demos">Demos</a></nav>
+<nav class="main" aria-label="Main"><a href="#wall">Releases</a><a href="#" data-archive>Archive</a><a href="#artists">Artists</a><a href="#radio">Radio</a><a href="#events">Events</a><a href="#demos">Demos</a></nav>
 <div class="hright">
 <button class="btn sm" id="theme" type="button" aria-label="Switch to light mode">Light</button>
-<button class="btn sm crbtn" id="crateBtn" type="button" aria-label="Open crate">Crate <span class="cnt" id="crateCnt">0</span></button>
+<button class="btn sm crbtn" id="crateBtn" type="button" aria-label="Open crate" data-crate>Crate <span class="cnt">0</span></button>
 </div>
 </header></div>
 
@@ -257,7 +282,7 @@ footer{border-top:1.5px solid var(--ink);padding-top:40px;padding-bottom:40px}
 </section>
 
 <section class="wrap block" id="wall">
-<div class="shead"><h2 class="disp">Releases</h2><p><span id="relCount">245</span> releases of techno and minimal, 2013 — 2026. Hover to play, click to open.</p></div>
+<div class="shead"><h2 class="disp">Releases</h2><p><span id="relCount">245</span> releases of techno and minimal, 2013 — 2026. Hover to play, click to open.</p><a class="btn sm" href="#" data-archive>Archive timeline →</a></div>
 <div class="wall-ctrls" id="filters"></div>
 <div id="wallBody"></div>
 </section>
@@ -303,14 +328,28 @@ footer{border-top:1.5px solid var(--ink);padding-top:40px;padding-bottom:40px}
 <!-- Release view -->
 <section class="rv" id="rv" aria-label="Release" aria-hidden="true">
 <div class="wrap">
-<div class="rv-top"><button class="bk" id="rvBack" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg> Back to releases</button>
-<button class="btn sm crbtn" id="rvCrate" type="button">Crate <span class="cnt" id="crateCnt2">0</span></button></div>
+<div class="rv-top"><button class="bk" data-close type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg> Back to releases</button>
+<button class="btn sm crbtn" type="button" data-crate>Crate <span class="cnt">0</span></button></div>
 <div class="rv-grid">
 <div class="rv-art"><img id="rvImg" class="xerox" src="img/c02.jpg" alt=""></div>
 <div id="rvInfo"></div>
 </div>
 </div>
 </section>
+
+<!-- Artist view -->
+<section class="rv" id="av" aria-label="Artist" aria-hidden="true"><div class="wrap">
+<div class="rv-top"><button class="bk" data-close type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg> Back</button>
+<button class="btn sm crbtn" type="button" data-crate>Crate <span class="cnt">0</span></button></div>
+<div id="avInfo" style="padding-top:40px"></div>
+</div></section>
+
+<!-- Archive timeline -->
+<section class="rv" id="arch" aria-label="Archive" aria-hidden="true"><div class="wrap">
+<div class="rv-top"><button class="bk" data-close type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg> Back</button>
+<button class="btn sm crbtn" type="button" data-crate>Crate <span class="cnt">0</span></button></div>
+<div id="archBody"></div>
+</div></section>
 
 <!-- Crate drawer -->
 <div class="scrim" id="scrim"></div>
@@ -384,16 +423,23 @@ renderFilters();renderWall();
 $('filters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;filterFmt=b.dataset.f;renderFilters();renderWall();});
 // radio + lineup
 $('eps').innerHTML=RADIO.map((r,i)=>`<div class="ep" data-radio="${i}" role="button" tabindex="0" aria-label="Play ${esc(r.title)}"><span class="n">${r.ep}</span><div><div class="t">${esc(r.title)}</div><div class="s">${esc(r.artist)} · Proton Radio</div></div><span class="pl2">${playSvg}</span></div>`).join('');
-$('lineup').innerHTML=ARTISTS.map(a=>`<span><a href="#artists">${esc(a)}</a></span>`).join('<i>/</i> ');
+$('lineup').innerHTML=ARTISTS.map(a=>`<span><a href="#" data-artist="${esc(a)}">${esc(a)}</a></span>`).join('<i>/</i> ');
 // ---------- release view ----------
 function money(v){return '₹'+v.toLocaleString('en-IN');}
-function openRelease(i){const r=REL[i];window.__rv=i;
+function tileHTML(i,r){return `<div class="tile" data-i="${i}" role="button" tabindex="0" aria-label="Open ${esc(r.title)} by ${esc(r.artist)}"><img class="xerox" src="${IM[r.img]}" alt="" loading="lazy">${r.limited?'<span class="tlim">LTD</span>':''}<div class="ov"><div class="trow"><span class="tcat">${r.cat}</span><button class="tplay" data-play="${i}" type="button" aria-label="Play ${esc(r.title)}">${playSvg}</button></div><div class="tmeta"><b>${esc(r.title)}</b>${esc(r.artist)}</div></div></div>`;}
+const LOCS=['Goa, India','Bengaluru, India','Mumbai, India','Berlin, Germany','Kolkata, India','Pune, India','Delhi, India','Chennai, India'];
+function shash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0;}
+function artistMeta(name){const g=rnd(shash(name));return{loc:LOCS[Math.floor(g()*LOCS.length)],role:g()<.5?'Producer / DJ':'DJ / Live'};}
+let curSheet=null;
+function showSheet(id){if(curSheet&&curSheet!==id){const p=$(curSheet);p.classList.remove('open');p.setAttribute('aria-hidden','true');}const el=$(id);el.classList.add('open');el.setAttribute('aria-hidden','false');el.scrollTop=0;curSheet=id;window.__rv=(id==='rv')?window.__rvIdx:null;document.body.classList.add('locked');markLive();}
+function hideSheet(){if(!curSheet)return;const el=$(curSheet);el.classList.remove('open');el.setAttribute('aria-hidden','true');curSheet=null;window.__rv=null;if(!drawerOpen)document.body.classList.remove('locked');}
+function openRelease(i){const r=REL[i];window.__rvIdx=i;
  $('rvImg').src=IM[r.img];$('rvImg').classList.toggle('live',playing&&curRel===i);
  const related=[3,8,14].map(o=>REL[(i+o)%REL.length]);
  $('rvInfo').innerHTML=`
   <div class="rv-cat">${r.cat}${r.limited?' · Limited':''}</div>
   <h1 class="disp">${esc(r.title)}</h1>
-  <p class="rar"><a href="#artists">${esc(r.artist)}</a></p>
+  <p class="rar"><a href="#" data-artist="${esc(r.artist)}">${esc(r.artist)}</a></p>
   <dl class="meta-grid">
    <div><dt>Format</dt><dd>12″ / Digital</dd></div>
    <div><dt>Released</dt><dd>${r.released}</dd></div>
@@ -421,15 +467,24 @@ function openRelease(i){const r=REL[i];window.__rv=i;
   </dl>
   <p class="lab">If you like ${esc(r.title)}</p>
   <div class="rel-grid">${related.map(rr=>`<div class="tile" data-i="${IDX[rr.n]}" role="button" tabindex="0" aria-label="Open ${esc(rr.title)}"><img class="xerox" src="${IM[rr.img]}" alt="" loading="lazy"><div class="ov"><div class="trow"><span class="tcat">${rr.cat}</span></div><div class="tmeta"><b>${esc(rr.title)}</b>${esc(rr.artist)}</div></div></div>`).join('')}</div>`;
- const rv=$('rv');rv.classList.add('open');rv.setAttribute('aria-hidden','false');rv.scrollTop=0;document.body.classList.add('locked');markLive();}
-function closeRelease(){const rv=$('rv');rv.classList.remove('open');rv.setAttribute('aria-hidden','true');window.__rv=null;if(!drawerOpen)document.body.classList.remove('locked');}
-$('rvBack').addEventListener('click',closeRelease);
+ showSheet('rv');}
+function openArtist(name){const rels=REL.filter(r=>r.artist===name);const m=artistMeta(name);const eps=RADIO.filter(e=>e.artist===name);
+ $('avInfo').innerHTML=`<p class="av-loc mono">${esc(m.loc)} · ${esc(m.role)}</p><h1 class="disp av-name">${esc(name)}</h1>
+  <p class="av-bio">${esc(name)} is a techno &amp; minimal artist based in ${esc(m.loc.split(',')[0])}, part of the Soupherb family. <span class="ph">[Full artist bio to come from the label.]</span></p>
+  <div class="av-stats mono"><span>${rels.length} release${rels.length!==1?'s':''} on Soupherb</span>${eps.length?`<span>${eps.length} radio episode${eps.length!==1?'s':''}</span>`:''}</div>
+  <p class="lab">Releases</p><div class="rel-grid">${rels.length?rels.map(r=>tileHTML(IDX[r.n],r)).join(''):'<p class="ph">[Releases coming]</p>'}</div>
+  ${eps.length?'<p class="lab">Radio</p>'+eps.map(e=>`<div class="ep2" data-radio="${RADIO.indexOf(e)}" role="button" tabindex="0" aria-label="Play ${esc(e.title)}"><span class="n">${e.ep}</span>${esc(e.title)}</div>`).join(''):''}
+  <p class="lab">Elsewhere</p><div class="av-social"><a href="https://soundcloud.com/soupherb-records" target="_blank" rel="noopener">SoundCloud</a><a href="https://soupherbrecords.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a><a href="#">Instagram</a></div>`;
+ showSheet('av');}
+function openArchive(){let h='<div class="arch-head"><h1 class="disp">The Soupherb Archive</h1><p>245 releases, 2013 to 2026. Thirteen years in one wall — the catalogue is the identity.</p></div><div class="timeline">';
+ years.forEach(y=>{const items=REL.filter(r=>r.year===y);h+=`<div class="tl-year"><div><span class="disp yr">${y}</span><span class="ct">${items.length} release${items.length!==1?'s':''}</span></div><div class="tl-covers">${items.map(r=>`<button class="tlc" data-i="${IDX[r.n]}" type="button" title="${esc(r.cat)} · ${esc(r.title)}" aria-label="Open ${esc(r.title)}"><img class="xerox" src="${IM[r.img]}" alt="" loading="lazy"></button>`).join('')}</div></div>`;});
+ h+='</div>';$('archBody').innerHTML=h;showSheet('arch');}
 // ---------- crate ----------
 let crate=[];try{crate=JSON.parse(localStorage.getItem('sh-crate')||'[]')}catch(e){}
 let drawerOpen=false;
 function saveCrate(){try{localStorage.setItem('sh-crate',JSON.stringify(crate))}catch(e){}}
 function crateCount(){return crate.length;}
-function updateCount(){const c=crateCount();['crateCnt','crateCnt2'].forEach(id=>{const el=$(id);if(el)el.textContent=c});}
+function updateCount(){const c=crateCount();document.querySelectorAll('.crbtn .cnt').forEach(el=>el.textContent=c);}
 function addToCrate(i,fmt){const r=REL[i];crate.push({n:r.n,cat:r.cat,title:r.title,artist:r.artist,img:r.img,fmt,price:fmt==='vinyl'?r.price:r.priceD,label:fmt==='vinyl'?'12″ Vinyl':'Digital'});saveCrate();updateCount();renderCrate();toast((fmt==='vinyl'?'12″':'Digital')+' added · '+r.title);}
 function removeFromCrate(idx){crate.splice(idx,1);saveCrate();updateCount();renderCrate();}
 function renderCrate(){const body=$('drawerBody'),foot=$('drawerFoot');
@@ -438,8 +493,7 @@ function renderCrate(){const body=$('drawerBody'),foot=$('drawerFoot');
  const sub=crate.reduce((s,c)=>s+c.price,0);
  foot.innerHTML=`<div class="subtotal"><span>${crate.length} item${crate.length>1?'s':''}</span><span class="v">${money(sub)}</span></div><button class="btn fill" id="checkout" type="button" style="width:100%;justify-content:center">Checkout →</button><p class="msg">Shipping calculated at checkout · India / Europe / UK / USA.</p>`;}
 function openDrawer(){drawerOpen=true;$('drawer').classList.add('open');$('scrim').classList.add('open');document.body.classList.add('locked');renderCrate();}
-function closeDrawer(){drawerOpen=false;$('drawer').classList.remove('open');$('scrim').classList.remove('open');if(!(window.__rv!=null))document.body.classList.remove('locked');}
-$('crateBtn').addEventListener('click',openDrawer);$('rvCrate').addEventListener('click',openDrawer);
+function closeDrawer(){drawerOpen=false;$('drawer').classList.remove('open');$('scrim').classList.remove('open');if(!curSheet)document.body.classList.remove('locked');}
 $('drawerClose').addEventListener('click',closeDrawer);$('scrim').addEventListener('click',closeDrawer);
 $('drawerBody').addEventListener('click',e=>{const rm=e.target.closest('[data-rm]');if(rm)removeFromCrate(+rm.dataset.rm);});
 $('drawerFoot').addEventListener('click',e=>{if(e.target.id==='checkout'){$('drawerBody').innerHTML='<p class="empty">This is a pitch demo.<br>Checkout — cards, UPI, Apple&nbsp;Pay — would complete the order here.<br><br>Thanks for digging.</p>';$('drawerFoot').innerHTML='';crate=[];saveCrate();updateCount();}});
@@ -501,12 +555,16 @@ $('dCover').addEventListener('click',()=>{if(!curIsRadio)openRelease(curRel);});
 document.addEventListener('click',e=>{
  const play=e.target.closest('[data-play]');if(play){e.stopPropagation();playRelease(+play.dataset.play,0);return;}
  const add=e.target.closest('[data-add]');if(add){const[i,f]=add.dataset.add.split(':');addToCrate(+i,f);return;}
+ const bk=e.target.closest('[data-close]');if(bk){hideSheet();return;}
+ const cr=e.target.closest('[data-crate]');if(cr){openDrawer();return;}
+ const arch=e.target.closest('[data-archive]');if(arch){e.preventDefault();openArchive();return;}
+ const art=e.target.closest('[data-artist]');if(art){e.preventDefault();openArtist(art.dataset.artist);return;}
  const tr=e.target.closest('[data-track]');if(tr){const[i,ti]=tr.dataset.track.split(':').map(Number);playRelease(i,ti);return;}
  const radio=e.target.closest('[data-radio]');if(radio){playRadio(+radio.dataset.radio);return;}
- const tile=e.target.closest('.tile[data-i]');if(tile){openRelease(+tile.dataset.i);return;}
+ const tile=e.target.closest('.tile[data-i],.tlc[data-i]');if(tile){openRelease(+tile.dataset.i);return;}
 });
 document.addEventListener('keydown',e=>{
- if(e.key==='Escape'){if(drawerOpen){closeDrawer();return;}if(window.__rv!=null){closeRelease();return;}}
+ if(e.key==='Escape'){if(drawerOpen){closeDrawer();return;}if(curSheet){hideSheet();return;}}
  if((e.key==='Enter'||e.key===' ')){const t=e.target;if(t.matches('.tile[data-i]')){e.preventDefault();openRelease(+t.dataset.i);}else if(t.matches('[data-track]')){e.preventDefault();const[i,ti]=t.dataset.track.split(':').map(Number);playRelease(i,ti);}else if(t.matches('[data-radio]')){e.preventDefault();playRadio(+t.dataset.radio);}}
 });
 $('vol').addEventListener('input',e=>{if(master)master.gain.value=+e.target.value});
