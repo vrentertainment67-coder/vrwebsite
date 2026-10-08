@@ -8,7 +8,7 @@
     "vertical": "artist",
     "tags": ["Artist & DJ", "Astro"],
     "metric": { "value": "38 → 92", "label": "SEO score after the rebuild" },
-    "blurb": "The flagship booking site for an international DJ. Guests self-route by event — weddings, corporate, clubs — with his remixes and The Vic Fix series a scroll away. The rebuild took its search score from 38 to 92.",
+    "blurb": "A touring act whose old site buried the booking and barely showed up in search. We rebuilt it around how clients actually choose — wedding, club, corporate — and took its search score from 38 to 92.",
     "quote": null
   },
   {
@@ -20,7 +20,7 @@
     "vertical": "artist",
     "tags": ["Artist & DJ", "Astro"],
     "metric": null,
-    "blurb": "Ultra-luxury for a DJ who plays live darbuka over her sets. Towering serif display on gold and black, a live showreel, and a booking flow that captures the date, the room and the brief before it ever reaches her inbox.",
+    "blurb": "Her real edge — live darbuka played over the set — kept getting lost in a generic DJ pitch. We built her a site as premium as the rooms she plays, led with the live element, and made every enquiry arrive qualified.",
     "quote": null
   },
   {
@@ -32,7 +32,7 @@
     "vertical": "events",
     "tags": ["Event production", "Astro"],
     "metric": null,
-    "blurb": "Sound, light and music run by one team since 2008. The proof leads — 1,000+ events and a 4.7★ rating — with a dedicated page for every event type and booking a WhatsApp message away.",
+    "blurb": "Eighteen years of reputation that lived only in word-of-mouth. We put the proof up front — 1,000+ events and a 4.7★ rating — and turned a WhatsApp thread into a site that does the booking.",
     "quote": "[Ask Lloyd for a one-line quote]"
   },
   {
@@ -44,7 +44,7 @@
     "vertical": "artist",
     "tags": ["Artist & DJ", "New Delhi"],
     "metric": null,
-    "blurb": "“The room never lies.” A photography-led site for a Delhi DJ, producer and remixer, where 26 years and six residencies carry the pitch and an availability check sits above the fold.",
+    "blurb": "Twenty-six years of credits scattered across socials and a press kit. We pulled them into one photography-led case, with the residencies and the résumé doing the convincing above the fold.",
     "quote": null
   },
   {
@@ -56,7 +56,7 @@
     "vertical": "other",
     "tags": ["Landscape architecture"],
     "metric": null,
-    "blurb": "Image-first to the edges, so the gardens speak before the words do. A near-navless portfolio for a landscape-architecture studio, with project stories, careers and contact always one click away.",
+    "blurb": "A studio whose gardens sell themselves — if you can actually see them. We stripped the site back to the images and let the work carry the room, with everything else a quiet click away.",
     "quote": null
   },
   {
@@ -68,7 +68,7 @@
     "vertical": "other",
     "tags": ["Private practice", "Bengaluru"],
     "metric": null,
-    "blurb": "A calm, editorial home for a psychologist, built around a custom “Perspective” wordmark. Serif type and wide margins set the tone; the writing explains plainly how therapy works and who it’s for.",
+    "blurb": "Choosing a therapist is a trust decision, and most practice sites read clinical. We built a calm, branded home — a custom “Perspective” identity and plain language — that makes the first message easier to send.",
     "quote": null
   },
   {
@@ -80,7 +80,7 @@
     "vertical": "other",
     "tags": ["DJ community", "Bengaluru"],
     "metric": null,
-    "blurb": "A no-agenda room for the city’s DJs — the people behind the flyers, finally in one place. Bold gold-on-black type, recaps of past editions and a simple way in, built to grow a scene rather than sell a booking.",
+    "blurb": "A scene where everyone books the nights but no one’s in the same room. We built it a home rather than a storefront — no headliner, no hard sell, just a confident way to belong and keep up.",
     "quote": null
   },
   {
@@ -92,7 +92,7 @@
     "vertical": "hospitality",
     "tags": ["Nightlife brand", "Bengaluru"],
     "metric": null,
-    "blurb": "Every city has its drink; Bangalore has Flingit. A moody, bilingual site for the beverage and its culture of play — a spot-finder across 230+ outlets, events, rewards and a weekly leaderboard, all behind a proper age gate.",
+    "blurb": "Anyone can sell a bottle; the hard part is selling a night. We built the world around the drink — a bilingual, gamified platform that turns 230+ stockists into somewhere to actually go.",
     "quote": null
   }
 ]
