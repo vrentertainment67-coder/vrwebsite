@@ -1,0 +1,149 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { PROJECTS, projectTagLine, hasCaseStudy } from '@/lib/content';
+import { SITE } from '@/data/site';
+
+export function getStaticPaths() {
+  const items = PROJECTS.filter(hasCaseStudy);
+  return items.map((p, i) => ({
+    params: { slug: p.slug },
+    props: { p, next: items[(i + 1) % items.length] },
+  }));
+}
+
+const { p, next } = Astro.props;
+const cs = p.caseStudy;
+const tagline = projectTagLine(p);
+const showQuote = p.quote && !p.quote.trim().startsWith('[');
+
+const title = `${p.name} — case study | VR Entertainment`;
+const description = p.blurb;
+const schema = [
+  {
+    '@type': 'CreativeWork',
+    '@id': `${SITE.url}/work/${p.slug}#case`,
+    name: `${p.name} — case study`,
+    url: `${SITE.url}/work/${p.slug}`,
+    about: p.blurb,
+    creator: { '@id': `${SITE.url}/#organization` },
+    mainEntityOfPage: p.url,
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Work', item: `${SITE.url}/#work` },
+      { '@type': 'ListItem', position: 2, name: p.name, item: `${SITE.url}/work/${p.slug}` },
+    ],
+  },
+];
+---
+
+<Layout title={title} description={description} path={`/work/${p.slug}`} ogImage={p.image} schema={schema}>
+  <Header variant="inner" active="/#work" />
+  <main id="main" class="cs">
+    <a class="back mono vr-rise" href="/#work"><span aria-hidden="true">←</span> All work</a>
+
+    <div class="cs-head">
+      <div class="eyebrow mono vr-rise"><span class="vr-pulse dot" aria-hidden="true"></span>Case study</div>
+      <h1 class="h1 vr-rise-2">{p.name}</h1>
+      <p class="lead vr-rise-2">{p.blurb}</p>
+      <div class="meta vr-rise-3">
+        <span class="tag mono">{tagline}</span>
+        <a class="visit" href={p.url} target="_blank" rel="noopener">{p.domain} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <a class="shot vr-rise-3 vr-lift" href={p.url} target="_blank" rel="noopener" aria-label={`Visit ${p.name}`}>
+      <img src={p.image} alt={`${p.name} homepage`} width="1200" height="750" decoding="async" />
+    </a>
+
+    {p.metric && (
+      <div class="metricbar vr-reveal">
+        <span class="mv">{p.metric.value}</span>
+        <span class="ml">{p.metric.label}</span>
+      </div>
+    )}
+
+    <div class="cs-body">
+      <section class="blk vr-reveal">
+        <h2 class="lab mono">The brief</h2>
+        <p class="para">{cs.challenge}</p>
+      </section>
+      <section class="blk vr-reveal">
+        <h2 class="lab mono">What we built</h2>
+        <ul class="built">
+          {cs.approach.map((a) => <li>{a}</li>)}
+        </ul>
+      </section>
+      <section class="blk vr-reveal">
+        <h2 class="lab mono">The outcome</h2>
+        <p class="para strong">{cs.outcome}</p>
+      </section>
+      {showQuote && (
+        <blockquote class="pull vr-reveal"><span class="it">“{p.quote}”</span></blockquote>
+      )}
+    </div>
+
+    <div class="cs-cta vr-reveal">
+      <a class="btn btn-solid" href="/contact">Start a project <span aria-hidden="true">→</span></a>
+      <a class="btn btn-outline" href={p.url} target="_blank" rel="noopener">Visit the live site ↗</a>
+    </div>
+
+    <a class="next vr-reveal" href={`/work/${next.slug}`}>
+      <span class="mono nx">Next project</span>
+      <span class="nxn">{next.name} <span aria-hidden="true">→</span></span>
+    </a>
+  </main>
+  <Footer variant="inner" />
+</Layout>
+
+<style>
+  .cs { max-width: var(--container); margin: 0 auto; padding: 48px var(--gutter) var(--section-y); display: flex; flex-direction: column; gap: 40px; }
+  .mono { font-family: var(--font-mono); }
+  .it { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: var(--tracking-serif); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  .back { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); text-decoration: none; width: fit-content; }
+  .back:hover { color: var(--fg); }
+
+  .cs-head { display: flex; flex-direction: column; gap: 22px; }
+  .eyebrow { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .h1 { margin: 0; font-weight: 500; font-size: clamp(44px, 7vw, 104px); line-height: 0.94; letter-spacing: var(--tracking-display); }
+  .lead { margin: 0; max-width: 680px; font-size: var(--text-lead); line-height: 1.5; font-weight: 300; color: var(--muted); }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+  .tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .visit { font-size: 14px; color: var(--fg); text-decoration: none; }
+  .visit:hover { color: var(--accent); }
+
+  .shot { display: block; border-radius: var(--radius-frame); overflow: hidden; border: 1px solid var(--line); background: var(--card); box-shadow: 0 60px 120px -60px rgba(0, 0, 0, 0.55); }
+  .shot img { display: block; width: 100%; height: auto; }
+
+  .metricbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 26px 0; }
+  .mv { font-size: var(--text-stat); font-weight: 300; letter-spacing: -0.05em; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .ml { font-size: 15px; color: var(--muted); }
+
+  .cs-body { display: flex; flex-direction: column; gap: 44px; max-width: 760px; }
+  .blk { display: flex; flex-direction: column; gap: 14px; }
+  .lab { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--accent); margin: 0; }
+  .para { margin: 0; font-size: 19px; line-height: 1.6; color: var(--muted); }
+  .para.strong { color: var(--fg); }
+  .built { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .built li { font-size: 18px; line-height: 1.5; color: var(--fg); padding: 16px 0 16px 26px; border-top: 1px solid var(--line); position: relative; }
+  .built li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+  .built li:first-child { border-top: 0; }
+
+  .pull { margin: 8px 0 0; padding: 28px 0 0; border-top: 1px solid var(--line); }
+  .pull .it { font-size: clamp(24px, 3.4vw, 38px); line-height: 1.25; color: var(--fg); }
+
+  .cs-cta { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px; }
+  .btn { text-decoration: none; display: inline-flex; align-items: center; gap: 14px; min-height: var(--btn-h); padding: 0 30px; border-radius: var(--radius-pill); font-size: 16px; }
+  .btn-solid { background: var(--fg); color: var(--bg); font-weight: 500; }
+  .btn-outline { border: 1px solid var(--line); }
+
+  .next { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 28px; text-decoration: none; margin-top: 8px; }
+  .nx { font-size: 12px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
+  .nxn { font-size: clamp(30px, 4vw, 52px); font-weight: 500; letter-spacing: -0.03em; color: var(--fg); }
+  .next:hover .nxn { color: var(--accent); }
+</style>

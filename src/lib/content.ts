@@ -1,6 +1,11 @@
 import projectsJson from '@/data/projects.json';
 import scenesJson from '@/data/concierge-scenes.json';
 
+export interface CaseStudy {
+  challenge: string;
+  approach: string[];
+  outcome: string;
+}
 export interface Project {
   slug: string;
   name: string;
@@ -12,6 +17,12 @@ export interface Project {
   metric: { value: string; label: string } | null;
   blurb: string;
   quote: string | null;
+  caseStudy?: CaseStudy;
+}
+
+/** Projects that have a written case study (all current ones do). */
+export function hasCaseStudy(p: Project): p is Project & { caseStudy: CaseStudy } {
+  return !!p.caseStudy;
 }
 
 /** Work projects for the homepage showcase + (later) case studies. */

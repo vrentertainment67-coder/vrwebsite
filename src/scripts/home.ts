@@ -70,6 +70,7 @@ function initWork() {
   const items = Array.from(document.querySelectorAll<HTMLElement>('.work-item'));
   const shots = Array.from(document.querySelectorAll<HTMLImageElement>('.shot'));
   const frame = $<HTMLAnchorElement>('#work-frame');
+  const visit = $<HTMLAnchorElement>('#work-visit');
   const domain = $('#work-domain');
   const num = $('#work-num');
   if (!items.length || !frame) return;
@@ -84,7 +85,7 @@ function initWork() {
     items[i].querySelector('.work-btn')?.setAttribute('aria-current', 'true');
     shots.forEach((s, j) => s.classList.toggle('is-on', j === i));
     const p = PROJECTS[i];
-    if (p) { frame!.href = p.url; if (domain) domain.textContent = p.domain; }
+    if (p) { frame!.href = `/work/${p.slug}`; if (visit) visit.href = p.url; if (domain) domain.textContent = p.domain; }
     if (num) num.textContent = '0' + (i + 1);
   }
 

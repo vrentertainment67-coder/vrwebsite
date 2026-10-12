@@ -9,7 +9,17 @@
     "tags": ["Artist & DJ", "Astro"],
     "metric": { "value": "38 → 92", "label": "SEO score after the rebuild" },
     "blurb": "A touring act whose old site buried the booking and barely showed up in search. We rebuilt it around how clients actually choose — wedding, club, corporate — and took its search score from 38 to 92.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "An in-demand international DJ with a site that buried the booking and barely registered in search. Enquiries were leaking to word-of-mouth and third parties instead of landing with him directly.",
+      "approach": [
+        "Rebuilt on Astro around how clients actually choose — routed by event type: weddings, corporate, clubs.",
+        "Pulled his remixes and The Vic Fix series into the same journey, so the catalogue works for the booking.",
+        "Hardened the structure and schema for Google and AI search from the ground up.",
+        "Wired a 24-hour reply promise straight to WhatsApp and email."
+      ],
+      "outcome": "The rebuild took the site's search score from 38 to 92, and every enquiry now arrives pre-routed to the right offer."
+    }
   },
   {
     "slug": "dj-rhea",
@@ -21,7 +31,17 @@
     "tags": ["Artist & DJ", "Astro"],
     "metric": null,
     "blurb": "Her real edge — live darbuka played over the set — kept getting lost in a generic DJ pitch. We built her a site as premium as the rooms she plays, led with the live element, and made every enquiry arrive qualified.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "A DJ whose real differentiator — live darbuka played over the set — was getting lost in a generic DJ pitch, in front of an audience that judges luxury in seconds.",
+      "approach": [
+        "Built an ultra-luxury identity: towering serif display on gold and black.",
+        "Led with the live-percussion element, not the decks.",
+        "A booking flow that captures the date, the room and the brief before it ever reaches her inbox.",
+        "Astro and a Cloudflare Worker, with enquiries delivered by email through Cloudflare."
+      ],
+      "outcome": "A site as premium as the rooms she plays, with every enquiry arriving qualified. Live now as phase one of a three-phase build."
+    }
   },
   {
     "slug": "lloyds-pro-sound",
@@ -33,7 +53,17 @@
     "tags": ["Event production", "Astro"],
     "metric": null,
     "blurb": "Eighteen years of reputation that lived only in word-of-mouth. We put the proof up front — 1,000+ events and a 4.7★ rating — and turned a WhatsApp thread into a site that does the booking.",
-    "quote": "[Ask Lloyd for a one-line quote]"
+    "quote": "[Ask Lloyd for a one-line quote]",
+    "caseStudy": {
+      "challenge": "Eighteen years of reputation that lived almost entirely in word-of-mouth and WhatsApp threads. Nothing online was doing the convincing, or the admin.",
+      "approach": [
+        "Put the proof up front — 1,000+ events since 2008 and a 4.7★ rating.",
+        "Gave every event type its own page.",
+        "Made direct WhatsApp booking reachable from anywhere on the site.",
+        "Built a superadmin back office behind it: inventory and invoicing."
+      ],
+      "outcome": "A site that does the selling and a back office that runs the quotes and the jobs. [Ask Lloyd for a result to quote.]"
+    }
   },
   {
     "slug": "dj-gags",
@@ -45,7 +75,16 @@
     "tags": ["Artist & DJ", "New Delhi"],
     "metric": null,
     "blurb": "Twenty-six years of credits scattered across socials and a press kit. We pulled them into one photography-led case, with the residencies and the résumé doing the convincing above the fold.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "Twenty-six years of credits scattered across socials and a press kit, with no single place that made the case for a booking.",
+      "approach": [
+        "A photography-led site where the images carry the room.",
+        "Framed twenty-six years and six residencies as proof, above the fold.",
+        "Put an availability check and WhatsApp booking in reach from the first screen."
+      ],
+      "outcome": "One confident home for the booking, with the work and the résumé doing the convincing."
+    }
   },
   {
     "slug": "snla",
@@ -57,7 +96,16 @@
     "tags": ["Landscape architecture"],
     "metric": null,
     "blurb": "A studio whose gardens sell themselves — if you can actually see them. We stripped the site back to the images and let the work carry the room, with everything else a quiet click away.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "A landscape-architecture studio whose work is deeply visual, but whose old presence buried it under text and navigation.",
+      "approach": [
+        "An image-first, full-bleed layout so the gardens speak before the words do.",
+        "Stripped navigation back to keep attention on the work.",
+        "Project stories, careers and contact always one click away."
+      ],
+      "outcome": "A portfolio that lets the work carry the room. [Ask SNLA for a result to quote.]"
+    }
   },
   {
     "slug": "supriya-bopanna",
@@ -69,7 +117,17 @@
     "tags": ["Private practice", "Bengaluru"],
     "metric": null,
     "blurb": "Choosing a therapist is a trust decision, and most practice sites read clinical. We built a calm, branded home — a custom “Perspective” identity and plain language — that makes the first message easier to send.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "Choosing a therapist is a trust decision, and most practice sites read clinical or templated — a quiet barrier to that first message.",
+      "approach": [
+        "A custom “Perspective” wordmark and calm, editorial design.",
+        "Plain-language explanation of how sessions work and who the practice is for.",
+        "A private, considered contact flow.",
+        "A separate admin back office: content editing, a client CRM and no-GST invoicing."
+      ],
+      "outcome": "A calm home that makes the first message easier to send. Live on the apex and www."
+    }
   },
   {
     "slug": "bengaluru-djs-collective",
@@ -81,7 +139,17 @@
     "tags": ["DJ community", "Bengaluru"],
     "metric": null,
     "blurb": "A scene where everyone books the nights but no one’s in the same room. We built it a home rather than a storefront — no headliner, no hard sell, just a confident way to belong and keep up.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "A city full of people who book the nights but never meet — a community to build, not a product to sell.",
+      "approach": [
+        "Positioned it as a home for the scene, not a storefront — no headliner, no hard sell.",
+        "A bold gold-on-black identity with real attitude.",
+        "Recaps of past editions and a simple, clear way in.",
+        "Its own repo, deployed on Cloudflare Pages."
+      ],
+      "outcome": "A confident place to belong and keep up, live on bengalurudjscollective.com."
+    }
   },
   {
     "slug": "flingit",
@@ -93,6 +161,16 @@
     "tags": ["Nightlife brand", "Bengaluru"],
     "metric": null,
     "blurb": "Anyone can sell a bottle; the hard part is selling a night. We built the world around the drink — a bilingual, gamified platform that turns 230+ stockists into somewhere to actually go.",
-    "quote": null
+    "quote": null,
+    "caseStudy": {
+      "challenge": "Anyone can sell a bottle; the hard part is selling a night. Flingit needed a world, not a product page.",
+      "approach": [
+        "A moody, bilingual (English / Kannada) experience.",
+        "A spot-finder across 230+ stockists.",
+        "Gamified play: events, rewards and a weekly leaderboard.",
+        "A proper age gate up front."
+      ],
+      "outcome": "A platform that turns 230+ stockists into somewhere to actually go. [Ask Flingit for a result to quote.]"
+    }
   }
 ]
